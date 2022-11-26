@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 class UsersController extends Controller
 {   
     public function show(){
-        return view('users.index');
+        return view('users.dashboard');
     }
     public function change_password(){
         return view('users.change_password');
