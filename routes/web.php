@@ -42,16 +42,15 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/shop', function () {
-    return view('home');
+    return view('shop');
 })->name('shop');
-
 
 Route::get('/wishlist', function () {
     return view('home');
 })->name('wishlist');
 
 Route::get('/cart', function () {
-    return view('home');
+    return view('cart');
 })->name('cart');
 
 Route::get('/item', function () {
@@ -63,11 +62,11 @@ Route::get('/payment', function () {
 })->name('payment');
 
 Route::get('/about', function () {
-    return view('home');
+    return view('about');
 })->name('about');
 
 Route::get('/contact', function () {
-    return view('home');
+    return view('contact');
 })->name('contact');
 
 Route::get('/', function () {
