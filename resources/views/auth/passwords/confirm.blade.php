@@ -1,8 +1,5 @@
 @extends('layouts.app')
-@section('page_style')
-    <link rel="stylesheet" href="{{ URL::to('styles/auth.css') }}">
-@endsection
-@section('content')
+@section('main')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

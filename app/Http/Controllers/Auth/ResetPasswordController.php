@@ -2,10 +2,10 @@
 namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB;
-use App\Models\User;
-use Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Brian2694\Toastr\Facades\Toastr;
+use App\Models\User;
 
 class ResetPasswordController extends Controller
 {
@@ -29,7 +29,6 @@ class ResetPasswordController extends Controller
             return back();
         }
         else{
-            
             $user = User::where('email', $request->email)->update(['password' => Hash::make($request->password)]);
             DB::table('password_resets')->where(['email'=> $request->email])->delete();
             Toastr::success('Your password has been changed! :)','Success');

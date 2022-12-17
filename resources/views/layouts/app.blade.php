@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Nike</title>
-        <!-- <link rel='icon' href="https://pngimg.com/uploads/nike/nike_PNG7.png"> -->
         <link rel="shortcut icon" href="{{ asset('assets/imgs/logo.png') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
@@ -130,7 +130,7 @@
                                             </div>
                                             <div class="shopping-cart-button">
                                                 <a href="{{ route('cart') }}" class="outline">View cart</a>
-                                                <a href="{{ route('payment') }}">Checkout</a>
+                                                <a href="{{ route('checkout') }}">Checkout</a>
                                             </div>
                                         </div>
                                     </div>
@@ -547,5 +547,6 @@
     <!-- Template  JS -->
     <script src="{{ asset('assets/js/main.js?v=3.3') }}"></script>
     <script src="{{ asset('assets/js/shop.js?v=3.3') }}"></script>
+    <script src="{{ asset('js/firebase.js') }}"></script>
     </body>
 </html>

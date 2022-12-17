@@ -5,21 +5,15 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Brian2694\Toastr\Facades\Toastr;
-use Hash;
-use DB;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
     public function register()
     {
-        // $role = DB::table('role_type_users')->get();
-        // return view('auth.register',compact('role'));
-        return view('auth.register');
-
+        $role = DB::table('users')->get();
+        return view('auth.register',compact('role'));
     }
     public function storeUser(Request $request)
     {
@@ -27,19 +21,21 @@ class RegisterController extends Controller
             'name'      => 'required|string|max:255',
             'email'     => 'required|string|email|max:255|unique:users',
             'password'  => 'required|string|min:8|confirmed',
+            'address' => 'required|string|max:255',
+            'phone_number' => 'required|digits:10',
             'password_confirmation' => 'required',
         ]);
-
-        $dt       = Carbon::now();
-        $todayDate = $dt->toDayDateTimeString();
-        
-        User::create([
+        $query = User::create([
             'name'      => $request->name,
-            'avatar'    => $request->image,
             'email'     => $request->email,
+            'address'   => $request->address,
+            'phone_number' => $request->phone_number,
             'password'  => Hash::make($request->password),
         ]);
-        Toastr::success('Create new account successfully :)','Success');
-        return redirect('login');
+        if ($query){
+            return redirect()->route('login');
+        } else {
+            return redirect()->back()->with('fail', "Something went wrong");
+        }
     }
 }

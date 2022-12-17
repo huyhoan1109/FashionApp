@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->integer('type');
             $table->integer('color');
             $table->boolean('for_male')->default(true);

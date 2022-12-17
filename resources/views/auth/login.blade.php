@@ -34,7 +34,7 @@
                                                 <label class="form-check-label" for="exampleCheckbox1"><span>Remember me</span></label>
                                             </div>
                                         </div>
-                                        <a class="text-muted" href="#">Forgot password?</a>
+                                        <a class="text-muted" href="{{ route('forget-password') }}">Forgot password?</a>
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-fill-out btn-block hover-up" name="login">Log in</button>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-lg-1"></div>
                     <div class="col-lg-6">
-                        <img src="assets/imgs/login.png">
+                        <img src="{{ asset('assets/imgs/login.png') }}">
                     </div>
                 </div>
             </div>

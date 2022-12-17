@@ -1,8 +1,5 @@
 @extends('layouts.app')
-@section('page_style')
-    <link rel="stylesheet" href="{{ URL::to('styles/auth.css') }}">
-@endsection
-@section('content')
+@section('main')
     <div class="main-wrapper">
         <div class="account-content">
             <a href="{{ route('form/job/list') }}" class="btn btn-primary apply-btn">Apply Job</a>

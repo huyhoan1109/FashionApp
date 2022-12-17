@@ -45,6 +45,14 @@ Route::get('/shop', function () {
     return view('shop');
 })->name('shop');
 
+Route::get('/item', function () {
+    return view('home');
+})->name('item');
+
+Route::get('/checkout', function (){
+    return view('checkout');
+})->name('checkout');
+
 Route::get('/wishlist', function () {
     return view('home');
 })->name('wishlist');
@@ -52,10 +60,6 @@ Route::get('/wishlist', function () {
 Route::get('/cart', function () {
     return view('cart');
 })->name('cart');
-
-Route::get('/item', function () {
-    return view('home');
-})->name('item');
 
 Route::get('/payment', function () {
     return view('home');
@@ -69,9 +73,9 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/help', function() {
+    return view('help');
+})->name('help');
 
 // ----------------------------- Login ----------------------------//
 Route::controller(LoginController::class)->group(function () {
@@ -87,14 +91,9 @@ Route::controller(RegisterController::class)->group(function () {
 
 // ----------------------------- Forget password ----------------------------//
 Route::controller(ForgotPasswordController::class)->group(function () {
-    Route::get('forget-password', 'getEmail')->name('forget-password');
-    Route::post('forget-password', 'postEmail')->name('forget-password');    
+    Route::get('/forget-password', 'getEmail')->name('forget-password');
+    Route::post('/forget-password', 'postEmail')->name('forget-password');    
 });
-
-
-Route::get('/help', function() {
-    return view('help');
-})->name('help');
 
 Route::prefix('/users')->name('users.')->group(
     function(){
