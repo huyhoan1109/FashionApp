@@ -1,57 +1,45 @@
 @extends('layouts.app')
 @section('main')
-    <div class="main-wrapper">
-        <div class="account-content">
-            <a href="{{ route('form/job/list') }}" class="btn btn-primary apply-btn">Apply Job</a>
-            <div class="container">
-                <!-- Account Logo -->
-                <div class="account-logo">
-                    <a href="index.html"><img src="{{ URL::to('assets/img/logo2.png') }}" alt="SoengSouy"></a>
-                </div>
-                {{-- message --}}
-                {!! Toastr::message() !!}
-                <!-- Account Logo -->
-                <div class="account-box">
-                    <div class="account-wrapper">
-                        <h3 class="account-title">Reset Password</h3>
-                        <p class="account-subtitle">Input your email to register reset new password.</p>
-                        <!-- Account Form -->
-                        <form method="POST" action="/reset-password">
-                            @csrf
-                            <input type="hidden" name="token" value="{{ $token }}">
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Enter Your Email">
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+<section class="pt-150 pb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 m-auto">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="login_wrap widget-taber-content p-30 background-white border-radius-10 mb-md-5 mb-lg-0 mb-sm-5">
+                            <div class="padding_eight_all bg-white">
+                                <div class="heading_s1">
+                                    <h3 class="mb-30">Reset Password</h3>
+                                </div>
+                                <form method="POST" action="{{ route('reset-password') }}">
+                                    @csrf
+                                    <input type="hidden" name="token" value="{{ $token }}">
+                                    <div class="form-group">
+                                        <input type="text" required="" name="email" placeholder="Your Email">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" required="" name="password" placeholder="Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="password_confirmation" placeholder="Confirm password" required>
+                                        @if($errors->has('password_confirmation'))
+                                            <div class="error">{{ $errors->first('password_confirmation') }}</div>
+                                        @endif
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-fill-out btn-block hover-up">Reset Password</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Enter Password">
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label><strong>Repeat Password</strong></label>
-                                <input type="password" class="form-control" name="password_confirmation" placeholder="Choose Repeat Password">
-                            </div>
-                            <div class="form-group text-center">
-                                <button class="btn btn-primary account-btn" type="submit">Reset Password</button>
-                            </div>
-                            <div class="account-footer">
-                                <p>Already have an account? <a href="{{ route('login') }}">Login</a></p>
-                            </div>
-                        </form>
-                        <!-- /Account Form -->
+                        </div>
+                    </div>
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-6">
+                        <img src="{{ asset('assets/imgs/login.png') }}">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</section>
 @endsection

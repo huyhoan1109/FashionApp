@@ -94,45 +94,19 @@
                                 </div>
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="{{ route('cart') }}">
-                                        <img src="assets/imgs/theme/icons/icon-cart.svg">
+                                        <img src="{{ asset('assets/imgs/theme/icons/icon-cart.svg') }}">
                                         <span class="pro-count blue">?</span>
                                     </a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                        <!-- <ul>
+                                        <ul>
                                             <li>
-                                                <div class="shopping-cart-img">
-                                                    <a href="{{ route('item') }}"><img alt="Surfside Media" src="assets/imgs/shop/thumbnail-3.jpg"></a>
-                                                </div>
-                                                <div class="shopping-cart-title">
-                                                    <h4><a href="{{ route('item') }}">Daisy Casual Bag</a></h4>
-                                                    <h4><span>1 × </span>$800.00</h4>
-                                                </div>
-                                                <div class="shopping-cart-delete">
-                                                    <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                                </div>
+                                                @include('layouts.inc.cart.item')
                                             </li>
                                             <li>
-                                                <div class="shopping-cart-img">
-                                                    <a href="{{ route('item') }}"><img alt="Surfside Media" src="assets/imgs/shop/thumbnail-2.jpg"></a>
-                                                </div>
-                                                <div class="shopping-cart-title">
-                                                    <h4><a href="{{ route('item') }}">Corduroy Shirts</a></h4>
-                                                    <h4><span>1 × </span>$3200.00</h4>
-                                                </div>
-                                                <div class="shopping-cart-delete">
-                                                    <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                                </div>
+                                                @include('layouts.inc.cart.item')
                                             </li>
-                                        </ul> -->
-                                        <div class="shopping-cart-footer">
-                                            <div class="shopping-cart-total">
-                                                <h4>Total<span>$4000.00</span></h4>
-                                            </div>
-                                            <div class="shopping-cart-button">
-                                                <a href="{{ route('cart') }}" class="outline">View cart</a>
-                                                <a href="{{ route('checkout') }}">Checkout</a>
-                                            </div>
-                                        </div>
+                                        </ul> 
+                                        @include('layouts.inc.cart.footer')
                                     </div>
                                 </div>
                             </div>
@@ -305,16 +279,7 @@
                                         </ul>
                                     </li>  
                                     @auth                           
-                                        <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
-                                            <ul class="sub-menu">
-                                                <li><a href="#">Dashboard</a></li>
-                                                <li><a href="#">Products</a></li>
-                                                <li><a href="#">Categories</a></li>
-                                                <li><a href="#">Coupons</a></li>
-                                                <li><a href="#">Orders</a></li>
-                                                <li><a href="#">Customers</a></li> 
-                                                <li><a href="route('contact')">Contact</a></li>                                         
-                                            </ul>
+                                        <li><a href="{{ route('users.show') }}">My Account</a>
                                         </li>
                                     @endauth
                                 </ul>
@@ -466,25 +431,27 @@
                             <p class="wow fadeIn animated">
                                 <strong>Email: </strong>team3@webdevops.com
                             </p>
-                            <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
-                            <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
-                                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-facebook.svg') }}" alt=""></a>
-                                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-twitter.svg') }}" alt=""></a>
-                                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}" alt=""></a>
-                                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-pinterest.svg') }}" alt=""></a>
-                                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-youtube.svg') }}" alt=""></a>
-                            </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-3">
-                        <h5 class="widget-title wow fadeIn animated">About</h5>
+                        <h5 class="widget-title wow fadeIn animated">About Team</h5>
                         <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Delivery Information</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms &amp; Conditions</a></li>
-                            <li><a href="#">Contact Us</a></li>                            
+                            <li><a href="#">Nguyễn Huy Hoàn - 20194569</a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>                            
                         </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-3">
+                    <h5 class="widget-title wow fadeIn animated">Follow Us</h5>
+                        <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
+                            <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-facebook.svg') }}" alt=""></a>
+                            <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-twitter.svg') }}" alt=""></a>
+                            <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}" alt=""></a>
+                            <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-pinterest.svg') }}" alt=""></a>
+                            <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-youtube.svg') }}" alt=""></a>
+                        </div>
                     </div>
                     <div class="col-lg-4 mob-center">
                         <h5 class="widget-title wow fadeIn animated">Install App</h5>

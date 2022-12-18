@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Validator;
 class RegisterController extends Controller
 {
     public function register()
@@ -17,25 +17,25 @@ class RegisterController extends Controller
     }
     public function storeUser(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name'      => 'required|string|max:255',
             'email'     => 'required|string|email|max:255|unique:users',
-            'password'  => 'required|string|min:8|confirmed',
+            'password'  => 'required|string|confirmed',
             'address' => 'required|string|max:255',
             'phone_number' => 'required|digits:10',
             'password_confirmation' => 'required',
         ]);
-        $query = User::create([
-            'name'      => $request->name,
-            'email'     => $request->email,
-            'address'   => $request->address,
-            'phone_number' => $request->phone_number,
-            'password'  => Hash::make($request->password),
-        ]);
-        if ($query){
+        if ($validator->fails()){
+            return back()->withErrors($validator->errors());
+        } else { 
+            User::create([
+                'name'      => $request->name,
+                'email'     => $request->email,
+                'address'   => $request->address,
+                'phone_number' => $request->phone_number,
+                'password'  => Hash::make($request->password),
+            ]);
             return redirect()->route('login');
-        } else {
-            return redirect()->back()->with('fail', "Something went wrong");
         }
     }
 }

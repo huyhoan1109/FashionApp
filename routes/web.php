@@ -3,13 +3,15 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\ItemsController;
-use App\Http\Controllers\CartsController;
+use App\Http\Controllers\itemController;
+use App\Http\Controllers\cartController;
 use App\Http\Controllers\PaymentsController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController; 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,21 +24,6 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 |
 */
 
-// Middleware
-Route::group(
-    ['middleware'=>'auth'],
-    function(){
-        Route::get('home',function()
-        {
-            return view('home');
-        });
-        Route::get('home',function()
-        {
-            return view('home');
-        });
-    }
-);
-
 Route::get('/', function () {
     return view('home');
 })->name('home');
@@ -45,13 +32,13 @@ Route::get('/shop', function () {
     return view('shop');
 })->name('shop');
 
-Route::get('/item', function () {
-    return view('home');
-})->name('item');
-
 Route::get('/checkout', function (){
     return view('checkout');
 })->name('checkout');
+
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+})->name('privacy-policy');
 
 Route::get('/wishlist', function () {
     return view('home');
@@ -60,10 +47,6 @@ Route::get('/wishlist', function () {
 Route::get('/cart', function () {
     return view('cart');
 })->name('cart');
-
-Route::get('/payment', function () {
-    return view('home');
-})->name('payment');
 
 Route::get('/about', function () {
     return view('about');
@@ -76,6 +59,10 @@ Route::get('/contact', function () {
 Route::get('/help', function() {
     return view('help');
 })->name('help');
+
+Route::get('/item', function () {
+    return view('home');
+})->name('item');
 
 // ----------------------------- Login ----------------------------//
 Route::controller(LoginController::class)->group(function () {
@@ -95,14 +82,32 @@ Route::controller(ForgotPasswordController::class)->group(function () {
     Route::post('/forget-password', 'postEmail')->name('forget-password');    
 });
 
-Route::prefix('/users')->name('users.')->group(
+// ----------------------------- Forget password ----------------------------//
+Route::controller(ResetPasswordController::class)->group(function () {
+    Route::get('/reset-password/{token}', 'getPassword')->name('reset-password');
+    Route::post('/reset-password', 'updatePassword')->name('reset-password');    
+});
+
+// ----------------------------- User ----------------------------//
+Route::prefix('/users')->name('users.')->controller(UsersController::class)->group(
     function(){
-        Route::get('/', [UsersController::class, 'show'])->name('show');
-        Route::get('/change_password', [UsersController::class, 'change_password'])->name('change_password');
-        Route::post('/change_password', [UsersController::class, 'update_password'])->name('update_password');
+        Route::get('/', 'show')->name('show');
+        Route::get('/change_password', 'change_password')->name('change_password');
+        Route::post('/change_password', 'update_password')->name('update_password');
     }
 )->name('users');
 
-Route::prefix('/items', ItemsController::class);
-Route::prefix('/payments', PaymentsController::class);
-Route::prefix('/carts', CartsController::class);
+// ----------------------------- Cart ----------------------------//
+Route::prefix('/cart')->name('cart.')->controller(cartController::class)->group(
+    function(){
+        Route::post('/remove','remove')->name('remove');
+        Route::post('/add', 'add')->name('add');
+    }
+)->name('cart');
+
+// ----------------------------- Admin ----------------------------//
+Route::prefix('/admin')->middleware(['auth', 'isAdmin'])->name('admin.')->controller(AdminController::class)->group(
+    function(){
+        Route::get('/dashboard', 'dashboard');
+    }
+);
