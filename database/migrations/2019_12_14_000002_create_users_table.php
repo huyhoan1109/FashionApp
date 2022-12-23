@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('phone_number');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->boolean('is_admin')->default(false);
+            $table->integer('type')->default(1); # 0 => admin ; 1 => user thông thường ; 2 => user vãng lai
             $table->rememberToken();
             $table->timestamps();
         });

@@ -13,10 +13,7 @@ class UsersController extends Controller
     public function show(){
         return view('users');
     }
-    public function change_password(){
-        return view('users.change_password');
-    }
-    public function update_password(Request $request)
+    public function update(Request $request)
     {
         # Validation
         $request->validate([
@@ -27,7 +24,6 @@ class UsersController extends Controller
         if(!Hash::check($request->old_password, auth()->user()->password)){
             return back()->with("error", "Old Password Doesn't match!");
         }
-
 
         #Update the new Password
         User::whereId(auth()->user()->id)->update([

@@ -93,21 +93,11 @@
                                     </a>
                                 </div>
                                 <div class="header-action-icon-2">
-                                    <a class="mini-cart-icon" href="{{ route('cart') }}">
+                                    <!-- <a class="mini-cart-icon" href="{{ route('cart') }}">
                                         <img src="{{ asset('assets/imgs/theme/icons/icon-cart.svg') }}">
                                         <span class="pro-count blue">?</span>
-                                    </a>
-                                    <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                        <ul>
-                                            <li>
-                                                @include('layouts.inc.cart.item')
-                                            </li>
-                                            <li>
-                                                @include('layouts.inc.cart.item')
-                                            </li>
-                                        </ul> 
-                                        @include('layouts.inc.cart.footer')
-                                    </div>
+                                    </a> -->
+                                    @livewire('cart-component', ['user_id' => 0 ])
                                 </div>
                             </div>
                         </div>

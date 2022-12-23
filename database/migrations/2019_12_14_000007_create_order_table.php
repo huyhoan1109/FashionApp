@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('order', function (Blueprint $table) {
             $table->unsignedBigInteger("cart_id");
             $table->unsignedBigInteger("coupon_id");
+            $table->boolean("state")->default(false);
             $table->foreign('cart_id')
                 ->references("id")
                 ->on("cart")

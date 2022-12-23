@@ -66,6 +66,7 @@ class LoginController extends Controller
         
         if (Auth::attempt(['email'=> $email,'password'=> $password])) {
             /** get session */
+            $request->session()->put('key',Auth::user());
             return redirect()->route('home');
         } else {
             Toastr::error('fail, WRONG USERNAME OR PASSWORD :)','Error');

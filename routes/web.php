@@ -3,9 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\itemController;
-use App\Http\Controllers\cartController;
-use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\CartController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -92,22 +91,30 @@ Route::controller(ResetPasswordController::class)->group(function () {
 Route::prefix('/users')->name('users.')->controller(UsersController::class)->group(
     function(){
         Route::get('/', 'show')->name('show');
-        Route::get('/change_password', 'change_password')->name('change_password');
-        Route::post('/change_password', 'update_password')->name('update_password');
+        Route::post('/update', 'update')->name('update');
     }
 )->name('users');
 
 // ----------------------------- Cart ----------------------------//
 Route::prefix('/cart')->name('cart.')->controller(cartController::class)->group(
     function(){
-        Route::post('/remove','remove')->name('remove');
-        Route::post('/add', 'add')->name('add');
+        Route::post('/add', 'addCart')->name('add');
+        Route::post('/remove','removeCart')->name('remove');
     }
 )->name('cart');
+// ----------------------------- Item ----------------------------//
+Route::get('/item-detail/{item_id}', [ItemController::class, 'itemDetail'])->name('item-detail');
+Route::prefix('/item')->name('item.')->controller(ItemController::class)->group(
+    function(){
+        Route::post('/add','addItem')->name('add');
+        Route::post('/fix','fixItem')->name('fix');
+        Route::post('/delete','deleteItem')->name('delete');
+    }
+)->name('item');
 
 // ----------------------------- Admin ----------------------------//
 Route::prefix('/admin')->middleware(['auth', 'isAdmin'])->name('admin.')->controller(AdminController::class)->group(
     function(){
-        Route::get('/dashboard', 'dashboard');
+        Route::get('/dashboard', 'index');
     }
 );

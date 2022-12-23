@@ -15,11 +15,13 @@ return new class extends Migration
     {
         Schema::create('item', function (Blueprint $table) {
             $table->id();
-            $table->integer('type');
-            $table->integer('color');
+            $table->string('name');
+            $table->unsignedInteger('stock')->default(0);
+            $table->unsignedInteger('type')->default(0);
+            $table->unsignedInteger('color');
             $table->boolean('for_male')->default(true);
-            $table->float('price');
-            $table->float('size');
+            $table->unsignedInteger('size')->default(0);
+            $table->float('price')->default(0);
             $table->string('image');
             $table->string('description');
             $table->integer('review');
