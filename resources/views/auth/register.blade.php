@@ -23,13 +23,13 @@
                                 <form action="{{ route('register') }}" method="post">
                                     @csrf
                                     <div class="form-group">
-                                        <input type="text" name="name" placeholder="Name" value="{{ old('name') }}" required>
-                                        @if($errors->has('name'))
-                                            <div class="error">{{ $errors->first('name') }}</div>
-                                        @endif
+                                        <input type="text" name="firstname" placeholder="First Name" value="" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="email" placeholder="Email" value="{{ old('email') }}" required>
+                                        <input type="text" name="lastname" placeholder="Last Name" value="" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="email" placeholder="Email" value="" required>
                                         @if($errors->has('email'))
                                             <div class="error">{{ $errors->first('email') }}</div>
                                         @endif
@@ -41,9 +41,9 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <input type="tel" name="phone_number" placeholder="Phone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+                                        <input type="tel" name="phone" placeholder="Phone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
                                         @if($errors->has('address'))
-                                            <div class="error">{{ $errors->first('phone_number') }}</div>
+                                            <div class="error">{{ $errors->first('phone') }}</div>
                                         @endif
                                     </div>
                                     <div class="form-group">

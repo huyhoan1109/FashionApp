@@ -15,9 +15,6 @@
                                     @csrf
                                     <input type="hidden" name="token" value="{{ $token }}">
                                     <div class="form-group">
-                                        <input type="text" required="" name="email" placeholder="Your Email">
-                                    </div>
-                                    <div class="form-group">
                                         <input type="password" required="" name="password" placeholder="Password">
                                     </div>
                                     <div class="form-group">

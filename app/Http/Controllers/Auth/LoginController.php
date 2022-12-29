@@ -76,6 +76,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
+        $request->session()->forget('key');
         Toastr::success('Logout successfully :)','Success');
         return redirect()->route('home');
     }

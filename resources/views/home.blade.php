@@ -107,13 +107,19 @@
             <!-- End nav-tabs -->
             <div class="tab-content wow fadeIn animated" id="myTabContent">
                 <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                    @include('layouts.inc.app.tab')
+                    @livewire('tab-component', [
+                        'items' => $items
+                    ])
                 </div>
                 <div class="tab-pane fade show" id="tab-two" role="tabpanel" aria-labelledby="tab-two">
-                    @include('layouts.inc.app.tab')
+                    @livewire('tab-component', [
+                        'items' => $items
+                    ])
                 </div>
                 <div class="tab-pane fade show" id="tab-three" role="tabpanel" aria-labelledby="tab-three">
-                    @include('layouts.inc.app.tab')
+                    @livewire('tab-component', [
+                        'items' => $items
+                    ])
                 </div>
             </div>        
             <!--End tab-content-->

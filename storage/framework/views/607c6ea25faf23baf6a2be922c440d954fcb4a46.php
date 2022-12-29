@@ -3,9 +3,9 @@
         <div class="product-cart-wrap mb-30">
             <div class="product-img-action-wrap">
                 <div class="product-img product-img-zoom">
-                    <a href="{{ route('item') }}">
-                        <img class="default-img" src="{{ asset('assets/imgs/shop/product-1-1.jpg') }}" alt="">
-                        <img class="hover-img" src="{{ asset('assets/imgs/shop/product-1-2.jpg') }}" alt="">
+                    <a href="<?php echo e(route('item')); ?>">
+                        <img class="default-img" src="<?php echo e(asset('assets/imgs/shop/product-1-1.jpg')); ?>" alt="">
+                        <img class="hover-img" src="<?php echo e(asset('assets/imgs/shop/product-1-2.jpg')); ?>" alt="">
                     </a>
                 </div>
                 <div class="product-action-1">
@@ -19,9 +19,9 @@
             </div>
             <div class="product-content-wrap">
                 <div class="product-category">
-                    <a href="{{ route('shop') }}">Clothing</a>
+                    <a href="<?php echo e(route('shop')); ?>">Clothing</a>
                 </div>
-                <h2><a href="{{ route('item') }}">Colorful Pattern Shirts</a></h2>
+                <h2><a href="<?php echo e(route('item')); ?>">Colorful Pattern Shirts</a></h2>
                 <div class="rating-result" title="90%">
                     <span>
                         <span>90%</span>
@@ -32,6 +32,9 @@
                     <span class="old-price">$245.8</span>
                 </div>
                 <div class="product-action-1 show">
+                    <a aria-label="Add To Wishlist" class="action-btn hover-up" href="wishlist.html"><i class="fi-rs-heart"></i></a>
+                </div>
+                <div class="product-action-2 show">
                     <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
                 </div>
             </div>
@@ -41,7 +44,7 @@
         <div class="product-cart-wrap mb-30">
             <div class="product-img-action-wrap">
                 <div class="product-img product-img-zoom">
-                    <a href="{{ route('item') }}">
+                    <a href="<?php echo e(route('item')); ?>">
                         <img class="default-img" src="assets/imgs/shop/product-2-1.jpg" alt="">
                         <img class="hover-img" src="assets/imgs/shop/product-2-2.jpg" alt="">
                     </a>
@@ -57,9 +60,9 @@
             </div>
             <div class="product-content-wrap">
                 <div class="product-category">
-                    <a href="{{ route('shop') }}">Clothing</a>
+                    <a href="<?php echo e(route('shop')); ?>">Clothing</a>
                 </div>
-                <h2><a href="{{ route('item') }}">Plain Color Pocket Shirts</a></h2>
+                <h2><a href="<?php echo e(route('item')); ?>">Plain Color Pocket Shirts</a></h2>
                 <div class="rating-result" title="90%">
                     <span>
                         <span>50%</span>
@@ -79,7 +82,7 @@
         <div class="product-cart-wrap mb-30">
             <div class="product-img-action-wrap">
                 <div class="product-img product-img-zoom">
-                    <a href="{{ route('item') }}">
+                    <a href="<?php echo e(route('item')); ?>">
                         <img class="default-img" src="assets/imgs/shop/product-3-1.jpg" alt="">
                         <img class="hover-img" src="assets/imgs/shop/product-3-2.jpg" alt="">
                     </a>
@@ -95,9 +98,9 @@
             </div>
             <div class="product-content-wrap">
                 <div class="product-category">
-                    <a href="{{ route('shop') }}">Shirts</a>
+                    <a href="<?php echo e(route('shop')); ?>">Shirts</a>
                 </div>
-                <h2><a href="{{ route('item') }}">Vintage Floral Oil Shirts</a></h2>
+                <h2><a href="<?php echo e(route('item')); ?>">Vintage Floral Oil Shirts</a></h2>
                 <div class="rating-result" title="90%">
                     <span>
                         <span>95%</span>
@@ -117,7 +120,7 @@
         <div class="product-cart-wrap mb-30">
             <div class="product-img-action-wrap">
                 <div class="product-img product-img-zoom">
-                    <a href="{{ route('item') }}">
+                    <a href="<?php echo e(route('item')); ?>">
                         <img class="default-img" src="assets/imgs/shop/product-4-1.jpg" alt="">
                         <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg" alt="">
                     </a>
@@ -133,9 +136,9 @@
             </div>
             <div class="product-content-wrap">
                 <div class="product-category">
-                    <a href="{{ route('shop') }}">Clothing</a>
+                    <a href="<?php echo e(route('shop')); ?>">Clothing</a>
                 </div>
-                <h2><a href="{{ route('item') }}">Colorful Hawaiian Shirts</a></h2>
+                <h2><a href="<?php echo e(route('item')); ?>">Colorful Hawaiian Shirts</a></h2>
                 <div class="rating-result" title="90%">
                     <span>
                         <span>70%</span>
@@ -155,7 +158,7 @@
         <div class="product-cart-wrap mb-xs-30">
             <div class="product-img-action-wrap">
                 <div class="product-img product-img-zoom">
-                    <a href="{{ route('item') }}">
+                    <a href="<?php echo e(route('item')); ?>">
                         <img class="default-img" src="assets/imgs/shop/product-5-1.jpg" alt="">
                         <img class="hover-img" src="assets/imgs/shop/product-5-2.jpg" alt="">
                     </a>
@@ -171,9 +174,9 @@
             </div>
             <div class="product-content-wrap">
                 <div class="product-category">
-                    <a href="{{ route('shop') }}">Shirt</a>
+                    <a href="<?php echo e(route('shop')); ?>">Shirt</a>
                 </div>
-                <h2><a href="{{ route('item') }}">Flowers Sleeve Lapel Shirt</a></h2>
+                <h2><a href="<?php echo e(route('item')); ?>">Flowers Sleeve Lapel Shirt</a></h2>
                 <div class="rating-result" title="90%">
                     <span>
                         <span>70%</span>
@@ -193,7 +196,7 @@
         <div class="product-cart-wrap mb-xs-30">
             <div class="product-img-action-wrap">
                 <div class="product-img product-img-zoom">
-                    <a href="{{ route('item') }}">
+                    <a href="<?php echo e(route('item')); ?>">
                         <img class="default-img" src="assets/imgs/shop/product-6-1.jpg" alt="">
                         <img class="hover-img" src="assets/imgs/shop/product-6-2.jpg" alt="">
                     </a>
@@ -209,9 +212,9 @@
             </div>
             <div class="product-content-wrap">
                 <div class="product-category">
-                    <a href="{{ route('shop') }}">Shirts</a>
+                    <a href="<?php echo e(route('shop')); ?>">Shirts</a>
                 </div>
-                <h2><a href="{{ route('item') }}">Ethnic Floral Casual Shirts</a></h2>
+                <h2><a href="<?php echo e(route('item')); ?>">Ethnic Floral Casual Shirts</a></h2>
                 <div class="rating-result" title="90%">
                     <span>
                         <span>70%</span>
@@ -231,7 +234,7 @@
         <div class="product-cart-wrap mb-xs-30">
             <div class="product-img-action-wrap">
                 <div class="product-img product-img-zoom">
-                    <a href="{{ route('item') }}">
+                    <a href="<?php echo e(route('item')); ?>">
                         <img class="default-img" src="assets/imgs/shop/product-7-1.jpg" alt="">
                         <img class="hover-img" src="assets/imgs/shop/product-7-2.jpg" alt="">
                     </a>
@@ -247,9 +250,9 @@
             </div>
             <div class="product-content-wrap">
                 <div class="product-category">
-                    <a href="{{ route('shop') }}">Shoes</a>
+                    <a href="<?php echo e(route('shop')); ?>">Shoes</a>
                 </div>
-                <h2><a href="{{ route('item') }}">Stitching Hole Sandals</a></h2>
+                <h2><a href="<?php echo e(route('item')); ?>">Stitching Hole Sandals</a></h2>
                 <div class="rating-result" title="90%">
                     <span>
                         <span>98%</span>
@@ -268,7 +271,7 @@
         <div class="product-cart-wrap">
             <div class="product-img-action-wrap">
                 <div class="product-img product-img-zoom">
-                    <a href="{{ route('item') }}">
+                    <a href="<?php echo e(route('item')); ?>">
                         <img class="default-img" src="assets/imgs/shop/product-8-1.jpg" alt="">
                         <img class="hover-img" src="assets/imgs/shop/product-8-2.jpg" alt="">
                     </a>
@@ -281,9 +284,9 @@
             </div>
             <div class="product-content-wrap">
                 <div class="product-category">
-                    <a href="{{ route('shop') }}">Shirt</a>
+                    <a href="<?php echo e(route('shop')); ?>">Shirt</a>
                 </div>
-                <h2><a href="{{ route('item') }}">Mens Porcelain Shirt</a></h2>
+                <h2><a href="<?php echo e(route('item')); ?>">Mens Porcelain Shirt</a></h2>
                 <div class="rating-result" title="90%">
                     <span>
                         <span>70%</span>
@@ -299,4 +302,4 @@
             </div>
         </div>
     </div>
-</div>
+</div><?php /**PATH /home/kaneki/20221/Lập trình Web/FashionApp/resources/views/layouts/inc/app/tab.blade.php ENDPATH**/ ?>

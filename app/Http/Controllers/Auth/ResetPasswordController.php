@@ -6,34 +6,39 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Models\User;
-
+use Illuminate\Support\Carbon;
 class ResetPasswordController extends Controller
 {
     public function getPassword($token)
     {
-       return view('auth.passwords.reset', ['token' => $token]);
+        DB::table('password_reset')->where('created_at', '<', Carbon::now()->subSeconds(60))->delete();
+        $validator = DB::table('password_reset')->where('token', $token)->first();
+        if ($validator){
+            return view('auth.passwords.reset', ['token' => $token]);
+        } else {
+            return abort(404, 'Page not found');
+        }
     }
     
     public function updatePassword(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email|exists:users',
-            'password' => 'required|string|min:6|confirmed',
-            'password_confirmation' => 'required',
-        ]);
-
-        $updatePassword = DB::table('password_resets')->where(['email' => $request->email, 'token' => $request->token])->first();
-        if(!$updatePassword)
+        $update = DB::table('password_reset')->where([
+            'token' => $request->token
+        ])->first();
+        if(!$update)
         {
             Toastr::error('Invalid token! :)','Error');
             return back();
         }
         else{
-            $user = User::where('email', $request->email)->update(['password' => Hash::make($request->password)]);
-            DB::table('password_resets')->where(['email'=> $request->email])->delete();
+            User::where('email', $update->email)->update([
+                'password' => Hash::make($request->password)
+            ]);
+            DB::table('password_reset')->where([
+                'token'=> $request->token
+            ])->delete();
             Toastr::success('Your password has been changed! :)','Success');
             return redirect('/login');
         }
-       
     }
 }

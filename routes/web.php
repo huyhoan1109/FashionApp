@@ -1,15 +1,21 @@
 <?php
+use App\Models\User;
+use App\Models\Item;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\WishlistController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController; 
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 
 /*
@@ -24,12 +30,21 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    if (! Session::has('key')){
+        $user = new User();
+        $user->firstname = Str::random(15);
+        $user->lastname = Str::random(15);
+        $user->email = 'noreply'.User::where('type', 2)->count().'gmail.com';
+        $user->password = Str::random(15);
+        $user->address = 'Ha Noi';
+        $user->phone = 0000000000;
+        $user->type = 2; # user vang lai
+        $user->save();
+        Session::put('key', $user);
+    }
+    $items = Item::all();
+    return view('home', compact('items'));
 })->name('home');
-
-Route::get('/shop', function () {
-    return view('shop');
-})->name('shop');
 
 Route::get('/checkout', function (){
     return view('checkout');
@@ -40,7 +55,7 @@ Route::get('/privacy-policy', function () {
 })->name('privacy-policy');
 
 Route::get('/wishlist', function () {
-    return view('home');
+    return view('wishlist');
 })->name('wishlist');
 
 Route::get('/cart', function () {
@@ -81,7 +96,7 @@ Route::controller(ForgotPasswordController::class)->group(function () {
     Route::post('/forget-password', 'postEmail')->name('forget-password');    
 });
 
-// ----------------------------- Forget password ----------------------------//
+// ----------------------------- Reset password ----------------------------//
 Route::controller(ResetPasswordController::class)->group(function () {
     Route::get('/reset-password/{token}', 'getPassword')->name('reset-password');
     Route::post('/reset-password', 'updatePassword')->name('reset-password');    
@@ -95,13 +110,26 @@ Route::prefix('/users')->name('users.')->controller(UsersController::class)->gro
     }
 )->name('users');
 
+Route::controller(ShopController::class)->group(function () {
+    Route::get('/shop', 'show')->name('shop');
+    Route::get('/search/{query}', 'search')->name('search');
+});
+
 // ----------------------------- Cart ----------------------------//
-Route::prefix('/cart')->name('cart.')->controller(cartController::class)->group(
+Route::prefix('/cart')->name('cart.')->controller(CartController::class)->group(
     function(){
         Route::post('/add', 'addCart')->name('add');
         Route::post('/remove','removeCart')->name('remove');
     }
 )->name('cart');
+
+Route::get('/wishlist', [WishlistController::class, 'show'])->name('wishlist');
+Route::prefix('/wishlist')->name('wishlist.')->controller(WishlistController::class)->group(
+    function(){
+        Route::post('/add', 'add')->name('add');
+        Route::post('/remove','remove')->name('remove');
+    }
+)->name('wishlist');
 // ----------------------------- Item ----------------------------//
 Route::get('/item-detail/{item_id}', [ItemController::class, 'itemDetail'])->name('item-detail');
 Route::prefix('/item')->name('item.')->controller(ItemController::class)->group(

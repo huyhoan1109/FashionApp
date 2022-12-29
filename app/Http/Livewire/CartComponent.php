@@ -3,30 +3,34 @@
 namespace App\Http\Livewire;
 
 use App\Models\Cart;
-use App\Models\Item;
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
 
 class CartComponent extends Component
 {
-    public function render()
-    {
-        $user_id = Session::get('key')['id'];
-        $cart_list = Cart::where('user_id', $user_id)->get();
-        $cart_data = [];
-        error_log(count($cart_data));
-        $total = 0;
-        foreach($cart_list as $cart){
-            $item = Item::find($cart->item_id);
-            $cart_data[] = [
-                'name' => $item->name,
-                'quantity' => $cart->quantity,
-                'image' => $item->image,
-                'price' => $item->price
-            ];
-            $total += $cart->quantity * $item->price;
+    public function raiseItem($row_id){
+        $cart = Cart::find($row_id)->first();
+        $qty = $cart->quantity + 1;
+        Cart::whereId($row_id)->update([
+            'quantity' => $qty
+        ]);
+    }
+    public function reduceItem($row_id){
+        $cart = Cart::find($row_id)->first();
+        if ($cart->quantity > 0){
+            $qty = $cart->quantity - 1;
+            Cart::whereId($row_id)->update([
+                'quantity' => $qty
+            ]);
         }
-        error_log(count($cart_data));
-        return view('livewire.cart-component', compact('cart_data', 'total'));
+    }
+    public function removeItem($row_id){
+        Cart::find($row_id)->delete();
+        $this->emitTo('cart-icon-component', 'refreshComponent');
+    }
+    public function render(){
+        $user_id = Session::get('key')['id'];
+        $cart = Cart::where('user_id', $user_id)->get();
+        return view('livewire.cart-component', compact('cart'));
     }
 }

@@ -11,9 +11,11 @@ class Item extends Model
     protected $table = "item";
     protected $fillable = [
         'name',
+        'quantity',
         'color',
         'for_male',
         'price',
+        'discount_price',
         'size',
         'image',
         'description',

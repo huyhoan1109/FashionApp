@@ -1,5 +1,5 @@
-﻿@extends('layouts.app')
-@section('main')
+﻿
+<?php $__env->startSection('main'); ?>
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
@@ -42,7 +42,7 @@
                                 <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5 class="mb-0">Hello Rosie! </h5>
+                                            <h5 class="mb-0">Hello <?php echo e($user->firstname); ?> <?php echo e($user->lastname); ?> ! </h5>
                                         </div>
                                         <div class="card-body">
                                             <p>From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a href="#">edit your password and account details.</a></p>
@@ -54,6 +54,7 @@
                                         <div class="card-header">
                                             <h5 class="mb-0">Your Orders</h5>
                                         </div>
+                                        <?php if(@count($orders) > 0): ?>
                                         <div class="card-body">
                                             <div class="table-responsive">
                                                 <table class="table">
@@ -66,32 +67,23 @@
                                                             <th>Actions</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
+                                                    <?php $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <tr>
-                                                            <td>#1357</td>
+                                                            <td><?php echo e($order->id); ?></td>
                                                             <td>March 45, 2022</td>
                                                             <td>Processing</td>
                                                             <td>$125.00 for 2 item</td>
                                                             <td><a href="#" class="btn-small d-block">View</a></td>
                                                         </tr>
-                                                        <tr>
-                                                            <td>#2468</td>
-                                                            <td>June 29, 2022</td>
-                                                            <td>Completed</td>
-                                                            <td>$364.00 for 5 item</td>
-                                                            <td><a href="#" class="btn-small d-block">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>#2366</td>
-                                                            <td>August 02, 2022</td>
-                                                            <td>Completed</td>
-                                                            <td>$280.00 for 3 item</td>
-                                                            <td><a href="#" class="btn-small d-block">View</a></td>
-                                                        </tr>
-                                                    </tbody>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </table>
                                             </div>
                                         </div>
+                                        <?php else: ?>
+                                        <div class="card-body">
+                                            <p>You didn't have any order</p>
+                                        </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="track-orders" role="tabpanel" aria-labelledby="track-orders-tab">
@@ -154,16 +146,15 @@
                                             <h5>Account Details</h5>
                                         </div>
                                         <div class="card-body">
-                                            <p>Already have an account? <a href="#">Log in instead!</a></p>
                                             <form method="post" name="enq">
                                                 <div class="row">
                                                     <div class="form-group col-md-6">
                                                         <label>First Name <span class="required">*</span></label>
-                                                        <input required="" class="form-control square" name="name" type="text">
+                                                        <input required="" class="form-control square" name="name" type="text" value="<?php echo e($user->firstname); ?>">
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label>Last Name <span class="required">*</span></label>
-                                                        <input required="" class="form-control square" name="phone">
+                                                        <input required="" class="form-control square" name="name" type="text" value="<?php echo e($user->lastname); ?>">
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>Display Name <span class="required">*</span></label>
@@ -200,4 +191,6 @@
             </div>
         </div>
     </section>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/kaneki/20221/Lập trình Web/FashionApp/resources/views/user.blade.php ENDPATH**/ ?>

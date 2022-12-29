@@ -18,22 +18,24 @@ class RegisterController extends Controller
     public function storeUser(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name'      => 'required|string|max:255',
-            'email'     => 'required|string|email|max:255|unique:users',
-            'password'  => 'required|string|confirmed',
-            'address' => 'required|string|max:255',
-            'phone_number' => 'required|digits:10',
+            'firstname'      => 'required|string|max:255',
+            'lastname'       => 'required|string|max:255',
+            'email'          => 'required|string|email|max:255|unique:users',
+            'password'       => 'required|string|confirmed',
+            'address'        => 'required|string|max:255',
+            'phone'   => 'required|digits:10',
             'password_confirmation' => 'required',
         ]);
         if ($validator->fails()){
             return back()->withErrors($validator->errors());
         } else { 
             User::create([
-                'name'      => $request->name,
-                'email'     => $request->email,
-                'address'   => $request->address,
-                'phone_number' => $request->phone_number,
-                'password'  => Hash::make($request->password),
+                'firstname'    => $request->firstname,
+                'lastname'     => $request->lastname,
+                'email'        => $request->email,
+                'address'      => $request->address,
+                'phone' => $request->phone,
+                'password'     => Hash::make($request->password),
             ]);
             return redirect()->route('login');
         }

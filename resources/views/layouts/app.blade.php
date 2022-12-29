@@ -8,6 +8,7 @@
         <link rel="shortcut icon" href="{{ asset('assets/imgs/logo.png') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+        @livewireStyles
     </head>
     <body>
     <header class="header-area header-style-1 header-height-2">
@@ -85,20 +86,8 @@
                         </div>
                         <div class="header-action-right">
                             <div class="header-action-2">
-                                <div class="header-action-icon-2">
-                                    <a href="{{ route('wishlist') }}">
-                                        <img src="{{ asset('assets/imgs/theme/icons/icon-heart.svg') }}">
-                                        <!-- số lượng sản phẩm thích -->
-                                        <span class="pro-count blue">?</span> 
-                                    </a>
-                                </div>
-                                <div class="header-action-icon-2">
-                                    <!-- <a class="mini-cart-icon" href="{{ route('cart') }}">
-                                        <img src="{{ asset('assets/imgs/theme/icons/icon-cart.svg') }}">
-                                        <span class="pro-count blue">?</span>
-                                    </a> -->
-                                    @livewire('cart-component', ['user_id' => 0 ])
-                                </div>
+                                @livewire('wishlist-icon-component')
+                                @livewire('cart-icon-component')
                             </div>
                         </div>
                     </div>
@@ -427,9 +416,9 @@
                         <h5 class="widget-title wow fadeIn animated">About Team</h5>
                         <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
                             <li><a href="#">Nguyễn Huy Hoàn - 20194569</a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
+                            <li><a href="#">Trần Quang Huy - 20190093</a></li>
+                            <li><a href="#">Hồ Tuấn Hưng - 20194583</a></li>
+                            <li><a href="#">Vũ Đức Dũng - 20194527</a></li>
                             <li><a href="#"></a></li>                            
                         </ul>
                     </div>
@@ -479,7 +468,8 @@
                 </div>
             </div>
         </div>
-    </footer>    
+    </footer> 
+    @livewireScripts   
     <!-- Vendor JS-->
     <script src="{{ asset('assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/jquery-3.6.0.min.js') }}"></script>

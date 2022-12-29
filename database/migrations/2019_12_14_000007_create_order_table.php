@@ -14,13 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('order', function (Blueprint $table) {
-            $table->unsignedBigInteger("cart_id");
+            $table->id();
+            $table->unsignedBigInteger("user_id");
             $table->unsignedBigInteger("coupon_id");
             $table->boolean("state")->default(false);
-            $table->foreign('cart_id')
-                ->references("id")
-                ->on("cart")
-                ->onDelete("cascade");
+            $table->foreign('user_id')
+            ->references("id")
+            ->on("users")
+            ->onDelete("cascade");
             $table->foreign('coupon_id')
                 ->references("id")
                 ->on("coupon")

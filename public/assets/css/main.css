@@ -4469,7 +4469,7 @@ table .product-thumbnail img {
 }
 
 .product-color-red {
-  background: #ff596d;
+  background: #ff0000;
 }
 
 .product-color-yellow {
@@ -4496,10 +4496,27 @@ table .product-thumbnail img {
   background: #ff8ff8;
 }
 
+.product-color-blue {
+  background: #0000FF;
+}
+
+.product-color-black {
+  background: #000;
+}
+
 .detail-gallery .slick-slider {
   background-color: #000;
   margin-bottom: 30px;
   border-radius: 10px;
+}
+
+.wishlisted {
+  background-color: #F15412 !important;
+  border:1px solid transparent !important;
+}
+
+.wishlisted i{
+  color: #fff !important;
 }
 
 .detail-gallery .slick-slider img {

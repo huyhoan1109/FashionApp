@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Illuminate\Support\Str;
+use App\Models\Order;
 
 class UsersController extends Controller
 {   
-    public function show(){
-        return view('users');
+    public function show(Request $request){
+        $user_id = $request->session()->get('key')['id'];
+        $user = User::find($user_id);
+        $orders = Order::where('user_id', $user_id)->get();
+        return view('user', compact('user', 'orders'));
     }
     public function update(Request $request)
     {
