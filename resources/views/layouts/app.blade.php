@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta http-equiv="refresh" content="{{ config('session.lifetime')}}">
         <title>Nike</title>
         <link rel="shortcut icon" href="{{ asset('assets/imgs/logo.png') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
@@ -79,11 +80,7 @@
                         <a href="{{ route('home') }}"><img width="10%" height="10%" src="{{ asset('assets/imgs/logo/logo-black.png') }}"></a>
                     </div>
                     <div class="header-right">
-                        <div class="search-style-1">
-                            <form action="#">                                
-                                <input type="text" placeholder="Search for items...">
-                            </form>
-                        </div>
+                        @livewire('search-component')
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 @livewire('wishlist-icon-component')
@@ -223,21 +220,21 @@
                                             <li class="sub-mega-menu sub-mega-menu-width-22">
                                                 <a class="menu-title" href="#">Women's Fashion</a>
                                                 <ul>
-                                                    <li><a href="{{ route('item') }}">Dresses</a></li>
-                                                    <li><a href="{{ route('item') }}">Blouses & Shirts</a></li>
-                                                    <li><a href="{{ route('item') }}">Hoodies & Sweatshirts</a></li>
+                                                    <li><a href="">Dresses</a></li>
+                                                    <li><a href="">Blouses & Shirts</a></li>
+                                                    <li><a href="">Hoodies & Sweatshirts</a></li>
                                                 </ul>
                                             </li>
                                             <li class="sub-mega-menu sub-mega-menu-width-22">
                                                 <a class="menu-title" href="#">Men's Fashion</a>
                                                 <ul>
-                                                    <li><a href="{{ route('item') }}">Shirts</a></li>
-                                                    <li><a href="{{ route('item') }}">Hoodies & Sweatshirts</a></li>
+                                                    <li><a href="">Shirts</a></li>
+                                                    <li><a href="">Hoodies & Sweatshirts</a></li>
                                                 </ul>
                                             </li>
                                             <li class="sub-mega-menu sub-mega-menu-width-34">
                                                 <div class="menu-banner-wrap">
-                                                    <a href="{{ route('item') }}"><img src="{{ asset('assets/imgs/banner/menu-banner.jpg') }}"></a>
+                                                    <a href=""><img src="{{ asset('assets/imgs/banner/menu-banner.jpg') }}"></a>
                                                     <div class="menu-banner-content">
                                                         <h4>Hot deals</h4>
                                                         <h3>Don't miss<br> Trending</h3>
@@ -245,7 +242,7 @@
                                                             <span class="new-price text-success">Save to 50%</span>
                                                         </div>
                                                         <div class="menu-banner-btn">
-                                                            <a href="{{ route('item') }}">Shop now</a>
+                                                            <a href="">Shop now</a>
                                                         </div>
                                                     </div>
                                                     <div class="menu-banner-discount">
@@ -314,17 +311,17 @@
                                 <ul class="dropdown">
                                     <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Women's Fashion</a>
                                         <ul class="dropdown">
-                                            <li><a href="{{ route('item') }}">Dresses</a></li>
-                                            <li><a href="{{ route('item') }}">Blouses & Shirts</a></li>
-                                            <li><a href="{{ route('item') }}">Hoodies & Sweatshirts</a></li>
-                                            <li><a href="{{ route('item') }}">Women's Sets</a></li>
+                                            <li><a href="">Dresses</a></li>
+                                            <li><a href="">Blouses & Shirts</a></li>
+                                            <li><a href="">Hoodies & Sweatshirts</a></li>
+                                            <li><a href="">Women's Sets</a></li>
                                         </ul>
                                     </li>
                                     <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Men's Fashion</a>
                                         <ul class="dropdown">
-                                            <li><a href="{{ route('item') }}">Jackets</a></li>
-                                            <li><a href="{{ route('item') }}">Casual Faux Leather</a></li>
-                                            <li><a href="{{ route('item') }}">Genuine Leather</a></li>
+                                            <li><a href="">Jackets</a></li>
+                                            <li><a href="">Casual Faux Leather</a></li>
+                                            <li><a href="">Genuine Leather</a></li>
                                         </ul>
                                     </li>
                                 </ul>

@@ -10,7 +10,7 @@
                                 <h2 class="animated fw-900">Supper value deals</h2>
                                 <h1 class="animated fw-900 text-brand">On all products</h1>
                                 <p class="animated">Save more with coupons & up to 70% off</p>
-                                <a class="animated btn btn-brush btn-brush-3" href="<?php echo e(route('item')); ?>"> Shop Now </a>
+                                <a class="animated btn btn-brush btn-brush-3" href=""> Shop Now </a>
                             </div>
                         </div>
                         <div class="col-lg-7 col-md-6">
@@ -30,7 +30,7 @@
                                 <h2 class="animated fw-900">Fashion Trending</h2>
                                 <h1 class="animated fw-900 text-7">Great Collection</h1>
                                 <p class="animated">Save more with coupons & up to 20% off</p>
-                                <a class="animated btn btn-brush btn-brush-2" href="<?php echo e(route('item')); ?>"> Discover Now </a>
+                                <a class="animated btn btn-brush btn-brush-2" href=""> Discover Now </a>
                             </div>
                         </div>
                         <div class="col-lg-7 col-md-6">
@@ -111,17 +111,17 @@ if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('tab-component', [
                         'items' => $items
                     ])->html();
-} elseif ($_instance->childHasBeenRendered('KJFTGdJ')) {
-    $componentId = $_instance->getRenderedChildComponentId('KJFTGdJ');
-    $componentTag = $_instance->getRenderedChildComponentTagName('KJFTGdJ');
+} elseif ($_instance->childHasBeenRendered('uibtOYt')) {
+    $componentId = $_instance->getRenderedChildComponentId('uibtOYt');
+    $componentTag = $_instance->getRenderedChildComponentTagName('uibtOYt');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('KJFTGdJ');
+    $_instance->preserveRenderedChild('uibtOYt');
 } else {
     $response = \Livewire\Livewire::mount('tab-component', [
                         'items' => $items
                     ]);
     $html = $response->html();
-    $_instance->logRenderedChild('KJFTGdJ', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('uibtOYt', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -132,17 +132,17 @@ if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('tab-component', [
                         'items' => $items
                     ])->html();
-} elseif ($_instance->childHasBeenRendered('Q0OKjjH')) {
-    $componentId = $_instance->getRenderedChildComponentId('Q0OKjjH');
-    $componentTag = $_instance->getRenderedChildComponentTagName('Q0OKjjH');
+} elseif ($_instance->childHasBeenRendered('UdseVBo')) {
+    $componentId = $_instance->getRenderedChildComponentId('UdseVBo');
+    $componentTag = $_instance->getRenderedChildComponentTagName('UdseVBo');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('Q0OKjjH');
+    $_instance->preserveRenderedChild('UdseVBo');
 } else {
     $response = \Livewire\Livewire::mount('tab-component', [
                         'items' => $items
                     ]);
     $html = $response->html();
-    $_instance->logRenderedChild('Q0OKjjH', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('UdseVBo', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -153,17 +153,17 @@ if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('tab-component', [
                         'items' => $items
                     ])->html();
-} elseif ($_instance->childHasBeenRendered('pkYwtt1')) {
-    $componentId = $_instance->getRenderedChildComponentId('pkYwtt1');
-    $componentTag = $_instance->getRenderedChildComponentTagName('pkYwtt1');
+} elseif ($_instance->childHasBeenRendered('MrFJ1Sn')) {
+    $componentId = $_instance->getRenderedChildComponentId('MrFJ1Sn');
+    $componentTag = $_instance->getRenderedChildComponentTagName('MrFJ1Sn');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('pkYwtt1');
+    $_instance->preserveRenderedChild('MrFJ1Sn');
 } else {
     $response = \Livewire\Livewire::mount('tab-component', [
                         'items' => $items
                     ]);
     $html = $response->html();
-    $_instance->logRenderedChild('pkYwtt1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('MrFJ1Sn', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

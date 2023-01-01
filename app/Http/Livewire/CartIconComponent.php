@@ -14,7 +14,8 @@ class CartIconComponent extends Component
     protected $listeners = ['refreshComponent' => '$refresh'];
     public function removeItem($row_id){
         Cart::find($row_id)->delete();
-        $this->emitTo('cart-icon-component', 'refreshComponent');
+        $this->emitTo('cart-icon-component','refreshComponent');
+        $this->emitTo('cart-component','refreshComponent');
     }
     public function render(){
         $user_id = Session::get('key')['id'];

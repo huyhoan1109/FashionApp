@@ -11,7 +11,7 @@
                                 <h2 class="animated fw-900">Supper value deals</h2>
                                 <h1 class="animated fw-900 text-brand">On all products</h1>
                                 <p class="animated">Save more with coupons & up to 70% off</p>
-                                <a class="animated btn btn-brush btn-brush-3" href="{{ route('item') }}"> Shop Now </a>
+                                <a class="animated btn btn-brush btn-brush-3" href=""> Shop Now </a>
                             </div>
                         </div>
                         <div class="col-lg-7 col-md-6">
@@ -31,7 +31,7 @@
                                 <h2 class="animated fw-900">Fashion Trending</h2>
                                 <h1 class="animated fw-900 text-7">Great Collection</h1>
                                 <p class="animated">Save more with coupons & up to 20% off</p>
-                                <a class="animated btn btn-brush btn-brush-2" href="{{ route('item') }}"> Discover Now </a>
+                                <a class="animated btn btn-brush btn-brush-2" href=""> Discover Now </a>
                             </div>
                         </div>
                         <div class="col-lg-7 col-md-6">

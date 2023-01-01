@@ -18,6 +18,9 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php 
+                                $total = 0; 
+                            @endphp
                             @foreach($cart as $item)
                                 @php 
                                     $info = Item::find($item->item_id); 
@@ -31,14 +34,20 @@
                                     <td class="price" data-title="Price"><span>{{ $info->discount_price }} </span></td>
                                     <td class="text-center" data-title="Stock">
                                         <div class="detail-qty border radius m-auto">
-                                            <a href="" wire:click="raiseItem({{ $item->id }})" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                            <a href="" wire:click.prevent="raiseItem({{ $item->id }})" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                             <span class="qty-val">{{ $item->quantity }}</span>
-                                            <a href="" wire:click="reduceItem({{ $item->id }})" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                            <a href="" wire:click.prevent="reduceItem({{ $item->id }})" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
                                         </div>
                                     </td>
+                                    @php 
+                                        $subtotal = $item->quantity * $info->discount_price; 
+                                    @endphp
                                     <td class="text-right" data-title="Cart">
-                                        <span>{{ $item->quantity * $info->discount_price }} </span>
+                                        <span>{{ $subtotal }} </span>
                                     </td>
+                                    @php 
+                                        $total += $subtotal; 
+                                    @endphp
                                     <td class="action" data-title="Remove"><a href="" wire:click.prevent="removeItem({{$item->id}})" class="text-muted"><i class="fi-rs-trash"></i></a></td>
                                 </tr>
                             @endforeach
@@ -66,13 +75,13 @@
                             <div class="total-amount">
                                 <div class="left">
                                     <div class="coupon">
-                                        <form action="#" target="_blank">
+                                        <form wire:submit.prevent="addCoupon" target="_blank">
                                             <div class="form-row row justify-content-center">
                                                 <div class="form-group col-lg-6">
-                                                    <input class="font-medium" name="Coupon" placeholder="Enter Your Coupon">
+                                                    <input class="font-medium" wire:model="coupon_code" placeholder="Enter Your Coupon">
                                                 </div>
                                                 <div class="form-group col-lg-6">
-                                                    <button class="btn  btn-sm"><i class="fi-rs-label mr-10"></i>Apply</button>
+                                                    <button type="submit" class="btn btn-sm"><i class="fi-rs-label mr-10"></i>Apply</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -90,13 +99,23 @@
                                 <table class="table">
                                     <tbody>
                                         <tr>
+                                            <td class="cart_total_label">All</td>
+                                            <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">${{ number_format($total, 2) }}</span></strong></td>
+                                        </tr>
+                                        @if($discount!=0)
+                                        <tr>
+                                            <td class="cart_total_label">Discount</td>
+                                            <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">{{ number_format($discount * 100, 2)}}%</span></strong></td>
+                                        </tr>
+                                        @endif
+                                        <tr>
                                             <td class="cart_total_label">Total</td>
-                                            <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">${{ 0 }}</span></strong></td>
+                                            <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">${{ number_format($total * (1-$discount), 2) }}</span></strong></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <a href="checkout.html" class="btn "> <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut</a>
+                            <a href="{{route('checkout')}}" class="btn "> <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut</a>
                         </div>
                     </div>
                 </div>

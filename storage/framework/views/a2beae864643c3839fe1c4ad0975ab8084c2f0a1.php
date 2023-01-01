@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+        <meta http-equiv="refresh" content="<?php echo e(config('session.lifetime')); ?>">
         <title>Nike</title>
         <link rel="shortcut icon" href="<?php echo e(asset('assets/imgs/logo.png')); ?>">
         <link rel="stylesheet" href="<?php echo e(asset('assets/css/main.css')); ?>">
@@ -80,40 +81,50 @@
                         <a href="<?php echo e(route('home')); ?>"><img width="10%" height="10%" src="<?php echo e(asset('assets/imgs/logo/logo-black.png')); ?>"></a>
                     </div>
                     <div class="header-right">
-                        <div class="search-style-1">
-                            <form action="#">                                
-                                <input type="text" placeholder="Search for items...">
-                            </form>
-                        </div>
+                        <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('search-component')->html();
+} elseif ($_instance->childHasBeenRendered('DUi2WQK')) {
+    $componentId = $_instance->getRenderedChildComponentId('DUi2WQK');
+    $componentTag = $_instance->getRenderedChildComponentTagName('DUi2WQK');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('DUi2WQK');
+} else {
+    $response = \Livewire\Livewire::mount('search-component');
+    $html = $response->html();
+    $_instance->logRenderedChild('DUi2WQK', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('wishlist-icon-component')->html();
-} elseif ($_instance->childHasBeenRendered('bBwalWj')) {
-    $componentId = $_instance->getRenderedChildComponentId('bBwalWj');
-    $componentTag = $_instance->getRenderedChildComponentTagName('bBwalWj');
+} elseif ($_instance->childHasBeenRendered('hm7IDjD')) {
+    $componentId = $_instance->getRenderedChildComponentId('hm7IDjD');
+    $componentTag = $_instance->getRenderedChildComponentTagName('hm7IDjD');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('bBwalWj');
+    $_instance->preserveRenderedChild('hm7IDjD');
 } else {
     $response = \Livewire\Livewire::mount('wishlist-icon-component');
     $html = $response->html();
-    $_instance->logRenderedChild('bBwalWj', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('hm7IDjD', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
                                 <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('cart-icon-component')->html();
-} elseif ($_instance->childHasBeenRendered('0o7eqWf')) {
-    $componentId = $_instance->getRenderedChildComponentId('0o7eqWf');
-    $componentTag = $_instance->getRenderedChildComponentTagName('0o7eqWf');
+} elseif ($_instance->childHasBeenRendered('7ce1h8J')) {
+    $componentId = $_instance->getRenderedChildComponentId('7ce1h8J');
+    $componentTag = $_instance->getRenderedChildComponentTagName('7ce1h8J');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('0o7eqWf');
+    $_instance->preserveRenderedChild('7ce1h8J');
 } else {
     $response = \Livewire\Livewire::mount('cart-icon-component');
     $html = $response->html();
-    $_instance->logRenderedChild('0o7eqWf', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('7ce1h8J', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -252,21 +263,21 @@ echo $html;
                                             <li class="sub-mega-menu sub-mega-menu-width-22">
                                                 <a class="menu-title" href="#">Women's Fashion</a>
                                                 <ul>
-                                                    <li><a href="<?php echo e(route('item')); ?>">Dresses</a></li>
-                                                    <li><a href="<?php echo e(route('item')); ?>">Blouses & Shirts</a></li>
-                                                    <li><a href="<?php echo e(route('item')); ?>">Hoodies & Sweatshirts</a></li>
+                                                    <li><a href="">Dresses</a></li>
+                                                    <li><a href="">Blouses & Shirts</a></li>
+                                                    <li><a href="">Hoodies & Sweatshirts</a></li>
                                                 </ul>
                                             </li>
                                             <li class="sub-mega-menu sub-mega-menu-width-22">
                                                 <a class="menu-title" href="#">Men's Fashion</a>
                                                 <ul>
-                                                    <li><a href="<?php echo e(route('item')); ?>">Shirts</a></li>
-                                                    <li><a href="<?php echo e(route('item')); ?>">Hoodies & Sweatshirts</a></li>
+                                                    <li><a href="">Shirts</a></li>
+                                                    <li><a href="">Hoodies & Sweatshirts</a></li>
                                                 </ul>
                                             </li>
                                             <li class="sub-mega-menu sub-mega-menu-width-34">
                                                 <div class="menu-banner-wrap">
-                                                    <a href="<?php echo e(route('item')); ?>"><img src="<?php echo e(asset('assets/imgs/banner/menu-banner.jpg')); ?>"></a>
+                                                    <a href=""><img src="<?php echo e(asset('assets/imgs/banner/menu-banner.jpg')); ?>"></a>
                                                     <div class="menu-banner-content">
                                                         <h4>Hot deals</h4>
                                                         <h3>Don't miss<br> Trending</h3>
@@ -274,7 +285,7 @@ echo $html;
                                                             <span class="new-price text-success">Save to 50%</span>
                                                         </div>
                                                         <div class="menu-banner-btn">
-                                                            <a href="<?php echo e(route('item')); ?>">Shop now</a>
+                                                            <a href="">Shop now</a>
                                                         </div>
                                                     </div>
                                                     <div class="menu-banner-discount">
@@ -343,17 +354,17 @@ echo $html;
                                 <ul class="dropdown">
                                     <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Women's Fashion</a>
                                         <ul class="dropdown">
-                                            <li><a href="<?php echo e(route('item')); ?>">Dresses</a></li>
-                                            <li><a href="<?php echo e(route('item')); ?>">Blouses & Shirts</a></li>
-                                            <li><a href="<?php echo e(route('item')); ?>">Hoodies & Sweatshirts</a></li>
-                                            <li><a href="<?php echo e(route('item')); ?>">Women's Sets</a></li>
+                                            <li><a href="">Dresses</a></li>
+                                            <li><a href="">Blouses & Shirts</a></li>
+                                            <li><a href="">Hoodies & Sweatshirts</a></li>
+                                            <li><a href="">Women's Sets</a></li>
                                         </ul>
                                     </li>
                                     <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Men's Fashion</a>
                                         <ul class="dropdown">
-                                            <li><a href="<?php echo e(route('item')); ?>">Jackets</a></li>
-                                            <li><a href="<?php echo e(route('item')); ?>">Casual Faux Leather</a></li>
-                                            <li><a href="<?php echo e(route('item')); ?>">Genuine Leather</a></li>
+                                            <li><a href="">Jackets</a></li>
+                                            <li><a href="">Casual Faux Leather</a></li>
+                                            <li><a href="">Genuine Leather</a></li>
                                         </ul>
                                     </li>
                                 </ul>

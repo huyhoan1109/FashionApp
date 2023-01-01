@@ -18,6 +18,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController; 
 use App\Http\Controllers\Auth\ResetPasswordController;
 
+use App\Http\Livewire\SearchComponent;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,17 +32,16 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 */
 
 Route::get('/', function () {
-    if (! Session::has('key')){
+    if(!Session::get('key')){
         $user = new User();
-        $user->firstname = Str::random(15);
-        $user->lastname = Str::random(15);
-        $user->email = 'noreply'.User::where('type', 2)->count().'gmail.com';
+        $user_id = $user->id;
+        $user->email = "noreply".User::where('type', 2)->count()."@gmail.com";
+        $user->firstname = "";
+        $user->lastname = "";
+        $user->type = 2;
         $user->password = Str::random(15);
-        $user->address = 'Ha Noi';
-        $user->phone = 0000000000;
-        $user->type = 2; # user vang lai
-        $user->save();
         Session::put('key', $user);
+        $user->save();
     }
     $items = Item::all();
     return view('home', compact('items'));
@@ -54,14 +55,6 @@ Route::get('/privacy-policy', function () {
     return view('privacy-policy');
 })->name('privacy-policy');
 
-Route::get('/wishlist', function () {
-    return view('wishlist');
-})->name('wishlist');
-
-Route::get('/cart', function () {
-    return view('cart');
-})->name('cart');
-
 Route::get('/about', function () {
     return view('about');
 })->name('about');
@@ -73,10 +66,6 @@ Route::get('/contact', function () {
 Route::get('/help', function() {
     return view('help');
 })->name('help');
-
-Route::get('/item', function () {
-    return view('home');
-})->name('item');
 
 // ----------------------------- Login ----------------------------//
 Route::controller(LoginController::class)->group(function () {
@@ -110,26 +99,13 @@ Route::prefix('/users')->name('users.')->controller(UsersController::class)->gro
     }
 )->name('users');
 
-Route::controller(ShopController::class)->group(function () {
-    Route::get('/shop', 'show')->name('shop');
-    Route::get('/search/{query}', 'search')->name('search');
-});
-
 // ----------------------------- Cart ----------------------------//
-Route::prefix('/cart')->name('cart.')->controller(CartController::class)->group(
-    function(){
-        Route::post('/add', 'addCart')->name('add');
-        Route::post('/remove','removeCart')->name('remove');
-    }
-)->name('cart');
-
+Route::get('/cart', function () { return view('cart');})->name('cart');
+// ----------------------------- Shop ----------------------------//
+Route::get('/shop', [ShopController::class, 'show'])->name('shop');
+// ----------------------------- Wishlist ----------------------------//
 Route::get('/wishlist', [WishlistController::class, 'show'])->name('wishlist');
-Route::prefix('/wishlist')->name('wishlist.')->controller(WishlistController::class)->group(
-    function(){
-        Route::post('/add', 'add')->name('add');
-        Route::post('/remove','remove')->name('remove');
-    }
-)->name('wishlist');
+
 // ----------------------------- Item ----------------------------//
 Route::get('/item-detail/{item_id}', [ItemController::class, 'itemDetail'])->name('item-detail');
 Route::prefix('/item')->name('item.')->controller(ItemController::class)->group(

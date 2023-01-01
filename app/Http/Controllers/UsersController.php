@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {   
     public function show(Request $request){
         $user_id = $request->session()->get('key')['id'];
         $user = User::find($user_id);
-        $orders = Order::where('user_id', $user_id)->get();
-        return view('user', compact('user', 'orders'));
+        return view('user', compact('user'));
     }
     public function update(Request $request)
     {

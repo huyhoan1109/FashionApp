@@ -1,4 +1,5 @@
-<form action="#">
-    <input type="text" placeholder="Search for items…">
-    <button type="submit"><i class="fi-rs-search"></i></button>
-</form>
+<div class="search-style-1">
+    <form action="{{route('shop')}}" method="get">                                
+        <input type="text" name="q" placeholder="Search for items...">
+    </form>
+</div>

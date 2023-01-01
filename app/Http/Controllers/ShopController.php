@@ -9,12 +9,11 @@ use Illuminate\Support\Facades\DB;
 class ShopController extends Controller
 {
     public function show(Request $request){
-        $user_id = $request->session()->get('key')['id'];
         $items = Item::query()->get();
         return view('shop', compact('items'));
     }
-    public function search(){
-        $items = Item::all();
+    public function search(Request $request){
+        $items = Item::where('name', 'like', $request->q)->get();
         return view('shop', compact('items'));
     }
 }

@@ -7,7 +7,11 @@
             </a>
         </div>
         <?php
-            $witems = DB::table('wishlist')->where('user_id', Session::get('key')['id'])->get()->pluck('item_id')->toArray();
+            if (Session::has('key')){
+                $witems = DB::table('wishlist')->where('user_id', Session::get('key')['id'])->get()->pluck('item_id')->toArray();
+            } else {
+                $witems = [];
+            }
         ?>
         <div class="product-action-1">
             <a href="<?php echo e(route('item-detail', ['item_id' => $item->id])); ?>" aria-label="Quick view" class="action-btn small hover-up"><i class="fi-rs-eye"></i></a>

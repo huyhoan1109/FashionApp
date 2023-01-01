@@ -3,7 +3,7 @@
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-                <a href="#" rel="nofollow">Home</a>                    
+                <a href="{{route('home')}}" rel="nofollow">Home</a>
                 <span></span> My Account
             </div>
         </div>
@@ -54,6 +54,10 @@
                                         <div class="card-header">
                                             <h5 class="mb-0">Your Orders</h5>
                                         </div>
+                                        @php
+                                            use App\Models\Order;
+                                            $orders = Order::where('user_id', $user->id)->get();
+                                        @endphp
                                         @if(@count($orders) > 0)
                                         <div class="card-body">
                                             <div class="table-responsive">

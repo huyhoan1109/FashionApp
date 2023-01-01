@@ -18,10 +18,10 @@
                 </div>
                 <div class="shopping-cart-title">
                     <h4><a href="<?php echo e(url('/item-detail/'.$info->id)); ?>"> <?php echo e($info->name); ?></a></h4>
-                    <h4><span><?php echo e($item->quantity); ?> × </span> <?php echo e($info->discount_price); ?></h4>
+                    <h4><span><?php echo e($item->quantity); ?> x</span> <?php echo e(number_format($info->discount_price, 2)); ?></h4>
                 </div>
                 <div class="shopping-cart-delete">
-                   <a href="" wire:click="removeItem(<?php echo e($item->id); ?>)"> <i class="fi-rs-cross-small"></i></a>
+                   <a href="" wire:click.prevent="removeItem(<?php echo e($item->id); ?>)"> <i class="fi-rs-cross-small"></i></a>
                 </div>
             </li>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -37,7 +37,7 @@
                                 $total += $info->discount_price * $item->quantity;
                             }
                         ?>
-                        $<?php echo e($total); ?>
+                        $<?php echo e(number_format($total, 2)); ?>
 
                     </span>
                 </h4>

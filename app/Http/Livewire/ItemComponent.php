@@ -4,12 +4,12 @@ namespace App\Http\Livewire;
 
 use App\Models\Item;
 use App\Models\Cart;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ItemComponent extends Component
 {
