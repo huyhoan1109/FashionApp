@@ -1,5 +1,6 @@
 @php 
     use App\Models\Item;
+    $total = 0;
 @endphp
 <section class="mt-50 mb-50">
     <div class="container">
@@ -18,9 +19,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php 
-                                $total = 0; 
-                            @endphp
                             @foreach($cart as $item)
                                 @php 
                                     $info = Item::find($item->item_id); 
@@ -41,13 +39,11 @@
                                     </td>
                                     @php 
                                         $subtotal = $item->quantity * $info->discount_price; 
+                                        $total += $subtotal;
                                     @endphp
                                     <td class="text-right" data-title="Cart">
                                         <span>{{ $subtotal }} </span>
                                     </td>
-                                    @php 
-                                        $total += $subtotal; 
-                                    @endphp
                                     <td class="action" data-title="Remove"><a href="" wire:click.prevent="removeItem({{$item->id}})" class="text-muted"><i class="fi-rs-trash"></i></a></td>
                                 </tr>
                             @endforeach

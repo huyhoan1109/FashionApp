@@ -92,8 +92,12 @@
                         @livewire('search-component')
                         <div class="header-action-right">
                             <div class="header-action-2">
-                                @livewire('wishlist-icon-component')
-                                @livewire('cart-icon-component')
+                                @livewire('wishlist-icon-component',[
+                                    'user_id' => Session::get('key')['id']
+                                ])
+                                @livewire('cart-icon-component',[
+                                    'user_id' => Session::get('key')['id']
+                                ])
                             </div>
                         </div>
                     </div>

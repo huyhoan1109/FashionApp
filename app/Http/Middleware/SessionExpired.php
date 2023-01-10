@@ -5,8 +5,6 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
-use Auth;
-use Session;
 use App\Models\User;
 class SessionExpired
 {
@@ -24,11 +22,13 @@ class SessionExpired
             $this->session->put('lastActivityTime', time());
         elseif(time() - $this->session->get('lastActivityTime') > $this->timeout){
             $this->session->forget('lastActivityTime');
-            $cookie = cookie('intend', $isLoggedIn ? url()->current() : '/');
+            cookie('intend', $isLoggedIn ? url()->current() : '/');
             auth()->logout();
+            session()->forget('key');
             User::where('firstname', '')->orWhere('lastname', '')->delete();
         }
         $isLoggedIn ? $this->session->put('lastActivityTime', time()) : $this->session->forget('lastActivityTime');
+        redirect()->route('home');
         return $next($request);
     }
 }

@@ -8,5 +8,7 @@
             </div>
         </div>
     </div>
-    @livewire('wishlist-component')
+    @livewire('wishlist-component',[
+        'user_id' => Session::get('key')['id']
+    ])
 @endsection

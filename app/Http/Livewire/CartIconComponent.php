@@ -11,15 +11,18 @@ use function PHPUnit\Framework\isEmpty;
 
 class CartIconComponent extends Component
 {
+    public $user_id;
     protected $listeners = ['refreshComponent' => '$refresh'];
     public function removeItem($row_id){
         Cart::find($row_id)->delete();
         $this->emitTo('cart-icon-component','refreshComponent');
         $this->emitTo('cart-component','refreshComponent');
     }
+    public function mount($user_id){
+        $this->user_id = $user_id;
+    }
     public function render(){
-        $user_id = Session::get('key')['id'];
-        $cart = Cart::where('user_id', $user_id)->get();
+        $cart = Cart::where('user_id', $this->user_id)->get();
         return view('livewire.cart-icon-component', compact('cart'));
     }
 }

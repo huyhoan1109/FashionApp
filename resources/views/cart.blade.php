@@ -9,5 +9,7 @@
             </div>
         </div>
     </div>
-    @livewire('cart-component')
+    @livewire('cart-component', [
+        'user_id' => Session::get('key')['id']
+    ])
 @endsection

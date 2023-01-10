@@ -20,8 +20,7 @@ class CheckoutComponent extends Component
     public $coupon;
     public $total;
     public $price;
-    public function mount(){
-        $user_id = Session::get('key')['id'];
+    public function mount($user_id){
         $this->user = User::find($user_id);
         $this->cart = Cart::where('user_id', $user_id)->get();        
         $this->coupon = Coupon::first();
