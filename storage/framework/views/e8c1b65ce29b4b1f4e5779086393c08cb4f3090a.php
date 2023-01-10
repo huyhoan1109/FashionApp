@@ -141,27 +141,29 @@
                             <div class="col-12">
                                 <div class="row related-products">
                                     <?php $__currentLoopData = $relateds; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $related): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>   
-                                    <div class="col-lg-4">
-                                        <?php
+                                        <?php if($related->id != $item->id): ?>
+                                        <div class="col-lg-4">
+                                            <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('item-component', [
-                                            'item_id' => $related->id,
-                                        ])->html();
-} elseif ($_instance->childHasBeenRendered('y3gdNxF')) {
-    $componentId = $_instance->getRenderedChildComponentId('y3gdNxF');
-    $componentTag = $_instance->getRenderedChildComponentTagName('y3gdNxF');
+                                                'item_id' => $related->id,
+                                            ])->html();
+} elseif ($_instance->childHasBeenRendered('VTczu8Q')) {
+    $componentId = $_instance->getRenderedChildComponentId('VTczu8Q');
+    $componentTag = $_instance->getRenderedChildComponentTagName('VTczu8Q');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('y3gdNxF');
+    $_instance->preserveRenderedChild('VTczu8Q');
 } else {
     $response = \Livewire\Livewire::mount('item-component', [
-                                            'item_id' => $related->id,
-                                        ]);
+                                                'item_id' => $related->id,
+                                            ]);
     $html = $response->html();
-    $_instance->logRenderedChild('y3gdNxF', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('VTczu8Q', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
-                                    </div>
+                                        </div>
+                                        <?php endif; ?>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
                             </div>
@@ -172,30 +174,30 @@ echo $html;
                     <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('category-component')->html();
-} elseif ($_instance->childHasBeenRendered('aX70PN0')) {
-    $componentId = $_instance->getRenderedChildComponentId('aX70PN0');
-    $componentTag = $_instance->getRenderedChildComponentTagName('aX70PN0');
+} elseif ($_instance->childHasBeenRendered('t9AR3sp')) {
+    $componentId = $_instance->getRenderedChildComponentId('t9AR3sp');
+    $componentTag = $_instance->getRenderedChildComponentTagName('t9AR3sp');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('aX70PN0');
+    $_instance->preserveRenderedChild('t9AR3sp');
 } else {
     $response = \Livewire\Livewire::mount('category-component');
     $html = $response->html();
-    $_instance->logRenderedChild('aX70PN0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('t9AR3sp', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
                     <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('filter-component')->html();
-} elseif ($_instance->childHasBeenRendered('OeKWi5a')) {
-    $componentId = $_instance->getRenderedChildComponentId('OeKWi5a');
-    $componentTag = $_instance->getRenderedChildComponentTagName('OeKWi5a');
+} elseif ($_instance->childHasBeenRendered('BEPgEqh')) {
+    $componentId = $_instance->getRenderedChildComponentId('BEPgEqh');
+    $componentTag = $_instance->getRenderedChildComponentTagName('BEPgEqh');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('OeKWi5a');
+    $_instance->preserveRenderedChild('BEPgEqh');
 } else {
     $response = \Livewire\Livewire::mount('filter-component');
     $html = $response->html();
-    $_instance->logRenderedChild('OeKWi5a', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('BEPgEqh', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

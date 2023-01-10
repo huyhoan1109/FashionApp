@@ -32,7 +32,7 @@ use App\Http\Livewire\SearchComponent;
 */
 
 Route::get('/', function () {
-    if(!Session::get('key')){
+    if(!Session::has('key')){
         $user = new User();
         $user_id = $user->id;
         $user->email = "noreply".User::where('type', 2)->count()."@gmail.com";
@@ -43,8 +43,7 @@ Route::get('/', function () {
         Session::put('key', $user);
         $user->save();
     }
-    $items = Item::all();
-    return view('home', compact('items'));
+    return view('home');
 })->name('home');
 
 Route::get('/checkout', function (){

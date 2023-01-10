@@ -25,9 +25,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link" id="track-orders-tab" data-bs-toggle="tab" href="#track-orders" role="tab" aria-controls="track-orders" aria-selected="false"><i class="fi-rs-shopping-cart-check mr-10"></i>Track Your Order</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link" id="address-tab" data-bs-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="true"><i class="fi-rs-marker mr-10"></i>My Address</a>
-                                    </li>
+                                    </li> -->
                                     <li class="nav-item">
                                         <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
                                     </li>
@@ -74,10 +74,28 @@
                                                     @foreach ($orders as $order)
                                                         <tr>
                                                             <td>{{$order->id}}</td>
-                                                            <td>March 45, 2022</td>
-                                                            <td>Processing</td>
-                                                            <td>$125.00 for 2 item</td>
-                                                            <td><a href="#" class="btn-small d-block">View</a></td>
+                                                            <td>{{$order->created_at}}</td>
+                                                            @if($order->isApproved)
+                                                                <td>Approved</td>
+                                                            @else
+                                                                <td>Processing</td>
+                                                            @endif
+                                                            @php
+                                                                $items = DB::table('orderItem')->where('order_id', $order->id)->get();
+                                                            @endphp
+                                                            @if(count($items) > 1)
+                                                                <td>${{$order->total}} for {{count($items)}} items</td>
+                                                            @else
+                                                                <td>${{$order->total}} for 1 item</td>
+                                                            @endif
+                                                            <td> 
+                                                                <a href="#">View</a>
+                                                                <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                                                                <ul>
+                                                                    
+                                                                </ul>
+                                                                </div>
+                                                            </td>
                                                         </tr>
                                                     @endforeach
                                                 </table>
@@ -115,58 +133,29 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="card mb-3 mb-lg-0">
-                                                <div class="card-header">
-                                                    <h5 class="mb-0">Billing Address</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <address>000 Interstate<br> 00 Business Spur,<br> Sault Ste. <br>Marie, MI 00000</address>
-                                                    <p>New York</p>
-                                                    <a href="#" class="btn-small">Edit</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5 class="mb-0">Shipping Address</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <address>4299 Express Lane<br>
-                                                        Sarasota, <br>FL 00000 USA <br>Phone: 1.000.000.0000</address>
-                                                    <p>Sarasota</p>
-                                                    <a href="#" class="btn-small">Edit</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="tab-pane fade" id="account-detail" role="tabpanel" aria-labelledby="account-detail-tab">
                                     <div class="card">
                                         <div class="card-header">
                                             <h5>Account Details</h5>
                                         </div>
                                         <div class="card-body">
-                                            <form method="post" name="enq">
+                                            <form method="post">
                                                 <div class="row">
                                                     <div class="form-group col-md-6">
                                                         <label>First Name <span class="required">*</span></label>
-                                                        <input required="" class="form-control square" name="name" type="text" value="{{ $user->firstname }}">
+                                                        <input required="" class="form-control square" name="firstname" type="text" value="{{ $user->firstname }}">
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label>Last Name <span class="required">*</span></label>
-                                                        <input required="" class="form-control square" name="name" type="text" value="{{ $user->lastname }}">
+                                                        <input required="" class="form-control square" name="lastname" type="text" value="{{ $user->lastname }}">
                                                     </div>
                                                     <div class="form-group col-md-12">
-                                                        <label>Display Name <span class="required">*</span></label>
-                                                        <input required="" class="form-control square" name="dname" type="text">
+                                                        <label>Address <span class="required">*</span></label>
+                                                        <input required="" class="form-control square" name="address" type="text" value="{{ $user->address }}">
                                                     </div>
                                                     <div class="form-group col-md-12">
-                                                        <label>Email Address <span class="required">*</span></label>
-                                                        <input required="" class="form-control square" name="email" type="email">
+                                                        <label>Email <span class="required">*</span></label>
+                                                        <input required="" class="form-control square" name="email" type="email" value="{{ $user->email }}">
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>Current Password <span class="required">*</span></label>

@@ -19,15 +19,15 @@
                                     <span><i class="fi-rs-apps"></i>Show:</span>
                                 </div>
                                 <div class="sort-by-dropdown-wrap">
-                                    <span> 50 <i class="fi-rs-angle-small-down"></i></span>
+                                    <span> <?php echo e($pageSize); ?> <i class="fi-rs-angle-small-down"></i></span>
                                 </div>
                             </div>
                             <div class="sort-by-dropdown">
                                 <ul>
-                                    <li><a class="active" href="#">50</a></li>
-                                    <li><a href="#">100</a></li>
-                                    <li><a href="#">200</a></li>
-                                    <li><a href="#">All</a></li>
+                                    <li><a class="<?php echo e($pageSize==12 ? 'active':''); ?>" href="" wire:click.prevent="changePageSize(12)">12</a></li>
+                                    <li><a class="<?php echo e($pageSize==15 ? 'active':''); ?>" href="" wire:click.prevent="changePageSize(15)">15</a></li>
+                                    <li><a class="<?php echo e($pageSize==25 ? 'active':''); ?>" href="" wire:click.prevent="changePageSize(25)">25</a></li>
+                                    <li><a class="<?php echo e($pageSize==32 ? 'active':''); ?>" href="" wire:click.prevent="changePageSize(32)">32</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -55,13 +55,13 @@
                 <?php if(isset($items)): ?>
                 <div class="row product-grid-3">
                     <?php $__currentLoopData = $items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <div class="col-lg-4 col-md-6 col-6 col-sm-6 row mt-3">
-                        <div class ="border-spacing">
-                            <?php
+                        <div class="col-lg-4 col-md-4 col-6 col-sm-6">
+                            <div class="product-cart-wrap mb-30">
+                                <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('item-component', [
-                                'item_id' => $item                              
-                            ])->html();
+                                    'item_id' => $item->item_id
+                                ])->html();
 } elseif ($_instance->childHasBeenRendered('l32566909-0')) {
     $componentId = $_instance->getRenderedChildComponentId('l32566909-0');
     $componentTag = $_instance->getRenderedChildComponentTagName('l32566909-0');
@@ -69,20 +69,20 @@ if (! isset($_instance)) {
     $_instance->preserveRenderedChild('l32566909-0');
 } else {
     $response = \Livewire\Livewire::mount('item-component', [
-                                'item_id' => $item                              
-                            ]);
+                                    'item_id' => $item->item_id
+                                ]);
     $html = $response->html();
     $_instance->logRenderedChild('l32566909-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
-                        </div> 
-                    </div>
+                            </div>
+                        </div>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
                 <!--pagination-->
                 <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
-                    <nav aria-label="Page navigation example">
+                    <!-- <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-start">
                             <li class="page-item active"><a class="page-link" href="#">01</a></li>
                             <li class="page-item"><a class="page-link" href="#">02</a></li>
@@ -91,7 +91,7 @@ echo $html;
                             <li class="page-item"><a class="page-link" href="#">16</a></li>
                             <li class="page-item"><a class="page-link" href="#"><i class="fi-rs-angle-double-small-right"></i></a></li>
                         </ul>
-                    </nav>
+                    </nav> -->
                 </div>
                 <?php endif; ?>
             </div>

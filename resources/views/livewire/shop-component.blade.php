@@ -13,15 +13,15 @@
                                     <span><i class="fi-rs-apps"></i>Show:</span>
                                 </div>
                                 <div class="sort-by-dropdown-wrap">
-                                    <span> 50 <i class="fi-rs-angle-small-down"></i></span>
+                                    <span> {{$pageSize}} <i class="fi-rs-angle-small-down"></i></span>
                                 </div>
                             </div>
                             <div class="sort-by-dropdown">
                                 <ul>
-                                    <li><a class="active" href="#">50</a></li>
-                                    <li><a href="#">100</a></li>
-                                    <li><a href="#">200</a></li>
-                                    <li><a href="#">All</a></li>
+                                    <li><a class="{{$pageSize==12 ? 'active':''}}" href="" wire:click.prevent="changePageSize(12)">12</a></li>
+                                    <li><a class="{{$pageSize==15 ? 'active':''}}" href="" wire:click.prevent="changePageSize(15)">15</a></li>
+                                    <li><a class="{{$pageSize==25 ? 'active':''}}" href="" wire:click.prevent="changePageSize(25)">25</a></li>
+                                    <li><a class="{{$pageSize==32 ? 'active':''}}" href="" wire:click.prevent="changePageSize(32)">32</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -49,25 +49,57 @@
                 @if(count($items)>0)
                 <div class="row product-grid-3">
                     @foreach($items as $item)
-                    <div class="col-lg-4 col-md-6 col-6 col-sm-6 row mt-3">
-                        <div class ="border-spacing">
-                            @livewire('item-component', ['item_id' => $item->id])
-                        </div> 
-                    </div>
+                        <div class="col-lg-4 col-md-4 col-6 col-sm-6">
+                            <div class="product-cart-wrap mb-30">
+                            <div class="product-img-action-wrap">
+                                <div class="product-img product-img-zoom">
+                                    <a href="{{ route('item-detail', ['item_id' => $item->id]) }}">
+                                        <img class="default-img" width="200" height="300" src="{{ $item->image }}" alt="">
+                                        <img class="hover-img" width="200" height=300" src="{{ $item->image }}" alt="">
+                                    </a>
+                                </div>
+                                @php
+                                    if (Session::has('key')){
+                                        $witems = DB::table('wishlist')->where('user_id', Session::get('key')['id'])->get()->pluck('item_id')->toArray();
+                                    } else {
+                                        $witems = [];
+                                    }
+                                @endphp
+                                <div class="product-action-1">
+                                    <a href="{{ route('item-detail', ['item_id' => $item->id]) }}" aria-label="Quick view" class="action-btn small hover-up"><i class="fi-rs-eye"></i></a>
+                                    @if(in_array($item->id, $witems))
+                                        <a href="" role="button" wire:click.prevent="removeWishlist({{$item->id}})" aria-label="Remove from Wishlist" class="action-btn small hover-up wishlisted" tabindex="0"><i class="fi-rs-heart"></i></a>
+                                    @else 
+                                        <a href="" role="button" wire:click.prevent="addWishlist({{$item->id}})" aria-label="Add To Wishlist" class="action-btn small hover-up" tabindex="0"><i class="fi-rs-heart"></i></a>
+                                    @endif
+                                </div>
+                                <div class="product-badges product-badges-position product-badges-mrg">
+                                    <span class="hot">Hot</span>
+                                </div>
+                            </div>
+                            <div class="product-content-wrap">
+                                <h2><a href="{{ url('/item-detail/'.$item->id) }}">{{ $item->name }}</a></h2>
+                                <div class="rating-result" title="90%">
+                                    <span>
+                                    </span>
+                                </div>
+                                <div class="product-price">
+                                    <span> ${{ number_format($item->discount_price, 2) }} </span>
+                                    <span class="old-price"> ${{ number_format($item->price, 2) }}</span>
+                                </div>
+                                <div class="product-action-1 show">
+                                    <a role="button" wire:click.prevent="addToCart({{$item->id}})" aria-label="Add To Cart" class="action-btn hover-up" href="cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                     @endforeach
                 </div>
                 <!--pagination-->
                 <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-start">
-                            <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                            <li class="page-item"><a class="page-link" href="#">02</a></li>
-                            <li class="page-item"><a class="page-link" href="#">03</a></li>
-                            <li class="page-item"><a class="page-link dot" href="#">...</a></li>
-                            <li class="page-item"><a class="page-link" href="#">16</a></li>
-                            <li class="page-item"><a class="page-link" href="#"><i class="fi-rs-angle-double-small-right"></i></a></li>
-                        </ul>
-                    </nav>
+                    <div class="d-flex justify-content-center mx-auto">
+                        {{ $items->links('vendor.livewire.bootstrap') }}
+                    </div>  
                 </div>
                 @endif
             </div>

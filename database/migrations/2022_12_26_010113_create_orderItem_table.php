@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('orderItem', function (Blueprint $table) {
             $table->id();
             $table->float('price');
+            $table->float('discount_price');
             $table->integer('quantity');
             $table->string('name');
             $table->string('description')->nullable();                          
@@ -24,7 +25,6 @@ return new class extends Migration
             ->references("id")
             ->on("order")
             ->onDelete("cascade");
-            $table->float('subtotal');
             $table->timestamps();
         });
     }

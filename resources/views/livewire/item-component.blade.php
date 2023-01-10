@@ -1,4 +1,4 @@
-<div class="product-cart-wrap hover-up">
+<div class="product-cart-wrap mb-20">
     <div class="product-img-action-wrap">
         <div class="product-img product-img-zoom">
             <a href="{{ route('item-detail', ['item_id' => $item->id]) }}">

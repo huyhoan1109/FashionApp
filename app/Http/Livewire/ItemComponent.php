@@ -5,14 +5,20 @@ namespace App\Http\Livewire;
 use App\Models\Item;
 use App\Models\Cart;
 use App\Models\User;
+use Error;
 use Livewire\Component;
+
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Monolog\Handler\ErrorLogHandler;
+use Symfony\Component\Console\EventListener\ErrorListener;
 
 class ItemComponent extends Component
 {
+    protected $listeners = ['refreshComponent', '$refresh'];
     public $item_id;
     public function mount($item_id)
     {
@@ -61,7 +67,7 @@ class ItemComponent extends Component
             ->where('item_id', $item_id)
             ->delete();
         $this->emitTo('wishlist-icon-component', 'refreshComponent');
-        redirect()->to('wishlist');
+        error_log(url()->current());
     }
     public function render()
     {

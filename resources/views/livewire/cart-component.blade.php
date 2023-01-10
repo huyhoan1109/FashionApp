@@ -54,7 +54,7 @@
                             @if(@count($cart) != 0)
                                 <tr>
                                     <td colspan="6" class="text-end">
-                                        <a href="#" class="text-muted"> <i class="fi-rs-cross-small"></i>Clear Cart</a>
+                                        <a href="" wire:click.prevent="removeCart()" class="text-muted"><i class="fi-rs-cross-small"></i>Clear Cart</a>
                                     </td>
                                 </tr>
                             @endif
@@ -62,62 +62,8 @@
                     </table>
                 </div>
                 <div class="cart-action text-end">
-                    <a class="btn mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10"></i>Update Cart</a>
                     <a href="{{route('shop')}}"class="btn"><i class="fi-rs-shopping-bag mr-10"></i>Continue Shopping</a>
-                </div>
-                <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>
-                <div class="row mb-50">
-                    <div class="col-lg-6 col-md-12">
-                        <div class="mb-30 mt-50">
-                            <div class="heading_s1 mb-3">
-                                <h4>Apply Coupon</h4>
-                            </div>
-                            <div class="total-amount">
-                                <div class="left">
-                                    <div class="coupon">
-                                        <form wire:submit.prevent="addCoupon" target="_blank">
-                                            <div class="form-row row justify-content-center">
-                                                <div class="form-group col-lg-6">
-                                                    <input class="font-medium" wire:model="coupon_code" placeholder="Enter Your Coupon">
-                                                </div>
-                                                <div class="form-group col-lg-6">
-                                                    <button type="submit" class="btn btn-sm"><i class="fi-rs-label mr-10"></i>Apply</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <div class="border p-md-4 p-30 border-radius cart-totals">
-                            <div class="heading_s1 mb-3">
-                                <h4>Cart Totals</h4>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td class="cart_total_label">All</td>
-                                            <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">${{ number_format($total, 2) }}</span></strong></td>
-                                        </tr>
-                                        @if($discount!=0)
-                                        <tr>
-                                            <td class="cart_total_label">Discount</td>
-                                            <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">{{ number_format($discount * 100, 2)}}%</span></strong></td>
-                                        </tr>
-                                        @endif
-                                        <tr>
-                                            <td class="cart_total_label">Total</td>
-                                            <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">${{ number_format($total * (1-$discount), 2) }}</span></strong></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <a href="{{route('checkout')}}" class="btn "> <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut</a>
-                        </div>
-                    </div>
+                    <a href="{{route('checkout')}}" class="btn"><i class="fi-rs-box-alt mr-10"></i>Checkout</a>
                 </div>
             </div>
         </div>

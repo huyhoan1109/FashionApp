@@ -140,11 +140,13 @@
                             <div class="col-12">
                                 <div class="row related-products">
                                     @foreach($relateds as $related)   
-                                    <div class="col-lg-4">
-                                        @livewire('item-component', [
-                                            'item_id' => $related->id,
-                                        ])
-                                    </div>
+                                        @if($related->id != $item->id)
+                                        <div class="col-lg-4">
+                                            @livewire('item-component', [
+                                                'item_id' => $related->id,
+                                            ])
+                                        </div>
+                                        @endif
                                     @endforeach
                                 </div>
                             </div>

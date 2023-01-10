@@ -44,159 +44,22 @@
         </div>
         <div class="slider-arrow hero-slider-1-arrow"></div>
     </section>
-    <section class="featured section-padding position-relative">
+    <section class="banners">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
-                    <div class="banner-features wow fadeIn animated hover-up">
-                        <img src="<?php echo e(asset('assets/imgs/theme/icons/feature-1.png')); ?>" alt="">
-                        <h4 class="bg-1">Free Shipping</h4>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
-                    <div class="banner-features wow fadeIn animated hover-up">
-                        <img src="<?php echo e(asset('assets/imgs/theme/icons/feature-2.png')); ?>" alt="">
-                        <h4 class="bg-3">Online Order</h4>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
-                    <div class="banner-features wow fadeIn animated hover-up">
-                        <img src="<?php echo e(asset('assets/imgs/theme/icons/feature-3.png')); ?>" alt="">
-                        <h4 class="bg-2">Save Money</h4>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
-                    <div class="banner-features wow fadeIn animated hover-up">
-                        <img src="<?php echo e(asset('assets/imgs/theme/icons/feature-4.png')); ?>" alt="">
-                        <h4 class="bg-4">Promotions</h4>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
-                    <div class="banner-features wow fadeIn animated hover-up">
-                        <img src="<?php echo e(asset('assets/imgs/theme/icons/feature-5.png')); ?>" alt="">
-                        <h4 class="bg-5">Happy Sell</h4>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
-                    <div class="banner-features wow fadeIn animated hover-up">
-                        <img src="<?php echo e(asset('assets/imgs/theme/icons/feature-6.png')); ?>" alt="">
-                        <h4 class="bg-6">24/7 Support</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="product-tabs section-padding position-relative wow fadeIn animated">
-        <div class="bg-square"></div>
-        <div class="container">
-            <div class="tab-header">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one" aria-selected="true">Featured</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Popular</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">New added</button>
-                    </li>
-                </ul>
-                <a href="#" class="view-more d-none d-md-flex">View More<i class="fi-rs-angle-double-small-right"></i></a>
-            </div>
-            <!-- End nav-tabs -->
-            <div class="tab-content wow fadeIn animated" id="myTabContent">
-                <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                    <?php
-if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('tab-component', [
-                        'items' => $items
-                    ])->html();
-} elseif ($_instance->childHasBeenRendered('uibtOYt')) {
-    $componentId = $_instance->getRenderedChildComponentId('uibtOYt');
-    $componentTag = $_instance->getRenderedChildComponentTagName('uibtOYt');
-    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('uibtOYt');
-} else {
-    $response = \Livewire\Livewire::mount('tab-component', [
-                        'items' => $items
-                    ]);
-    $html = $response->html();
-    $_instance->logRenderedChild('uibtOYt', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
-}
-echo $html;
-?>
-                </div>
-                <div class="tab-pane fade show" id="tab-two" role="tabpanel" aria-labelledby="tab-two">
-                    <?php
-if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('tab-component', [
-                        'items' => $items
-                    ])->html();
-} elseif ($_instance->childHasBeenRendered('UdseVBo')) {
-    $componentId = $_instance->getRenderedChildComponentId('UdseVBo');
-    $componentTag = $_instance->getRenderedChildComponentTagName('UdseVBo');
-    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('UdseVBo');
-} else {
-    $response = \Livewire\Livewire::mount('tab-component', [
-                        'items' => $items
-                    ]);
-    $html = $response->html();
-    $_instance->logRenderedChild('UdseVBo', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
-}
-echo $html;
-?>
-                </div>
-                <div class="tab-pane fade show" id="tab-three" role="tabpanel" aria-labelledby="tab-three">
-                    <?php
-if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('tab-component', [
-                        'items' => $items
-                    ])->html();
-} elseif ($_instance->childHasBeenRendered('MrFJ1Sn')) {
-    $componentId = $_instance->getRenderedChildComponentId('MrFJ1Sn');
-    $componentTag = $_instance->getRenderedChildComponentTagName('MrFJ1Sn');
-    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('MrFJ1Sn');
-} else {
-    $response = \Livewire\Livewire::mount('tab-component', [
-                        'items' => $items
-                    ]);
-    $html = $response->html();
-    $_instance->logRenderedChild('MrFJ1Sn', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
-}
-echo $html;
-?>
-                </div>
-            </div>        
-            <!--End tab-content-->
-        </div>
-    </section>
-    <section class="banner-2 section-padding pb-0">
-        <div class="container">
+            <h3 class="section-title mb-20"><span>Top Banner</span></h3>
             <div class="card-1">
                 <a href="<?php echo e(route('shop')); ?>">
                     <figure class=" img-hover-scale overflow-hidden">
-                        <img src="assets/imgs/banner/banner-4.png" alt="">
+                        <img src="<?php echo e(asset('assets/imgs/banner/banner-4.png')); ?>" alt="">
                     </figure>
                 </a>
             </div>
         </div>
     </section>
-    <section class="popular-categories section-padding mt-15 mb-25">
-        <div class="container wow fadeIn animated">
-            <h3 class="section-title mb-20"><span>Popular Categories</span></h3>
-            <div class="carausel-6-columns-cover position-relative">
-                <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-arrows"></div>
-                <div class="carausel-6-columns" id="carausel-6-columns">
-                    <!-- add hover-card.blade.php -->
-                </div>
-            </div>
-        </div>
-    </section>
+    <br>
     <section class="banners">
         <div class="container">
-            <h3 class="section-title mb-20"><span>Top Banners</span></h3>
+            <h3 class="section-title mb-20"><span>All</span></h3>
             <div class="row">
                 <div class="col-lg-4 col-md-auto">
                     <div class="card-1">
@@ -228,21 +91,7 @@ echo $html;
             </div>
         </div>
     </section>
-
-    <!-- add item.blade.php to ... -->
-    <section class="section-padding">
-        <div class="container wow fadeIn animated">
-            <h3 class="section-title mb-20"><span>New Arrivals</h3>
-            <div class="carausel-6-columns-cover position-relative">
-                <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-2-arrows"></div>
-                <div class="carausel-6-columns carausel-arrow-center" id="carausel-6-columns-2">
-                    
-                    <!-- ... -->
-
-                </div>
-            </div>
-        </div>
-    </section>
+    <br>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/kaneki/20221/Lập trình Web/FashionApp/resources/views/home.blade.php ENDPATH**/ ?>

@@ -1,7 +1,7 @@
 <div class="row product-grid-4">
     <?php $__currentLoopData = $items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-6 row mt-4">
-    <div class ="border-spacing">
+    <div class ="product-cart-wrap mb-30">
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('item-component', [

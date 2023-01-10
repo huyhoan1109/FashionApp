@@ -19,15 +19,15 @@
                                     <span><i class="fi-rs-apps"></i>Show:</span>
                                 </div>
                                 <div class="sort-by-dropdown-wrap">
-                                    <span> 50 <i class="fi-rs-angle-small-down"></i></span>
+                                    <span> {{$pageSize}} <i class="fi-rs-angle-small-down"></i></span>
                                 </div>
                             </div>
                             <div class="sort-by-dropdown">
                                 <ul>
-                                    <li><a class="active" href="#">50</a></li>
-                                    <li><a href="#">100</a></li>
-                                    <li><a href="#">200</a></li>
-                                    <li><a href="#">All</a></li>
+                                    <li><a class="{{$pageSize==12 ? 'active':''}}" href="" wire:click.prevent="changePageSize(12)">12</a></li>
+                                    <li><a class="{{$pageSize==15 ? 'active':''}}" href="" wire:click.prevent="changePageSize(15)">15</a></li>
+                                    <li><a class="{{$pageSize==25 ? 'active':''}}" href="" wire:click.prevent="changePageSize(25)">25</a></li>
+                                    <li><a class="{{$pageSize==32 ? 'active':''}}" href="" wire:click.prevent="changePageSize(32)">32</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -55,18 +55,18 @@
                 @if(isset($items))
                 <div class="row product-grid-3">
                     @foreach($items as $item)
-                    <div class="col-lg-4 col-md-6 col-6 col-sm-6 row mt-3">
-                        <div class ="border-spacing">
-                            @livewire('item-component', [
-                                'item_id' => $item                              
-                            ])
-                        </div> 
-                    </div>
+                        <div class="col-lg-4 col-md-4 col-6 col-sm-6">
+                            <div class="product-cart-wrap mb-30">
+                                @livewire('item-component', [
+                                    'item_id' => $item->item_id
+                                ])
+                            </div>
+                        </div>
                     @endforeach
                 </div>
                 <!--pagination-->
                 <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
-                    <nav aria-label="Page navigation example">
+                    <!-- <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-start">
                             <li class="page-item active"><a class="page-link" href="#">01</a></li>
                             <li class="page-item"><a class="page-link" href="#">02</a></li>
@@ -75,7 +75,7 @@
                             <li class="page-item"><a class="page-link" href="#">16</a></li>
                             <li class="page-item"><a class="page-link" href="#"><i class="fi-rs-angle-double-small-right"></i></a></li>
                         </ul>
-                    </nav>
+                    </nav> -->
                 </div>
                 @endif
             </div>

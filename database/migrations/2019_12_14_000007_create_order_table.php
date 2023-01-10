@@ -17,11 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('note');
             $table->unsignedBigInteger("user_id");
-            $table->unsignedBigInteger("coupon_id");
+            $table->unsignedBigInteger("coupon_id")->nullable();
             $table->integer('payment');
-            $table->string('billing_address');
             $table->float('total');
-            $table->boolean("state")->default(false);
+            $table->boolean("isApproved")->default(false);
             $table->foreign('user_id')
             ->references("id")
             ->on("users")
