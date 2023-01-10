@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopController;
@@ -31,10 +31,11 @@ use App\Http\Livewire\SearchComponent;
 |
 */
 
+
+
 Route::get('/', function () {
     if(!Session::has('key')){
         $user = new User();
-        $user_id = $user->id;
         $user->email = "noreply".User::where('type', 2)->count()."@gmail.com";
         $user->firstname = "";
         $user->lastname = "";
@@ -91,7 +92,7 @@ Route::controller(ResetPasswordController::class)->group(function () {
 });
 
 // ----------------------------- User ----------------------------//
-Route::prefix('/users')->name('users.')->controller(UsersController::class)->group(
+Route::prefix('/users')->name('users.')->middleware(['auth'])->controller(UserController::class)->group(
     function(){
         Route::get('/', 'show')->name('show');
         Route::post('/update', 'update')->name('update');

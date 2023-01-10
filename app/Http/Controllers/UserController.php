@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use App\Models\Order;
-use Illuminate\Support\Facades\Auth;
 
-class UsersController extends Controller
+class UserController extends Controller
 {   
     public function show(Request $request){
         $user_id = $request->session()->get('key')['id'];

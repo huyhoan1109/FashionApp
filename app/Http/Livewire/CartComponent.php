@@ -37,7 +37,7 @@ class CartComponent extends Component
         $this->emitTo('cart-icon-component', 'refreshComponent');
     }
     public function removeCart(){
-        error_log($this->user_id);
+        //error_log($this->user_id);
         Cart::where('user_id', $this->user_id)->delete();
         $this->emitTo('cart-icon-component', 'refreshComponent');
     }
@@ -47,7 +47,7 @@ class CartComponent extends Component
     public function mount(){
         $this->coupon = null;
         $this->coupon_code = "";
-        error_log(Session::get('key')['id']);
+        //error_log(Session::get('key')['id']);
         $this->user_id = Session::get('key')['id'];
     }
     public function render(){

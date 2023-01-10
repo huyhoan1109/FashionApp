@@ -32,7 +32,12 @@
                                         <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
+                                        <a class="nav-link" href= "{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                                            <i class="fi-rs-sign-out mr-10"></i>Logout
+                                        </a>
+                                        <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
                                     </li>
                                 </ul>
                             </div>

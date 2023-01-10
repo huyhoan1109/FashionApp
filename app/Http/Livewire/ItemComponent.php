@@ -67,7 +67,7 @@ class ItemComponent extends Component
             ->where('item_id', $item_id)
             ->delete();
         $this->emitTo('wishlist-icon-component', 'refreshComponent');
-        error_log(url()->current());
+        //error_log(url()->current());
     }
     public function render()
     {
