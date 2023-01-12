@@ -25,9 +25,6 @@
                                     <li class="nav-item">
                                         <a class="nav-link" id="track-orders-tab" data-bs-toggle="tab" href="#track-orders" role="tab" aria-controls="track-orders" aria-selected="false"><i class="fi-rs-shopping-cart-check mr-10"></i>Track Your Order</a>
                                     </li>
-                                    <!-- <li class="nav-item">
-                                        <a class="nav-link" id="address-tab" data-bs-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="true"><i class="fi-rs-marker mr-10"></i>My Address</a>
-                                    </li> -->
                                     <li class="nav-item">
                                         <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
                                     </li>
@@ -122,16 +119,17 @@
                                             <p>To track your order please enter your OrderID in the box below and press "Track" button. This was given to you on your receipt and in the confirmation email you should have received.</p>
                                             <div class="row">
                                                 <div class="col-lg-8">
-                                                    <form class="contact-form-style mt-30 mb-50" action="#" method="post">
+                                                    <form id="track_form" class="contact-form-style mt-30 mb-50" action="{{ url('/users/track') }}" method="post">
+                                                        @csrf 
                                                         <div class="input-style mb-20">
                                                             <label>Order ID</label>
-                                                            <input name="order-id" placeholder="Found in your order confirmation email" type="text" class="square">
+                                                            <input name="id" placeholder="Found in your order confirmation email" type="text" class="square">
                                                         </div>
                                                         <div class="input-style mb-20">
                                                             <label>Billing email</label>
-                                                            <input name="billing-email" placeholder="Email you used during checkout" type="email" class="square">
+                                                            <input name="billing_email" placeholder="Email you used during checkout" type="email" class="square">
                                                         </div>
-                                                        <button class="submit submit-auto-width" type="submit">Track</button>
+                                                        <button form="track_form" class="submit submit-auto-width" type="submit">Track</button>
                                                     </form>
                                                 </div>
                                             </div>

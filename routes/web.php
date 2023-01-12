@@ -96,6 +96,7 @@ Route::prefix('/users')->name('users.')->middleware(['auth'])->controller(UserCo
     function(){
         Route::get('/', 'show')->name('show');
         Route::post('/update', 'update')->name('update');
+        Route::post('/track', 'track')->name('track');
     }
 )->name('users');
 

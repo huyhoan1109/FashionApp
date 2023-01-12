@@ -4,7 +4,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Brian2694\Toastr\Facades\Toastr;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 class ResetPasswordController extends Controller
@@ -27,7 +26,6 @@ class ResetPasswordController extends Controller
         ])->first();
         if(!$update)
         {
-            Toastr::error('Invalid token! :)','Error');
             return back();
         }
         else{
@@ -37,7 +35,6 @@ class ResetPasswordController extends Controller
             DB::table('password_reset')->where([
                 'token'=> $request->token
             ])->delete();
-            Toastr::success('Your password has been changed! :)','Success');
             return redirect('/login');
         }
     }

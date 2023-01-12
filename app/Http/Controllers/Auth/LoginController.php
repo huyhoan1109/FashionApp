@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
-use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
@@ -69,7 +69,6 @@ class LoginController extends Controller
             $request->session()->put('key',Auth::user());
             return redirect()->route('home');
         } else {
-            Toastr::error('fail, WRONG USERNAME OR PASSWORD :)','Error');
             return redirect()->route('login');
         }
     }
@@ -77,7 +76,6 @@ class LoginController extends Controller
     {
         Auth::logout();
         $request->session()->forget('key');
-        Toastr::success('Logout successfully :)','Success');
         return redirect()->route('home');
     }
 }

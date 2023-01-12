@@ -9,7 +9,6 @@
         <link rel="shortcut icon" href="{{ asset('assets/imgs/logo.png') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
-        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
         <style type="text/css">
             .my-active span{
                 background-color: #5cb85c !important;
@@ -110,19 +109,19 @@
                     <div class="logo logo-width-1 d-block d-lg-none">
                         <a href="{{ route('home') }}"><img src="{{ asset('assets/imgs/logo/logo.png') }} " alt="logo"></a>
                     </div>
-                        <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
-                            <nav>
-                                <ul>
-                                    <li><a href=" {{ route('home') }}">Home</a></li>
-                                    <li><a href="{{ route('shop') }}">Shop</a></li>  
-                                    @auth                           
-                                        <li><a class="center" href="{{ route('users.show') }}">My Account</a>
-                                        </li>
-                                    @endauth
-                                    <li><a href="{{ route('about') }}">About</a></li>
-                                </ul>
-                            </nav>
-                        </div>
+                    <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
+                        <nav>
+                            <ul>
+                                <li><a href=" {{ route('home') }}">Home</a></li>
+                                <li><a href="{{ route('shop') }}">Shop</a></li>  
+                                @auth                           
+                                    <li><a class="center" href="{{ route('users.show') }}">My Account</a>
+                                    </li>
+                                @endauth
+                                <li><a href="{{ route('about') }}">About</a></li>
+                            </ul>
+                        </nav>
+                    </div>
                     <div class="hotline d-none d-lg-block">
                         <p><i class="fi-rs-smartphone"></i><span>Contact</span> (+84) 0000-000-000 </p>
                     </div>
@@ -254,5 +253,4 @@
     <script src="{{ asset('assets/js/main.js?v=3.3') }}"></script>
     <script src="{{ asset('assets/js/shop.js?v=3.3') }}"></script>
     <script src="{{ asset('js/firebase.js') }}"></script>
-    </body>
 </html>

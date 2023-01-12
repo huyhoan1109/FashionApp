@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Carbon;
 
 class ForgotPasswordController extends Controller
@@ -32,7 +31,6 @@ class ForgotPasswordController extends Controller
             $message->subject('Reset Password Notification');
             $message->to($request->email);
         });
-        Toastr::success('We have e-mailed your password reset link! :)','Success');
         return back();
     }
 }

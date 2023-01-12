@@ -3,8 +3,6 @@
 <div class="main-wrapper">
     <div class="account-content">
         <div class="container">
-            {{-- message --}}
-            {!! Toastr::message() !!}
             <!-- /Account Logo -->
             <div class="auth-container">
                 <div class="account-wrapper">
