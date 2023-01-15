@@ -37,16 +37,15 @@
                                     <span><i class="fi-rs-apps-sort"></i>Sort by:</span>
                                 </div>
                                 <div class="sort-by-dropdown-wrap">
-                                    <span> Featured <i class="fi-rs-angle-small-down"></i></span>
+                                    <span> {{ $sortBy }} <i class="fi-rs-angle-small-down"></i></span>
                                 </div>
                             </div>
                             <div class="sort-by-dropdown">
                                 <ul>
-                                    <li><a class="active" href="#">Featured</a></li>
-                                    <li><a href="#">Price: Low to High</a></li>
-                                    <li><a href="#">Price: High to Low</a></li>
-                                    <li><a href="#">Release Date</a></li>
-                                    <li><a href="#">Avg. Rating</a></li>
+                                    <li><a class="{{$sortBy=='Featured' ? 'active':''}}" href="" wire:click.prevent="changeSort('Featured')">Featured</a></li>
+                                    <li><a class="{{$sortBy=='Low to High' ? 'active':''}}" href="" wire:click.prevent="changeSort('Low to High')">Price: Low to High</a></li>
+                                    <li><a class="{{$sortBy=='High to Low' ? 'active':''}}" href="" wire:click.prevent="changeSort('High to Low')">Price: High to Low</a></li>
+                                    <li><a class="{{$sortBy=='Newest' ? 'active':''}}" href="" wire:click.prevent="changeSort('Newest')">Newest</a></li>
                                 </ul>
                             </div>
                         </div>

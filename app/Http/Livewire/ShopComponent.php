@@ -16,20 +16,21 @@ class ShopComponent extends Component
     protected $listeners = ['refreshComponent', '$refresh'];
     use WithPagination;
     public $pageSize;
-
+    public $sortBy;
+    public $item_name;
+    public $user_id;
     public function addToCart($item_id){
-        $user_id = Session::get('key')['id'];
-        $valid = Cart::where('user_id', $user_id)
+        $valid = Cart::where('user_id', $this->user_id)
                     ->where('item_id', $item_id)
                     ->exists();
         if(!$valid){
             Cart::create([
-                'user_id' => $user_id,
+                'user_id' => $this->user_id,
                 'item_id' => $item_id,
                 'quantity' => 1
             ]);
         } else {
-            $cart = Cart::where('user_id', $user_id)
+            $cart = Cart::where('user_id', $this->user_id)
                     ->where('item_id', $item_id)
                     ->first();
             $cart->quantity += 1;
@@ -38,14 +39,13 @@ class ShopComponent extends Component
         $this->emitTo('cart-icon-component', 'refreshComponent');
     }
     public function addWishlist($item_id){
-        $user_id = Session::get('key')['id'];
         $validator = DB::table('wishlist')
-                    ->where('user_id', $user_id)
+                    ->where('user_id', $this->user_id)
                     ->where('item_id', $item_id)
                     ->exists();
         if(!$validator){
             DB::table('wishlist')->insert([
-                'user_id' => $user_id,
+                'user_id' => $this->user_id,
                 'item_id' => $item_id,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -54,22 +54,55 @@ class ShopComponent extends Component
         $this->emitTo('wishlist-icon-component', 'refreshComponent');
     }
     public function removeWishlist($item_id){
-        $user_id = Session::get('key')['id'];
         DB::table('wishlist')
-            ->where('user_id', $user_id)
+            ->where('user_id', $this->user_id)
             ->where('item_id', $item_id)
             ->delete();
         $this->emitTo('wishlist-icon-component', 'refreshComponent');
     }
-    public function mount(){
+    public function mount($item_name){
         $this->pageSize = 12;
+        $this->sortBy = 'Featured';
+        $this->item_name = $item_name;
+        $this->user_id = Session::get('key')['id'];
     }
     public function changePageSize($size){
         $this->pageSize = $size;
     }
+    public function changeSort($sort){
+        $this->sortBy = $sort;
+    }
     public function render()
     {
-        $items = Item::paginate($this->pageSize);
+        $name = $this->item_name;
+        if($name == null){
+            if($this->sortBy == 'Featured'){
+                $items = Item::paginate($this->pageSize);
+            }
+            elseif($this->sortBy == 'Low to High'){
+                $items = Item::orderBy('discount_price', 'ASC')->paginate($this->pageSize);
+            }
+            elseif($this->sortBy == 'High to Low'){
+                $items = Item::orderBy('discount_price', 'DESC')->paginate($this->pageSize);
+            }
+            elseif($this->sortBy == 'Newest'){
+                $items = Item::orderBy('created_at', 'DESC')->paginate($this->pageSize);
+            }
+        } else {
+            $like_items = Item::where('name', 'like', '%'.$name.'%');
+            if($this->sortBy == 'Featured'){
+                $items = $like_items->paginate($this->pageSize);
+            }
+            elseif($this->sortBy == 'Low to High'){
+                $items = $like_items->orderBy('discount_price', 'ASC')->paginate($this->pageSize);
+            }
+            elseif($this->sortBy == 'High to Low'){
+                $items = $like_items->orderBy('discount_price', 'DESC')->paginate($this->pageSize);
+            }
+            elseif($this->sortBy == 'Newest'){
+                $items = $like_items->orderBy('created_at', 'DESC')->paginate($this->pageSize);
+            }
+        }
         return view('livewire.shop-component', [
             'items' => $items
         ]);

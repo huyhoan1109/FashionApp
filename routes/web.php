@@ -1,15 +1,14 @@
 <?php
 use App\Models\User;
-use App\Models\Item;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\WishlistController;
 
@@ -17,8 +16,6 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController; 
 use App\Http\Controllers\Auth\ResetPasswordController;
-
-use App\Http\Livewire\SearchComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,40 +29,20 @@ use App\Http\Livewire\SearchComponent;
 */
 
 
-
+// ----------------------------- Home ----------------------------//
 Route::get('/', function () {
     if(!Session::has('key')){
         $user = new User();
-        $user->email = "noreply".User::where('type', 2)->count()."@gmail.com";
         $user->firstname = "";
         $user->lastname = "";
         $user->type = 2;
-        $user->password = Str::random(15);
+        $user->email = "noreply".Str::random()."@gmail.com";
+        $user->password = Hash::make(Str::random());
         Session::put('key', $user);
         $user->save();
     }
     return view('home');
 })->name('home');
-
-Route::get('/checkout', function (){
-    return view('checkout');
-})->name('checkout');
-
-Route::get('/privacy-policy', function () {
-    return view('privacy-policy');
-})->name('privacy-policy');
-
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
-
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
-
-Route::get('/help', function() {
-    return view('help');
-})->name('help');
 
 // ----------------------------- Login ----------------------------//
 Route::controller(LoginController::class)->group(function () {
@@ -92,24 +69,40 @@ Route::controller(ResetPasswordController::class)->group(function () {
 });
 
 // ----------------------------- User ----------------------------//
-Route::prefix('/users')->name('users.')->middleware(['auth'])->controller(UserController::class)->group(
+Route::prefix('/user')->name('user.')->middleware(['auth'])->controller(UserController::class)->group(
     function(){
         Route::get('/', 'show')->name('show');
         Route::post('/update', 'update')->name('update');
         Route::post('/track', 'track')->name('track');
     }
-)->name('users');
+)->name('user');
 
-// ----------------------------- Cart ----------------------------//
-Route::get('/cart', function () { return view('cart');})->name('cart');
+// ----------------------------- Checkout ----------------------------//
+Route::get('/checkout', function(){return view('checkout');})->name('checkout');
+
+
+// ----------------------------- Contact ----------------------------//
+Route::get('/contact', function(){return view('contact');})->name('contact');
+
+
+// ----------------------------- Privacy - Policy ----------------------------//
+Route::get('/privacy-policy', function(){return view('privacy-policy');})->name('privacy-policy');
+
+
 // ----------------------------- Shop ----------------------------//
 Route::get('/shop', [ShopController::class, 'show'])->name('shop');
+
+
 // ----------------------------- Wishlist ----------------------------//
 Route::get('/wishlist', [WishlistController::class, 'show'])->name('wishlist');
 
+
 // ----------------------------- Item ----------------------------//
 Route::get('/item-detail/{item_id}', [ItemController::class, 'itemDetail'])->name('item-detail');
-Route::prefix('/item')->name('item.')->controller(ItemController::class)->group(
+
+
+// ----------------------------- Item configuration ----------------------------//
+Route::prefix('/item')->middleware(['auth', 'isAdmin'])->name('item.')->controller(ItemController::class)->group(
     function(){
         Route::post('/add','addItem')->name('add');
         Route::post('/fix','fixItem')->name('fix');
@@ -117,9 +110,12 @@ Route::prefix('/item')->name('item.')->controller(ItemController::class)->group(
     }
 )->name('item');
 
+// ----------------------------- Cart ----------------------------//
+Route::get('/cart', function(){return view('cart');})->name('cart');
+
 // ----------------------------- Admin ----------------------------//
 Route::prefix('/admin')->middleware(['auth', 'isAdmin'])->name('admin.')->controller(AdminController::class)->group(
     function(){
-        Route::get('/dashboard', 'index');
+        Route::get('/dashboard', 'index')->name('show');
     }
 );

@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Models\Cart;
-use App\Models\Coupon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
 
@@ -20,9 +19,10 @@ class CartComponent extends Component
     public function reduceItem($row_id){
         $cart = Cart::find($row_id);
         if ($cart->quantity > 0){
-            $cart->quantity = $cart->quantity - 1;;
+            $cart->quantity = $cart->quantity - 1;
             $cart->save();
         }
+        if ($cart->quantity == 0) $cart->delete();
         $this->emitTo('cart-icon-component', 'refreshComponent');
     }
     public function removeItem($row_id){
@@ -33,13 +33,11 @@ class CartComponent extends Component
         Cart::where('user_id', $this->user_id)->delete();
         $this->emitTo('cart-icon-component', 'refreshComponent');
     }
-    public function mount($user_id){
-        $this->user_id = $user_id;
+    public function mount(){
+        $this->user_id = Session::get('key')['id'];
     }
     public function render(){
-        $user_id = $this->user_id;
-        $cart = Cart::where('user_id', $user_id)->get();
-        error_log(count($cart));
+        $cart = Cart::where('user_id', $this->user_id)->get();
         return view('livewire.cart-component', compact('cart'));
     }
 }

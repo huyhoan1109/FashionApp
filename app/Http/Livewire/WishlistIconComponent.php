@@ -10,8 +10,8 @@ class WishlistIconComponent extends Component
 {
     public $user_id;
     protected $listeners = ['refreshComponent' => '$refresh'];
-    public function mount($user_id){
-        $this->user_id = $user_id;
+    public function mount(){
+        $this->user_id = Session::get('key')['id'];
     }
     public function render()
     {   

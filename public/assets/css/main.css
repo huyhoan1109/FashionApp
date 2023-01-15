@@ -675,7 +675,7 @@ strong,
 }
 
 .section-title {
-  font-weight: 600;
+  font-weight: 300;
 }
 
 .section-title.style-1 {
@@ -696,10 +696,10 @@ strong,
 }
 
 .section-title span {
-  color: #F15412;
+  color: #000;
 }
 
-h3.section-title {
+h4.section-title {
   font-size: 22px;
 }
 
@@ -9671,7 +9671,7 @@ span.fi-rs-apps {
   .heading-tab {
     display: block !important;
   }
-  .heading-tab h3.section-title {
+  .heading-tab h4.section-title {
     margin-bottom: 15px !important;
   }
   .nav.right {

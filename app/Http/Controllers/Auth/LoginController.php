@@ -60,9 +60,6 @@ class LoginController extends Controller
 
         $email = $request->email;
         $password = $request->password;
-
-        $dt         = Carbon::now();
-        $todayDate  = $dt->toDayDateTimeString();
         
         if (Auth::attempt(['email'=> $email,'password'=> $password])) {
             /** get session */

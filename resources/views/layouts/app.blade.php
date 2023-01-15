@@ -6,9 +6,11 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta http-equiv="refresh" content="{{ config('session.lifetime')}}">
         <title>Nike</title>
-        <link rel="shortcut icon" href="{{ asset('assets/imgs/logo.png') }}">
+        <link rel="icon" type="image/x-icon" href="{{ asset('assets/imgs/logo/logo.png') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/clicky-menu.css') }}">
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
         <style type="text/css">
             .my-active span{
                 background-color: #5cb85c !important;
@@ -23,6 +25,7 @@
         @livewireStyles
     </head>
     <body>
+    @include('sweetalert::alert')
     <header class="header-area header-style-1 header-height-2">
         <div class="header-top header-top-ptb-1 d-none d-lg-block">
             <div class="container">
@@ -44,9 +47,8 @@
                         <div class="text-center">
                             <div id="news-flash" class="d-inline-block">
                                 <ul>
-                                    <li>Get great devices up to 50% off <a href="{{ route('shop') }}">View details</a></li>
-                                    <li>Supper Value Deals - Save more with coupons</li>
-                                    <li>Trendy 25silver jewelry, save up 35% off today <a href="{{ route('shop') }}">Shop now</a></li>
+                                    <li>Super Value Deals - Save more with coupons <a href="{{ route('shop') }}">Shop now</a></li>
+                                    <li>Discover our new products now <a href="{{ route('shop') }}">Shop now</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -56,7 +58,8 @@
                             <div class="header-info header-info-right">
                                 <ul>                                
                                     <li>
-                                        <i class="fi-rs-key"></i>
+                                        <a href= "{{ route('user.show') }}"> {{ Auth::user()->email }} </a>
+                                        /
                                         <a href= "{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
                                             Log Out 
                                         </a>
@@ -91,12 +94,8 @@
                         @livewire('search-component')
                         <div class="header-action-right">
                             <div class="header-action-2">
-                                @livewire('wishlist-icon-component',[
-                                    'user_id' => Session::get('key')['id']
-                                ])
-                                @livewire('cart-icon-component',[
-                                    'user_id' => Session::get('key')['id']
-                                ])
+                                @livewire('wishlist-icon-component')
+                                @livewire('cart-icon-component')
                             </div>
                         </div>
                     </div>
@@ -115,15 +114,14 @@
                                 <li><a href=" {{ route('home') }}">Home</a></li>
                                 <li><a href="{{ route('shop') }}">Shop</a></li>  
                                 @auth                           
-                                    <li><a class="center" href="{{ route('users.show') }}">My Account</a>
+                                    <li><a href="{{ route('user.show') }}">My Account</a>
                                     </li>
                                 @endauth
-                                <li><a href="{{ route('about') }}">About</a></li>
                             </ul>
                         </nav>
                     </div>
                     <div class="hotline d-none d-lg-block">
-                        <p><i class="fi-rs-smartphone"></i><span>Contact</span> (+84) 0000-000-000 </p>
+                        <p><a href="{{ route('contact') }}"><i class="fi-rs-smartphone"></i><span>Contact</span> (+84) 0000-000-000 </a></p>
                     </div>
                 </div>
             </div>
@@ -250,7 +248,14 @@
     <script src="{{ asset('assets/js/plugins/jquery.theia.sticky.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/jquery.elevatezoom.js') }}"></script>
     <!-- Template  JS -->
+    <script src="{{ asset('js/firebase.js') }}"></script>
     <script src="{{ asset('assets/js/main.js?v=3.3') }}"></script>
     <script src="{{ asset('assets/js/shop.js?v=3.3') }}"></script>
-    <script src="{{ asset('js/firebase.js') }}"></script>
+    <script src="{{ asset('assets/js/clicky-menus.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+    <script>
+        window.addEventListener('swal',function(event){
+            Swal.fire(event.detail);
+        });
+    </script>
 </html>

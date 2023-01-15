@@ -44,12 +44,8 @@
                                 <div class="detail-info">
                                     <h2 class="title-detail"> {{ $item->name }} </h2>
                                     <div class="product-detail-rating">
-                                        <div class="product-rate-cover text-end">
-                                            <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width:90%">
-                                                </div>
-                                            </div>
-                                            <span class="font-small ml-5 text-muted"> (25 reviews)</span>
+                                        <div class="product-rate-cover text-end">    
+                                            <span class="font-small ml-5 text-muted"> ({{ rand(2, 25)}} reviews)</span> 
                                         </div>
                                     </div>
                                     <div class="clearfix product-price-cover">
@@ -70,41 +66,12 @@
                                             <li><i class="fi-rs-credit-card mr-5"></i> Cash on Delivery available</li>
                                         </ul>
                                     </div>
-                                    <div class="attr-detail attr-color mb-15">
-                                        <strong class="mr-10">Color</strong>
-                                        <ul class="list-filter color-filter">
-                                            <li class="active">
-                                                <a href="#" data-color="Red"><span class="product-color-red"></span></a>
-                                            </li>
-                                            <li><a href="#" data-color="Green"><span class="product-color-green"></span></a></li>
-                                            <li><a href="#" data-color="Yellow"><span class="product-color-yellow"></span></a></li>
-                                            <li><a href="#" data-color="Blue"><span class="product-color-blue"></span></a></li>
-                                            <li><a href="#" data-color="White"><span class="product-color-white"></span></a>
-                                            <li><a href="#" data-color="Black"><span class="product-color-black"></span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="attr-detail attr-size">
-                                        <strong class="mr-10">Size</strong>
-                                        <ul class="list-filter size-filter font-small">
-                                            <li><a href="#">S</a></li>
-                                            <li class="active"><a href="#">M</a></li>
-                                            <li><a href="#">L</a></li>
-                                            <li><a href="#">XL</a></li>
-                                            <li><a href="#">XXL</a></li>
-                                        </ul>
-                                    </div>
+
                                     <div class="bt-1 border-color-1 mt-30 mb-30"></div>
-                                    <div class="detail-extralink">
-                                        <div class="detail-qty border radius">
-                                            <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                            <span class="qty-val">1</span>
-                                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                        </div>
-                                        <div class="product-extra-link2">
-                                            <button type="submit" class="button button-add-to-cart">Add to cart</button>
-                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="#"><i class="fi-rs-heart"></i></a>
-                                        </div>
-                                    </div>
+                                    @livewire('detail-component', [
+                                        'item_id' => $item->id
+                                    ])
+
                                     <ul class="product-meta font-xs color-grey mt-50">
                                         <li class="mb-5">Tags: 
                                             @switch($item->type)             
@@ -127,7 +94,7 @@
                                                 <a href="#" rel="tag">Women</a>
                                             @endif 
                                         </li>
-                                        <li>Availability:<span class="in-stock text-success ml-5"> {{ $item->stock }} Items In Stock</span></li>
+                                        <li>Availability:<span class="in-stock text-success ml-5"> {{ $item->quantity }} Items In Stock</span></li>
                                     </ul>
                                 </div>
                                 <!-- Detail Info -->
@@ -135,7 +102,7 @@
                         </div>
                         <div class="row mt-60">
                             <div class="col-12">
-                                <h3 class="section-title style-1 mb-30">Related products</h3>
+                                <h4 class="section-title style-1 mb-30">Related products</h3>
                             </div>
                             <div class="col-12">
                                 <div class="row related-products">

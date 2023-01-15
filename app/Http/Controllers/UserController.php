@@ -8,44 +8,50 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {   
-    public $user_id; 
     public function show(Request $request){
-        $this->user_id = $request->session()->get('key')['id'];
-        $user = User::find($this->user_id);
+        $user = User::find($request->session()->get('key')['id']);
         return view('user', compact('user'));
     }
     public function track(Request $request){
         $validator = Order::where('id', "=", $request->id)->exists();
         if ($validator){
             Mail::send('mail.order-track',['order_id' => $request->id], function($message) use ($request) {
-                $message->subject('Reset Password Notification');
+                $message->subject('Your Order');
                 $message->to($request->billing_email);
             });
-            return redirect()->back()->with('message', 'Sending message successfully!');
+            toast('Sending message successfully!', 'success', 'top-right');
         } else {
-            
-            return redirect()->back()->with('error', 'Something is wrong!');
+            toast('Something is wrong!', 'error', 'top-right');
         }
+        return back();
     }
     public function update(Request $request)
     {
         # Validation
-        $request->validate([
-            'old_password' => 'required',
-            'new_password' => 'required|confirmed',
+        $valid = Validator::make($request->all(), [
+            'oldpassword' => 'required',
+            'newpassword' => 'required',
+            'newpassword_confirmation' => 'required'
         ]);
-        #Match The Old Password
-        if(!Hash::check($request->old_password, auth()->user()->password)){
-            return back()->with("error", "Old Password Doesn't match!");
+        if ($request->newpassword != $request->newpassword_confirmation){
+            toast('Password confirmation is wrong!', 'error', 'top-right');
         }
-
-        #Update the new Password
-        User::whereId(auth()->user()->id)->update([
-            'password' => Hash::make($request->new_password)
-        ]);
-        return back()->with("status", "Password changed successfully!");
+        #Match The Old Password
+        elseif(!Hash::check($request->oldpassword, auth()->user()->password)){
+            toast('Something is wrong!', 'error', 'top-right');
+        }
+        else {
+            #Update the new Password
+            error_log(2);
+            User::whereId(auth()->user()->id)->update([
+                'password' => Hash::make($request->newpassword)
+            ]);
+            toast('Update password successfully!', 'success', 'top-right');
+        }
+        return back();
     }
 }

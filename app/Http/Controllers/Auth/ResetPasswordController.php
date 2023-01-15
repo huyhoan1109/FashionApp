@@ -8,9 +8,12 @@ use App\Models\User;
 use Illuminate\Support\Carbon;
 class ResetPasswordController extends Controller
 {
+    public $timeout = 60;
     public function getPassword($token)
     {
-        DB::table('password_reset')->where('created_at', '<', Carbon::now()->subSeconds(60))->delete();
+        DB::table('password_reset')
+        ->where('created_at', '<', Carbon::now()
+        ->subSeconds($this->timeout))->delete();
         $validator = DB::table('password_reset')->where('token', $token)->first();
         if ($validator){
             return view('auth.passwords.reset', ['token' => $token]);
@@ -29,6 +32,7 @@ class ResetPasswordController extends Controller
             return back();
         }
         else{
+            toast('Change password successfully', 'success', 'top-right');
             User::where('email', $update->email)->update([
                 'password' => Hash::make($request->password)
             ]);

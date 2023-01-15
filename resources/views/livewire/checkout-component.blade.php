@@ -1,6 +1,9 @@
+@php
+    use App\Models\Coupon;
+@endphp
 <section class="mt-50 mb-50">
     <div class="container">
-        <form wire:submit.prevent="createOrder(Object.fromEntries(new FormData($event.target)))" method="post"> 
+        <form id="form_order" wire:submit.prevent="createOrder(Object.fromEntries(new FormData($event.target)))" method="post"> 
         <div class="row">
             <div class="col-md-6">
                 <div class="mb-25">
@@ -14,7 +17,10 @@
                         <input type="text" required="" name="lastname" required="" value="{{$user->lastname}}" placeholder="Last name *">
                     </div>
                     <div class="form-group">
-                        <input type="text" required="" name="billing_address" value="{{$user->address}}" placeholder="Billing address *">
+                        <input type="email" required="" name="email" value="{{$user->email}}" placeholder="Email *">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" required="" name="address" value="{{$user->address}}" placeholder="Billing address *">
                     </div>
                     <div class="form-group">
                         <input type="text" required="" name="phone" type="text" value="{{$user->phone}}" placeholder="Phone *">
@@ -27,7 +33,10 @@
                         <input type="text" name="lastname" required="" placeholder="Last name *">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="billing_address" required="" placeholder="Billing address *">
+                        <input type="email" name="email" required="" placeholder="Email *">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="address" required="" placeholder="Billing address *">
                     </div>
                     <div class="form-group">
                         <input type="text" name="phone" required="" placeholder="Phone *">
@@ -39,6 +48,27 @@
                 <div class="form-group mb-30">
                     <textarea rows="5" name="extra_note" placeholder="Order notes"></textarea>
                 </div>
+                @if (count($availCouponId))
+                <div class="mb-30 mt-50">
+                    <div class="heading_s1 mb-3">
+                        <h4>Apply Coupon</h4>
+                    </div>
+                    <div class="form-group">
+                        <div class="selectdiv">
+                            <!-- <select class="minimal"> -->
+                            <select class="minimal" wire:click="changeCoupon($event.target.value)" style="width: 300px;">
+                                <option value="" disabled>Select an option...</option>
+                                @foreach($availCouponId as $currId)
+                                    @php
+                                    $currCoupon = Coupon::find($currId);
+                                    @endphp
+                                    <option value="{{$currId}}">{{$currCoupon->coupon_code}} - {{number_format($currCoupon->discount * 100, 0)}} %</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
             <div class="col-md-6">
                 <div class="order_review">
@@ -75,7 +105,7 @@
                                     <th>Price</th>
                                     <td class="product-subtotal" colspan="2">${{number_format($price, 2)}}</td>
                                 </tr>
-                                @if($user->type != 2)
+                                @if($user->type != 2 && $coupon != null)
                                 <tr>
                                     <th>Shipping + Coupon</th>
                                     <td colspan="2"><em>Free Shipping + ({{number_format($coupon->discount * 100, 2)}}% discount)</em></td>
@@ -108,7 +138,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-fill-out btn-block mt-30">Place Order</a>
+                    <button type="submit" form="form_order" class="btn btn-fill-out btn-block mt-30">Place Order</button>
                 </div>
             </div>
             </form>

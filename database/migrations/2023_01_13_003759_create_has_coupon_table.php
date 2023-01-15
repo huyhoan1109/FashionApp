@@ -13,20 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('order', function (Blueprint $table) {
+        Schema::create('has_coupon', function (Blueprint $table) {
             $table->id();
-            $table->string('note');
             $table->unsignedBigInteger("user_id");
-            $table->unsignedBigInteger("coupon_id")->nullable();
-            $table->integer('payment');
-            $table->float('subtotal');
-            $table->float('total');
-            $table->boolean("isApproved")->default(false);
-            $table->foreign('user_id')
-            ->references("id")
-            ->on("users")
-            ->onDelete("cascade");
-            $table->foreign('coupon_id')
+            $table->unsignedBigInteger("coupon_id");
+            $table->boolean('avail')->default(true);
+            $table->date('expired_at');
+            $table->foreign("user_id")
+                ->references("id")
+                ->on("users")
+                ->onDelete("cascade");
+            $table->foreign("coupon_id")
                 ->references("id")
                 ->on("coupon")
                 ->onDelete("cascade");
@@ -41,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order');
+        Schema::dropIfExists('has_coupon');
     }
 };

@@ -27,7 +27,8 @@ class RegisterController extends Controller
             'password_confirmation' => 'required',
         ]);
         if ($validator->fails()){
-            return back()->withErrors($validator->errors());
+            toast($validator->errors(), 'error', 'top-right');
+            return back();
         } else { 
             User::create([
                 'firstname'    => $request->firstname,
@@ -37,6 +38,7 @@ class RegisterController extends Controller
                 'phone' => $request->phone,
                 'password'     => Hash::make($request->password),
             ]);
+            toast('Register successfully', 'success', 'top-right');
             return redirect()->route('login');
         }
     }

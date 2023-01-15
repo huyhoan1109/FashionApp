@@ -18,9 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedInteger('quantity')->default(0);
             $table->unsignedInteger('type')->default(0);
-            $table->unsignedInteger('color');
             $table->boolean('for_male')->default(true);
-            $table->unsignedInteger('size')->default(0);
             $table->float('price')->default(0);
             $table->float('discount_price')->default(0);
             $table->string('image');

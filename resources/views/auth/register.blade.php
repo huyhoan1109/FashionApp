@@ -61,7 +61,7 @@
                                     <div class="login_footer form-group">
                                         <div class="chek-form">
                                             <div class="custome-checkbox">
-                                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox12" value="">
+                                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox12" value="" checked>
                                                 <label class="form-check-label" for="exampleCheckbox12"><span>I agree to terms &amp; Policy.</span></label>
                                             </div>
                                         </div>
@@ -78,7 +78,7 @@
                         </div>
                     </div>                            
                     <div class="col-lg-6">
-                        <img src="assets/imgs/login.png">
+                        <img src="{{ asset('assets/imgs/login.png') }}">
                     </div>
                 </div>
             </div>

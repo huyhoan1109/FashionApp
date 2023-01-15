@@ -1,6 +1,6 @@
 <section class="banners">
     <div class="container">
-        <h3 class="section-title mb-20"><span>Top Banners</span></h3>
+        <h4 class="section-title mb-20"><span>Top Banners</span></h3>
         <div class="row">
             <div class="col-lg-4 col-md-auto">
                 <div class="card-1">

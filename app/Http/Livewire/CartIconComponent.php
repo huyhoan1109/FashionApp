@@ -18,8 +18,8 @@ class CartIconComponent extends Component
         $this->emitTo('cart-icon-component','refreshComponent');
         $this->emitTo('cart-component','refreshComponent');
     }
-    public function mount($user_id){
-        $this->user_id = $user_id;
+    public function mount(){
+        $this->user_id = Session::get('key')['id'];
     }
     public function render(){
         $cart = Cart::where('user_id', $this->user_id)->get();
