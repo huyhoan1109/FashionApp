@@ -5,6 +5,8 @@ namespace App\Http\Livewire;
 use App\Models\Item;
 use App\Models\Cart;
 
+use App\Helper\Helper;
+
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -33,10 +35,6 @@ function wishlistSearch($user_id, $sort){
         $sorted = $reval->sortBy('created_at');
     }
     return $sorted;
-}
-
-function toCollection($data){
-    return collect(json_decode(json_encode($data)));
 }
 
 class WishlistComponent extends Component
@@ -85,7 +83,7 @@ class WishlistComponent extends Component
     }
     public function render()
     {
-        $object = toCollection($this->wishlist);
+        $object = Helper::toCollection($this->wishlist);
         $currentPage = Paginator::resolveCurrentPage();
         $currentPageItems = $object->slice(($currentPage - 1) * $this->pageSize, $this->pageSize)->all();
         $items = new Paginator($currentPageItems, count($object), $this->pageSize);

@@ -18,7 +18,7 @@
                     <div class="login_wrap widget-taber-content p-30 background-white border-radius-5">
                             <div class="padding_eight_all bg-white">
                                 <div class="heading_s1">
-                                    <h3 class="mb-30">Create an Account</h3>
+                                    <h3 class="mb-30">Join Us</h3>
                                 </div>
                                 <form action="{{ route('register') }}" method="post">
                                     @csrf
@@ -76,10 +76,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div>                            
-                    <div class="col-lg-6">
-                        <img src="{{ asset('assets/imgs/login.png') }}">
+                    </div>        
+                    <div class="col-lg-1"></div>                    
+                    <div class="col-lg-5">
+                        <img src="{{asset('assets/imgs/logo/logo-slogan.png')}}">
+                        <img src="{{asset('assets/imgs/logo/logo-black.png')}}">
                     </div>
+                    <!-- <div class="col-lg-6">
+                        <img src="{{asset('assets/imgs/logo/logo-text.png')}}">
+                    </div> -->
                 </div>
             </div>
         </div>

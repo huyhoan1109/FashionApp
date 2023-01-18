@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger("user_id");
             $table->unsignedBigInteger("coupon_id");
             $table->boolean('avail')->default(true);
-            $table->date('expired_at');
+            $table->timestamp('expired_at');
             $table->foreign("user_id")
                 ->references("id")
                 ->on("users")

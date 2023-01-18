@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -63,7 +62,9 @@ class LoginController extends Controller
         
         if (Auth::attempt(['email'=> $email,'password'=> $password])) {
             /** get session */
-            $request->session()->put('key',Auth::user());
+            $user = Auth::user();
+            toast('Hello'.' '.$user->firstname.' '.$user->lastname, 'success', 'top-right');
+            $request->session()->put('key',$user);
             return redirect()->route('home');
         } else {
             return redirect()->route('login');
@@ -71,6 +72,8 @@ class LoginController extends Controller
     }
     public function logout(Request $request)
     {
+        $user = Auth::user();
+        toast('Goodbye'.' '.$user->firstname.' '.$user->lastname, 'success', 'top-right');
         Auth::logout();
         $request->session()->forget('key');
         return redirect()->route('home');

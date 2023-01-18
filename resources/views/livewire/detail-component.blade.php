@@ -20,17 +20,13 @@
             @endif
         </div>
     </div>
-    <div style="width: 80px; float:left"><a style="font-size: 20px; color: #F15412;">Rating: </a></div>
-    <div class="rating">
-        <input type="radio" id="star5" name="rating" value="5" />
-        <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
-        <input type="radio" id="star4" name="rating" value="4" />
-        <label class="star" for="star4" title="Great" aria-hidden="true"></label>
-        <input type="radio" id="star3" name="rating" value="3" />
-        <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
-        <input type="radio" id="star2" name="rating" value="2" />
-        <label class="star" for="star2" title="Good" aria-hidden="true"></label>
-        <input type="radio" id="star1" name="rating" value="1" />
-        <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
+    <div style="float:left;" class="star-rating">
+        <a style="font-size: 18px; color: #F15412; float:left; width: 80px;">Rating: </a>
+        <div class="star-rating__wrap">
+            @for($i=5; $i>0; $i--)
+                <input class="star-rating__input" wire:click="$emit('post_my_rate')" wire:model="submit_rate" id="star-rating-{{$i}}"" type="radio" name="rating" value="{{$i}}">
+                <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-{{$i}}" title="{{$i}} out of 5 stars"></label>
+            @endfor
+        </div>
     </div>
 </div>

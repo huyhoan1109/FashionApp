@@ -42,10 +42,17 @@
                             </div>
                             <div class="col-md-6 col-sm-12 col-xs-12">
                                 <div class="detail-info">
-                                    <h2 class="title-detail"> {{ $item->name }} </h2>
+                                    <h2 class="title-detail"> {{ $item->name }} {{number_format($item->rate, 2)}} </h2>
                                     <div class="product-detail-rating">
-                                        <div class="product-rate-cover text-end">    
-                                            <span class="font-small ml-5 text-muted"> ({{ rand(2, 25)}} reviews)</span> 
+                                        <div class="product-rate-cover text-end">
+                                            @for($i=0; $i<5; $i++)
+                                                @if($i < number_format($item->rate, 0))
+                                                    <span style="color: #F15412;" class="fa fa-star checked"></span>
+                                                @else
+                                                    <span style="color: #F15412;" class="fa fa-star-o"></span>
+                                                @endif
+                                            @endfor
+                                            <span class="font-small ml-5 text-muted"> ({{ $item->review }} reviews)</span> 
                                         </div>
                                     </div>
                                     <div class="clearfix product-price-cover">
@@ -121,51 +128,29 @@
                     </div>
                 </div>
                 <div class="col-lg-3 primary-sidebar sticky-sidebar">
-                    @livewire('category-component')
-                    @livewire('filter-component')
-                    <!-- Product sidebar Widget -->
-                    <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
+                    <div class="widget-header position-relative mb-20 pb-10">
+                        <h5 class="widget-title">Trending Now</h5>
+                    </div>
+                    <div style="width: 80%; height:80%" class="widget-area">
+                        <div class="banner-img wow fadeIn mb-45 animated d-lg-block d-none animated">
+                            @php 
+                                $img_src = 'assets/imgs/banner/trend-'.rand(1, 3).'.jpg'
+                            @endphp 
+                            <img src="{{ asset($img_src) }}" alt="">
+                        </div>
+                    </div>
+                    <div class="sidebar-widget widget_tags mb-50">
                         <div class="widget-header position-relative mb-20 pb-10">
-                            <h5 class="widget-title mb-10">New products</h5>
-                            <div class="bt-1 border-color-1"></div>
+                            <h5 class="widget-title">Popular tags </h5>
                         </div>
-                        <div class="single-post clearfix">
-                            <div class="image">
-                                <img src="{{ asset('assets/imgs/shop/thumbnail-3.jpg') }}" alt="#">
-                            </div>
-                            <div class="content pt-10">
-                                <h5><a href="#">Chen Cardigan</a></h5>
-                                <p class="price mb-0 mt-5">$99.50</p>
-                                <div class="product-rate">
-                                    <div class="product-rating" style="width:90%"></div>
-                                </div>
-                            </div>
+                        <div class="tagcloud">
+                            <a class="tag-cloud-link" href="">Shoes</a>
+                            <a class="tag-cloud-link" href="">Jacket</a>
+                            <a class="tag-cloud-link" href="">Men</a>
+                            <a class="tag-cloud-link" href="">Shirt</a>
+                            <a class="tag-cloud-link" href="">Sport</a>
                         </div>
-                        <div class="single-post clearfix">
-                            <div class="image">
-                                <img src="{{ asset('assets/imgs/shop/thumbnail-4.jpg') }}" alt="#">
-                            </div>
-                            <div class="content pt-10">
-                                <h6><a href="#">Chen Sweater</a></h6>
-                                <p class="price mb-0 mt-5">$89.50</p>
-                                <div class="product-rate">
-                                    <div class="product-rating" style="width:80%"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single-post clearfix">
-                            <div class="image">
-                                <img src="{{ asset('assets/imgs/shop/thumbnail-5.jpg') }}" alt="#">
-                            </div>
-                            <div class="content pt-10">
-                                <h6><a href="#">Colorful Jacket</a></h6>
-                                <p class="price mb-0 mt-5">$25</p>
-                                <div class="product-rate">
-                                    <div class="product-rating" style="width:60%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>                        
+                    </div>
                 </div>
             </div>
         </div>

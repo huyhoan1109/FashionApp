@@ -57,12 +57,12 @@
                         <div class="selectdiv">
                             <!-- <select class="minimal"> -->
                             <select class="minimal" wire:click="changeCoupon($event.target.value)" style="width: 300px;">
-                                <option value="" disabled>Select an option...</option>
+                                <option value="">Select an option...</option>
                                 @foreach($availCouponId as $currId)
                                     @php
                                     $currCoupon = Coupon::find($currId);
                                     @endphp
-                                    <option value="{{$currId}}">{{$currCoupon->coupon_code}} - {{number_format($currCoupon->discount * 100, 0)}} %</option>
+                                    <option value="{{$currId}}">{{$currCoupon->coupon_code}} - {{number_format($currCoupon->discount, 0)}} %</option>
                                 @endforeach
                             </select>
                         </div>
@@ -108,7 +108,7 @@
                                 @if($user->type != 2 && $coupon != null)
                                 <tr>
                                     <th>Shipping + Coupon</th>
-                                    <td colspan="2"><em>Free Shipping + ({{number_format($coupon->discount * 100, 2)}}% discount)</em></td>
+                                    <td colspan="2"><em>Free Shipping + ({{number_format($coupon->discount, 2)}}% discount)</em></td>
                                 </tr>
                                 @endif
                                 <tr>

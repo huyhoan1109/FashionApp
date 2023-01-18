@@ -212,8 +212,8 @@
                             <div class="sub-price">
                             </div>
                             <div class="sub-price">
-                                <small>COUPON ({{number_format(100 * $coupon->discount, 2)}}%)</small>
-                                <span class="text-inverse">${{number_format($order->subtotal * $coupon->discount, 2)}}</span>
+                                <small>COUPON ({{number_format($coupon->discount, 2)}}%)</small>
+                                <span class="text-inverse">${{number_format($order->subtotal * $coupon->discount/100, 2)}}</span>
                             </div>
                         @endif 
                     </div>

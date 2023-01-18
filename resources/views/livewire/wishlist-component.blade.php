@@ -73,10 +73,13 @@
                             </div>
                             <div class="product-content-wrap">
                                 <h2><a href="{{ url('/item-detail/'.$item->id) }}">{{ $item->name }}</a></h2>
-                                <div class="rating-result" title="90%">
-                                    <span>
-                                    </span>
-                                </div>
+                                @for($i=0; $i<5; $i++)
+                                    @if($i < number_format($item->rate, 0))
+                                        <span style="color: #F15412;" class="fa fa-star checked"></span>
+                                    @else
+                                        <span style="color: #F15412;" class="fa fa-star-o"></span>
+                                    @endif
+                                @endfor
                                 <div class="product-price">
                                     <span> ${{ number_format($item->discount_price, 2) }} </span>
                                     <span class="old-price"> ${{ number_format($item->price, 2) }}</span>
@@ -98,13 +101,17 @@
                 @endif
             </div>
             <div class="col-lg-3 primary-sidebar sticky-sidebar">
-                <div class="row">
-                    <div class="col-lg-12 col-mg-6"></div>
-                    <div class="col-lg-12 col-mg-6"></div>
+                <div class="widget-header position-relative mb-20 pb-10">
+                    <h5 class="widget-title">Trending Now</h5>
                 </div>
-                @livewire('category-component')
-                @livewire('filter-component')
-                <!-- Product sidebar Widget -->
+                <div style="width: 70%; height:70%" class="widget-area">
+                    <div class="banner-img wow fadeIn mb-45 animated d-lg-block d-none animated">
+                        @php 
+                            $img_src = 'assets/imgs/banner/trend-'.rand(1, 3).'.jpg'
+                        @endphp 
+                        <img src="{{ asset($img_src) }}" alt="">
+                    </div>
+                </div>
             </div>
         </div>
     </div>

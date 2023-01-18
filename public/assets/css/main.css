@@ -7401,14 +7401,14 @@ span.fi-rs-apps {
 
 .widget-category ul > li {
   padding: 6px 0;
-  -webkit-transition-duration: .2s;
-          transition-duration: .2s;
+  -webkit-transition-duration: .1s;
+          transition-duration: .1s;
 }
 
 .widget-category ul > li:hover {
   padding-left: 5px;
-  -webkit-transition-duration: .2s;
-          transition-duration: .2s;
+  -webkit-transition-duration: .1s;
+          transition-duration: .1s;
 }
 
 .widget-category ul > li a {

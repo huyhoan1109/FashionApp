@@ -25,7 +25,7 @@ class SessionExpired
             $this->session->forget('lastActivityTime');
             cookie('intend', $isLoggedIn ? url()->current() : '/');
             $user = User::find(session()->get('key')['id']);
-            if ($user->type == 2 && Order::where('user_id', $user->id)->count() == 0){
+            if (isset($user) && $user->type == 2 && Order::where('user_id', $user->id)->count() == 0){
                 $user->delete();
             }
             auth()->logout();

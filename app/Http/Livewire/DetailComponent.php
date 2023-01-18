@@ -3,8 +3,13 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+
+use App\Models\User;
 use App\Models\Item;
 use App\Models\Cart;
+
+use App\Helper\Helper;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 class DetailComponent extends Component
@@ -12,13 +17,32 @@ class DetailComponent extends Component
     public $item_id;
     public $user_id;
     public $quantity;
+    public $submit_rate;
+    protected $listeners = ['post_my_rate' => 'PostMyRate'];
+
+    public function PostMyRate(){
+        $user = User::find($this->user_id);
+        if(isset($user) && $user->type != 2){
+            $item = Item::find($this->item_id);
+            $new_review =  $item->review + 1;
+            $item->rate = ($item->rate * $item->review + $this->submit_rate)/$new_review;
+            $item->review = $new_review;
+            $item->save();
+            $this->dispatchBrowserEvent('swal', Helper::SuccessToast('Thank you for rating item!'));
+        } else {
+            $this->dispatchBrowserEvent('swal', Helper::ErrorToast('Become our users to rate this item!'));
+        }
+    }
+
     public function mount($item_id){
         $this->user_id = Session::get('key')['id'];
         $this->item_id = $item_id;
         $this->quantity = 1;
     }
     public function reduceItem(){
-        $this->quantity -= 1;
+        if($this->quantity > 1){
+            $this->quantity -= 1;
+        }
     }
     public function raiseItem(){
         $this->quantity += 1;

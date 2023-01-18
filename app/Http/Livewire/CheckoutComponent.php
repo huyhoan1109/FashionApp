@@ -3,11 +3,17 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+
+use Exception;
+
 use App\Models\Item;
 use App\Models\Order;
 use App\Models\Cart;
 use App\Models\Coupon;
 use App\Models\User;
+
+use App\Helper\Helper;
+
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -20,12 +26,12 @@ function allCoupon($user_id){
         ->where('avail', true)
         ->pluck('coupon_id');
 }
+
 class CheckoutComponent extends Component
 {
     protected $listeners = [
         'refreshComponent' => '$refresh'
     ];
-    
     public $user;
     public $user_id;
     public $cart;
@@ -33,22 +39,6 @@ class CheckoutComponent extends Component
     public $coupon;
     public $total;
     public $price;
-    public $swal_error = [
-        'title' => "You haven't ordered yet",
-        'timer'=>3000,
-        'icon'=>'error',
-        'toast'=>true,
-        'position'=>'top-right',
-        'showConfirmButton' => false
-    ];
-    public $swal_success = [
-        'title' => 'You have ordered successfully',
-        'timer'=>3000,
-        'icon'=>'success',
-        'toast'=>true,
-        'position'=>'top-right',
-        'showConfirmButton' => false
-    ];
     public function mount(){
         $this->user_id = Session::get('key')['id'];
         $this->user = User::find($this->user_id);
@@ -70,62 +60,80 @@ class CheckoutComponent extends Component
 
     public function changeCoupon($coupon_id){
         $this->coupon = Coupon::find($coupon_id);
-        $this->total = $this->price * (1-$this->coupon->discount);
+        if(isset($this->coupon)) $this->total = $this->price * (1-$this->coupon->discount/100);
+        else $this->total = $this->price;
     }
 
     public function createOrder($data){
         if($this->total > 0){
-            $order = new Order();
-            if($this->coupon != null){
-                DB::table('has_coupon')
-                ->where('user_id', $this->user->id)
-                ->where('coupon_id', $this->coupon->id)
-                ->update(['avail' => false]);
-                $this->availCouponId = allCoupon($this->user_id);
-                $order->coupon_id = $this->coupon->id;
-            } else {
-                $order->coupon_id = null;
+            DB::beginTransaction();
+            try {
+                $order = new Order();
+                if($this->coupon != null){
+                    DB::table('has_coupon')
+                    ->where('user_id', $this->user->id)
+                    ->where('coupon_id', $this->coupon->id)
+                    ->update(['avail' => false]);
+                    $this->availCouponId = allCoupon($this->user_id);
+                    $order->coupon_id = $this->coupon->id;
+                } else {
+                    $order->coupon_id = null;
+                }
+                $order->note =  "Customer: ".$data['firstname']." ".$data['lastname']."\n".
+                                "Address: ".$data['address']."\n".
+                                "Phone: ".$data['phone']."\n";
+                $order->total = $this->total;
+                if($data['payment_option'] == 'pay1'){
+                    $order->payment = 1;
+                } elseif ($data['payment_option'] == 'pay2'){
+                    $order->payment = 2;
+                } else{
+                    $order->payment = 3;
+                } 
+                $order->user_id = $this->user->id;
+                if ($this->user->type == 2){
+                    $this->user->firstname = $data['firstname'];
+                    $this->user->lastname = $data['lastname'];
+                    $this->user->save();
+                }
+                $order->subtotal = $this->price;
+                $order->save();
+                foreach($this->cart as $item){
+                    $info = Item::find($item->item_id);
+                    if ($info->quantity >= $item->quantity){
+                        DB::table('orderItem')->insert([
+                            'discount_price' => $info->discount_price, 
+                            'price' => $info->price,
+                            'quantity' => $item->quantity,
+                            'name' => $info->name,
+                            'description' => $info->description,
+                            'order_id' => $order->id,
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now()
+                        ]);
+                        $info->quantity -= $item->quantity;
+                        $info->save();
+                    } else {
+                        $message = $info->name." isn't currently availble!";
+                        $this->dispatchBrowserEvent('swal', Helper::ErrorToast($message));
+                        throw new \Exception($message);
+                    }
+                }
+                $message = 'Order created';
+                $this->dispatchBrowserEvent('swal', Helper::SuccessToast($message));
+                Cart::where('user_id', $this->user->id)->delete();
+                Mail::send('mail.order-track',['order_id' => $order->id], function($message) use ($data) {
+                    $message->subject('Your Order');
+                    $message->to($data['email']);
+                });
+                redirect()->route('home');
+            } catch (Exception){
+                DB::rollBack();
             }
-            $order->note =  "Customer: ".$data['firstname']." ".$data['lastname']."\n".
-                            "Address: ".$data['address']."\n".
-                            "Phone: ".$data['phone']."\n";
-            $order->total = $this->total;
-            if($data['payment_option'] == 'pay1'){
-                $order->payment = 1;
-            } elseif ($data['payment_option'] == 'pay2'){
-                $order->payment = 2;
-            } else{
-                $order->payment = 3;
-            } 
-            $order->user_id = $this->user->id;
-            if ($this->user->type == 2){
-                $this->user->firstname = $data['firstname'];
-                $this->user->lastname = $data['lastname'];
-                $this->user->save();
-            }
-            $order->subtotal = $this->price;
-            $order->save();
-            foreach($this->cart as $item){
-                $info = Item::find($item->item_id);
-                DB::table('orderItem')->insert([
-                    'discount_price' => $info->discount_price, 
-                    'price' => $info->price,
-                    'quantity' => $item->quantity,
-                    'name' => $info->name,
-                    'description' => $info->description,
-                    'order_id' => $order->id,
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ]);
-            }
-            Cart::where('user_id', $this->user->id)->delete();
-            $this->dispatchBrowserEvent('swal', $this->swal_success);
-            Mail::send('mail.order-track',['order_id' => $order->id], function($message) use ($data) {
-                $message->subject('Your Order');
-                $message->to($data['email']);
-            });
+            DB::commit();
         } else {
-            $this->dispatchBrowserEvent('swal', $this->swal_error);
+            $message = "You haven't ordered yet";
+            $this->dispatchBrowserEvent('swal', Helper::ErrorToast($message));
         }
     }
     public function render()

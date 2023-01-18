@@ -42,7 +42,7 @@ class UserController extends Controller
         }
         #Match The Old Password
         elseif(!Hash::check($request->oldpassword, auth()->user()->password)){
-            toast('Something is wrong!', 'error', 'top-right');
+            toast('Old password is wrong!', 'error', 'top-right');
         }
         else {
             #Update the new Password

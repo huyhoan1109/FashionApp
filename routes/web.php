@@ -36,8 +36,8 @@ Route::get('/', function () {
         $user->firstname = "";
         $user->lastname = "";
         $user->type = 2;
-        $user->email = "noreply".Str::random()."@gmail.com";
-        $user->password = Hash::make(Str::random());
+        $user->email = Str::random(8)."@gmail.com";
+        $user->password = Str::random(8);
         Session::put('key', $user);
         $user->save();
     }

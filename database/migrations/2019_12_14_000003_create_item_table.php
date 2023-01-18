@@ -17,13 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedInteger('quantity')->default(0);
-            $table->unsignedInteger('type')->default(0);
+            $table->unsignedInteger('type')->default(1);
             $table->boolean('for_male')->default(true);
             $table->float('price')->default(0);
             $table->float('discount_price')->default(0);
             $table->string('image');
             $table->string('description');
             $table->integer('review');
+            $table->float('rate');
             $table->timestamps();
         });
     }

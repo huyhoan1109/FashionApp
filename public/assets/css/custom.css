@@ -140,38 +140,33 @@ select:-moz-focusring {
   text-shadow: 0 0 0 #000;
 }
 
-.rating {
-  margin-top: none;
-  border: none;
-  float: left;
+.star-rating{
+	font-size: 0;
 }
-
-.rating > label {
-  color: #90A0A3;
-  float: right;
+.star-rating__wrap{
+	display: inline-block;
+	font-size: 18px;
 }
-
-.rating > label:before {
-  margin-left: none;
-  font-size: 1.4em;
-  font-family: FontAwesome;
-  content: "\2605";
-  display: inline-block;
+.star-rating__wrap:after{
+	content: "";
+	display: table;
+	clear: both;
 }
-
-.rating > input {
-  display: none;
+.star-rating__ico{
+	float: right;
+	padding-left: 2px;
+	cursor: pointer;
+	color: #FFB300;
 }
-
-.rating > input:checked ~ label,
-.rating:not(:checked) > label:hover,
-.rating:not(:checked) > label:hover ~ label {
-  color: #F79426;
+.star-rating__ico:last-child{
+	padding-left: 0;
 }
-
-.rating > input:checked + label:hover,
-.rating > input:checked ~ label:hover,
-.rating > label:hover ~ input:checked ~ label,
-.rating > input:checked ~ label:hover ~ label {
-  color: #FECE31;
+.star-rating__input{
+	display: none;
+}
+.star-rating__ico:hover:before,
+.star-rating__ico:hover ~ .star-rating__ico:before,
+.star-rating__input:checked ~ .star-rating__ico:before
+{
+	content: "\f005";
 }

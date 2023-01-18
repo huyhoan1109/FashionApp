@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-lg-1"></div>
                     <div class="col-lg-6">
-                        <img src="{{ asset('assets/imgs/login.png') }}">
+                        <img src="{{asset('assets/imgs/logo/logo-text.png')}}">
                     </div>
                 </div>
             </div>

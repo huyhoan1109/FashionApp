@@ -1,5 +1,57 @@
 ﻿@extends('layouts.app')
 @section('main')
+    <header>
+        <style>
+             /* Dropdown Button */
+            .dropbtn {
+                /* background-color: #3498DB; */
+                color: #F15412;;
+                /* padding: 16px; */
+                font-size: 16px;
+                border: none;
+                cursor: pointer;
+            }
+
+            /* Dropdown button on hover & focus */
+            /* .dropbtn:hover, .dropbtn:focus {
+                background-color: #2980B9;
+            } */
+
+            /* The container <div> - needed to position the dropdown content */
+            .dropdownShow {
+                position: relative;
+                display: inline-block;
+            }
+
+            /* Dropdown Content (Hidden by Default) */
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f1f1f1;
+                min-width: 200px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+            }
+
+            /* Links inside the dropdown */
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+            /* Change color of dropdown links on hover */
+            .dropdown-content a:hover {background-color: #ddd;}
+
+            /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+            .show {display:block;} 
+        </style>
+    </header>
+    @php
+        use App\Models\Order;
+        use App\Models\Coupon;
+    @endphp
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
@@ -18,6 +70,9 @@
                                 <ul class="nav flex-column" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="orders-tab" data-bs-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="coupon-tab" data-bs-toggle="tab" href="#coupon" role="tab" aria-controls="coupon" aria-selected="false"><i class="fi-rs-diamond mr-10"></i>Coupon</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="track-orders-tab" data-bs-toggle="tab" href="#track-orders" role="tab" aria-controls="track-orders" aria-selected="false"><i class="fi-rs-shopping-cart-check mr-10"></i>Track Your Order</a>
@@ -49,7 +104,6 @@
                                             <h5 class="mb-0">Your Orders</h5>
                                         </div>
                                         @php
-                                            use App\Models\Order;
                                             $orders = Order::where('user_id', $user->id)->get();
                                         @endphp
                                         @if(@count($orders) > 0)
@@ -83,11 +137,13 @@
                                                                 <td>${{$order->total}} for 1 item</td>
                                                             @endif
                                                             <td> 
-                                                                <a href="#">View</a>
-                                                                <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                                                <ul>
-                                                                    
-                                                                </ul>
+                                                                <div class="dropdownShow">
+                                                                    <a onclick="myFunction()" class="dropbtn">View</a>
+                                                                </div> 
+                                                                <div id="myDropdown" class="dropdown-content">
+                                                                    @foreach($items as $item)
+                                                                        <a>{{$item->name}} x {{$item->quantity}} (${{$item->discount_price * $item->quantity}})</a>
+                                                                    @endforeach
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -102,6 +158,51 @@
                                         @endif
                                     </div>
                                 </div>
+                                <div class="tab-pane fade" id="coupon" role="tabpanel" aria-labelledby="coupon-tab">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="mb-0">Your Coupon</h5>
+                                        </div>
+                                        @php
+                                            $lists = DB::table('has_coupon')->where('user_id', $user->id)->get();
+                                        @endphp
+                                        @if(@count($lists) > 0)
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Coupon code</th>
+                                                            <th>Discount</th>
+                                                            <th>Available</th>
+                                                            <th>Expired at</th>
+                                                        </tr>
+                                                    </thead>
+                                                    @foreach ($lists as $info)
+                                                        @php 
+                                                            $coupon = Coupon::find($info->coupon_id);
+                                                        @endphp
+                                                        <tr>
+                                                            <td>{{$coupon->coupon_code}}</td>
+                                                            <td>{{$coupon->discount}}%</td>
+                                                            @if($info->avail)
+                                                                <td>Yes</td>
+                                                            @else
+                                                                <td>No</td>
+                                                            @endif
+                                                            <td>{{$info->expired_at}}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </table>
+                                            </div>
+                                        </div>
+                                        @else
+                                        <div class="card-body">
+                                            <p>You didn't have any coupon</p>
+                                        </div>
+                                        @endif
+                                    </div>
+                                </div>
                                 <div class="tab-pane fade" id="track-orders" role="tabpanel" aria-labelledby="track-orders-tab">
                                     <div class="card">
                                         <div class="card-header">
@@ -111,7 +212,7 @@
                                             <p>To track your order please enter your OrderID in the box below and press "Track" button. This was given to you on your receipt and in the confirmation email you should have received.</p>
                                             <div class="row">
                                                 <div class="col-lg-8">
-                                                    <form id="track_form" class="contact-form-style mt-30 mb-50" action="{{ url('/users/track') }}" method="post">
+                                                    <form id="track_form" class="contact-form-style mt-30 mb-50" action="{{ route('user.track') }}" method="post">
                                                         @csrf 
                                                         <div class="input-style mb-20">
                                                             <label>Order ID</label>
@@ -180,4 +281,23 @@
             </div>
         </div>
     </section>
+    <script>
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+                }
+            }
+        } 
+    </script>
 @endsection
