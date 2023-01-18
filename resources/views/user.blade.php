@@ -27,7 +27,7 @@
             .dropdown-content {
                 display: none;
                 position: absolute;
-                background-color: #f1f1f1;
+                background-color: white;
                 min-width: 200px;
                 box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
                 z-index: 1;
@@ -138,12 +138,19 @@
                                                             @endif
                                                             <td> 
                                                                 <div class="dropdownShow">
-                                                                    <a onclick="myFunction()" class="dropbtn">View</a>
+                                                                    <a onmouseover="showDrop('{{$order->id}}')" class="dropbtn">View</a>
                                                                 </div> 
-                                                                <div id="myDropdown" class="dropdown-content">
+                                                                <div id="drop-down-order{{$order->id}}" class="dropdown-content">
                                                                     @foreach($items as $item)
                                                                         <a>{{$item->name}} x {{$item->quantity}} (${{$item->discount_price * $item->quantity}})</a>
                                                                     @endforeach
+                                                                    @php 
+                                                                        $usedCoupon = Coupon::find($order->coupon_id);
+                                                                    @endphp
+                                                                    @if(isset($usedCoupon))
+                                                                        <div class="divider center_icon"><i class="fi-rs-fingerprint"></i></div>
+                                                                        <a>Discount: {{$usedCoupon->discount}}%</a>
+                                                                    @endif
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -282,12 +289,13 @@
         </div>
     </section>
     <script>
-        function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
+        function showDrop(id) {
+            current_drop = "drop-down-order"+id;
+            document.getElementById(current_drop).classList.toggle("show");
         }
 
         // Close the dropdown menu if the user clicks outside of it
-        window.onclick = function(event) {
+        window.onmouseover = function(event) {
             if (!event.target.matches('.dropbtn')) {
                 var dropdowns = document.getElementsByClassName("dropdown-content");
                 var i;

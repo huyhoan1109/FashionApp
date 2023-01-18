@@ -42,7 +42,7 @@
                             </div>
                             <div class="col-md-6 col-sm-12 col-xs-12">
                                 <div class="detail-info">
-                                    <h2 class="title-detail"> {{ $item->name }} {{number_format($item->rate, 2)}} </h2>
+                                    <h2 class="title-detail"> {{ $item->name }} </h2>
                                     <div class="product-detail-rating">
                                         <div class="product-rate-cover text-end">
                                             @for($i=0; $i<5; $i++)

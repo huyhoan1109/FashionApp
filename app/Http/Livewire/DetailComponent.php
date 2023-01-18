@@ -45,7 +45,8 @@ class DetailComponent extends Component
         }
     }
     public function raiseItem(){
-        $this->quantity += 1;
+        $item = Item::find($this->item_id);
+        if($this->quantity < $item->quantity) $this->quantity += 1;
     }
     public function addWishlist($item_id){
         $validator = DB::table('wishlist')
