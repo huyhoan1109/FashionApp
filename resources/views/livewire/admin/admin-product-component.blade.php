@@ -108,7 +108,7 @@
                                             <td>{{ $item->created_at }}</td>
                                             <td>
                                                 <a href="{{ route('admin.product.edit',['product_id'=>$item->id]) }}" class="text-info" style="margin-left:20px ">Edit</a>
-                                                <a href="#" onclick="deleteConfirm({{ $item->id }})" class="text-danger" style="margin-left:20px ">Delete</a>
+                                                <a  href="#" onclick="deleteConfirm({{ $item->id }})" class="text-danger" style="margin-left:20px ">Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach
