@@ -16,6 +16,14 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController; 
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Livewire\Admin\AdminDashboardComponent;
+use App\Http\Livewire\Admin\AdminOrderComponent;
+use App\Http\Livewire\Admin\AdminProductComponent;
+use App\Http\Livewire\Admin\AdminUserComponent;
+use App\Http\Livewire\Admin\AdminAddUserComponent;
+use App\Http\Livewire\Admin\AdminAddProductComponent;
+use App\Http\Livewire\Admin\AdminEditProductComponent;
+use App\Http\Livewire\Admin\AdminOrderDetailComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -114,8 +122,21 @@ Route::prefix('/item')->middleware(['auth', 'isAdmin'])->name('item.')->controll
 Route::get('/cart', function(){return view('cart');})->name('cart');
 
 // ----------------------------- Admin ----------------------------//
-Route::prefix('/admin')->middleware(['auth', 'isAdmin'])->name('admin.')->controller(AdminController::class)->group(
-    function(){
-        Route::get('/dashboard', 'index')->name('show');
-    }
-);
+// Route::prefix('/admin')->middleware(['auth', 'isAdmin'])->name('admin.')->controller(AdminController::class)->group(
+//     function(){
+//         Route::get('/dashboard', 'index')->name('show');
+//     }
+//);
+Route::get('/admin/dashboard', AdminDashboardComponent::class)->name('admin.dashboard');
+//Route::get('/admin/category', AdminCategoriesComponent::class)->name('admin.categories');
+Route::get('/admin/orders', AdminOrderComponent::class)->name('admin.orders');
+Route::get('/admin/orders/{order_id}', AdminOrderDetailComponent::class)->name('admin.ordersdetails');
+
+Route::get('/admin/products', AdminProductComponent::class)->name('admin.products');
+Route::get('/admin/product/add', AdminAddProductComponent::class)->name('admin.product.add');
+Route::get('/admin/product/edit/{product_id}', AdminEditProductComponent::class)->name('admin.product.edit');
+
+
+Route::get('/admin/users', AdminUserComponent::class)->name('admin.users');
+Route::get('/admin/user/add', AdminAddUserComponent::class)->name('admin.user.add');
+
