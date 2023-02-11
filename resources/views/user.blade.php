@@ -82,7 +82,7 @@
                                     </li>
                                     @if(!$user->type)
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('admin.show') }}" aria-selected="false"><i class="fi-rs-settings-sliders mr-10"></i>Admin</a>
+                                        <a class="nav-link" href="{{ route('admin.dashboard') }}" aria-selected="false"><i class="fi-rs-settings-sliders mr-10"></i>Admin</a>
                                     </li>
                                     @endif
                                     <li class="nav-item">

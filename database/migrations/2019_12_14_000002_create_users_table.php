@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('firstname')->default("N/A");
             $table->string('lastname')->default("N/A");
+            $table->string('gender')->default("Male");
             $table->string('email')->unique();
             $table->string('password');
             $table->string('address')->default("Ha Noi");

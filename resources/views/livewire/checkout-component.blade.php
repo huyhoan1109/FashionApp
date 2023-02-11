@@ -130,7 +130,7 @@
                             </div>
                             <div class="custome-radio">
                                 <input class="form-check-input" required="" type="radio" name="payment_option" id="pay2" value="pay2">
-                                <label class="form-check-label" for="pay2" data-bs-toggle="collapse" data-target="#cardPayment" aria-controls="cardPayment">Card Payment</label>                                        
+                                <label class="form-check-label" for="pay2" data-bs-toggle="collapse" data-target="#cardPayment" aria-controls="cardPayment">Credit Card</label>                                        
                             </div>
                             <div class="custome-radio">
                                 <input class="form-check-input" required="" type="radio" name="payment_option" id="pay3" value="pay3">

@@ -21,4 +21,8 @@ class Item extends Model
         'description',
         'review'
     ];
+    public function orderItem()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }

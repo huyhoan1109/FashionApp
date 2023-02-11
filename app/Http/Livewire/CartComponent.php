@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 class CartComponent extends Component
 {
     public $user_id;
-    protected $listeners = ['refreshComponent', '$refresh'];
+    public $listeners = ['refreshComponent', '$refresh'];
     public function raiseItem($row_id){
         $cart = Cart::find($row_id);
         $cart->quantity = $cart->quantity + 1;
@@ -31,7 +31,6 @@ class CartComponent extends Component
     }
     public function removeCart(){
         Cart::where('user_id', $this->user_id)->delete();
-        $this->emitTo('cart-icon-component', 'refreshComponent');
     }
     public function mount(){
         $this->user_id = Session::get('key')['id'];

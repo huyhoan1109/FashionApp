@@ -114,8 +114,20 @@ Route::prefix('/item')->middleware(['auth', 'isAdmin'])->name('item.')->controll
 Route::get('/cart', function(){return view('cart');})->name('cart');
 
 // ----------------------------- Admin ----------------------------//
-Route::prefix('/admin')->middleware(['auth', 'isAdmin'])->name('admin.')->controller(AdminController::class)->group(
+Route::prefix('/admin')->name('admin.')->middleware(['auth', 'isAdmin'])->controller(AdminController::class)->group(
     function(){
-        Route::get('/dashboard', 'index')->name('show');
+        Route::get('/dashboard', 'index')->name('dashboard');
+        Route::get('/category/{category_id}', 'ShowCategory')->name('categories');
+        Route::get('/orders', 'Order')->name('orders');
+        Route::get('/orders/{order_id}', 'OrderDetail')->name('ordersdetails');
+        Route::get('/products', 'ShowProduct')->name('products');
+        Route::get('/product/add', 'AddProduct')->name('product.add');
+        Route::get('/product/edit/{product_id}', 'EditProduct')->name('product.edit');
+        Route::get('/users', 'ShowUsers')->name('users');
+        Route::get('/user/detail/{user_id}', 'UserDetail')->name('user.detail');
+        Route::get('/user/add', 'AddUser')->name('user.add');
+        Route::get('/user/edit/{user_id}', 'EditUser')->name('user.edit');
+        Route::get('/coupons', 'Coupon')->name('coupons');
+        Route::get('/coupon/add', 'AddCoupon')->name('coupon.add');
     }
-);
+)->name('admin');

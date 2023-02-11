@@ -161,6 +161,18 @@
                 <small>To</small>
                 <address class="m-t-8 m-b-8">    
                     <span style="white-space: pre-line;">{{$order->note}}</span>
+                    <span style="white-space: pre-line;"> PAYMEND METHOD: 
+                        @switch($order->payment)
+                        @case(1)
+                            Cash On Delivery
+                        @break
+                        @case(2)
+                            Credit Card
+                        @break
+                        @case(3)
+                            Paypal
+                        @break
+                    </span>
                 </address>
                 </div>
                 <div class="invoice-date">

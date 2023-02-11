@@ -13,4 +13,12 @@ class Coupon extends Model
         'coupon_code',
         'discount',
     ];
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
+    public function has_coupon()
+    {
+        return $this->hasMany(HasCoupon::class);
+    }
 }
