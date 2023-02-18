@@ -123,10 +123,14 @@
                                                         <tr>
                                                             <td>{{$order->id}}</td>
                                                             <td>{{$order->created_at}}</td>
-                                                            @if($order->isApproved)
+                                                            @if($order->state==1)
                                                                 <td>Approved</td>
-                                                            @else
-                                                                <td>Processing</td>
+                                                            @endif
+                                                            @if($order->state==0)
+                                                                <td>Pending Payment</td>
+                                                            @endif
+                                                            @if($order->state==2)
+                                                                <td>Cancel</td>
                                                             @endif
                                                             @php
                                                                 $items = DB::table('orderItem')->where('order_id', $order->id)->get();

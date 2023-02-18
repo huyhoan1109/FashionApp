@@ -11,7 +11,6 @@ class SessionExpired
 {
     protected $session;
     protected $timeout;
-     
     public function __construct(Store $session){
         $this->session = $session;
         $this->timeout = config('session.lifetime');

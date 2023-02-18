@@ -50,7 +50,7 @@
                 <div class="flex items-center mt-3">
                     <i data-lucide="clock" class="w-4 h-4 text-slate-500 mr-2"></i>Transaction Status: 
                     <span class="flex items-center justify-center whitespace-nowrap ml-1  text-danger">
-                        @switch($order->isApproved)
+                        @switch($order->state)
                                     @case(1)
                                     Completed
                                         @break

@@ -172,9 +172,19 @@
                                                 <div class="flex items-center justify-center text-success">  ${{ $order->total}}</div>
                                             </td>
                                             <td class="w-40">
-                                                <div class="flex items-center justify-center whitespace-nowrap {{ $order->isApproved ? 'text-success' : 'text-pending' }}">
-                                                    <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> {{ $order->isApproved ? 'Completed' : 'Pending Payment' }}
-                                                </div>
+                                                <div class="flex items-center justify-center whitespace-nowrap text-danger">
+                                                    @switch($order->state)
+                                                    @case(1)
+                                                    Completed
+                                                        @break
+                                                    @case(0)
+                                                    Pending Payment
+                                                        @break
+                                                    @case(2)
+                                                        Cancel
+                                                        @break
+                                                @endswitch
+                                                </div>    
                                                 {{-- <div class="flex items-center justify-center text-success">  {{ $isApproved}}</div> --}}
                                             </td>
                                             <td class="table-report__action w-56">

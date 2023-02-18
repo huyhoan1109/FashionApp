@@ -21,8 +21,8 @@ class AdminDashboardComponent extends Component
         $totalItem= Item::count();
         $totalOrder= Order::count();
         $todayOrder = Order::whereDate('created_at',Carbon::today())->count();
-        $todayRevenue = Order:: whereDate('created_at',Carbon::today())->where('isApproved','1')->sum('total');
-        $totalRevenue = Order::where('isApproved','1')->sum('total');
+        $todayRevenue = Order:: whereDate('created_at',Carbon::today())->where('state','1')->sum('total');
+        $totalRevenue = Order::where('state','1')->sum('total');
         return view('livewire.admin.admin-dashboard-component',[
             'totalUser' => $totalUser,
             'totalItem' => $totalItem,

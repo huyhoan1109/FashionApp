@@ -45,7 +45,7 @@ class AdminUserDetailComponent extends Component
     {
         $couponList = Coupon::all();
         $orders = Order::where('user_id',$this->user_id);
-        $sum = Order::where('user_id',$this->user_id)->where('isApproved','1')->sum('total');
+        $sum = Order::where('user_id',$this->user_id)->where('state','1')->sum('total');
         $user = User::find($this->user_id);
         return view('livewire.admin.admin-user-detail-component',[
             'user'=> $user,
