@@ -17,7 +17,6 @@ class AdminUserDetailComponent extends Component
     }
     public function addCoupon($coupon_id)
     {
-        error_log(($coupon_id));
         $hasCoupon = new HasCoupon();
         $hasCoupon->user_id = $this->user_id;
         $hasCoupon->coupon_id = $coupon_id;
@@ -38,7 +37,6 @@ class AdminUserDetailComponent extends Component
     }
 
     public function getConfirm($coupon_id){
-        error_log($coupon_id);
         $this->delete_coupon = $coupon_id;
     }
     public function render()

@@ -23,8 +23,7 @@ class AdminOrderComponent extends Component
         if($order->state == '0')
         {
             $order->state='1';
-        }
-        
+        }   
         $order->save();
         session()->flash('message','Order has been changed!');
         redirect()->route('admin.orders');

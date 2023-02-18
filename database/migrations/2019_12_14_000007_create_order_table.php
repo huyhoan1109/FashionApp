@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('payment');
             $table->float('subtotal');
             $table->float('total');
-            $table->boolean("isApproved")->default(false);
+            $table->unsignedBigInteger("state")->default(0);
             $table->foreign('user_id')
             ->references("id")
             ->on("users")

@@ -96,9 +96,6 @@
 
                         </ul>
                     </li>
-                    
-                    
-    
                     <li>
                         <a href="javascript:;" class="menu">
                             <div class="menu__icon"> <i data-lucide="users"></i> </div>
@@ -178,8 +175,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
-                            
+                            </li>                    
                             <li>
                                 <a href="javascript:;" class="side-menu">
                                     <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>

@@ -46,7 +46,6 @@ class UserController extends Controller
         }
         else {
             #Update the new Password
-            error_log(2);
             User::whereId(auth()->user()->id)->update([
                 'password' => Hash::make($request->newpassword)
             ]);

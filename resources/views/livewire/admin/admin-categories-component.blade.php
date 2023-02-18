@@ -19,7 +19,7 @@
             <ul class="dropdown-content bg-primary text-white">
                 <li class="p-2">
                     <div class="font-medium">Admin</div>
-                    <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">Software Engineer</div>
+                    <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">Nike Store</div>
                 </li>
                 <li>
                     <hr class="dropdown-divider border-white/[0.08]">
@@ -31,38 +31,34 @@
             </ul>
         </div>
     </div>
-    
 </div> 
-            @switch($category_id)
-                        @case(1)
-                            @php
-                                $category= 'Clothes'
-                            @endphp
-                            
-                            @break
-                        @case(3)
-                            @php
-                                $category= 'Shirt'
-                            @endphp
-                            @break
-                        @case(4)
-                            @php
-                                $category= 'Jacket'
-                            @endphp
-                            @break
-                        @case(2)
-                            @php
-                                $category= 'Shoes'
-                            @endphp
-                            @break
-                        @default
-                        @php
-                        $category= 'Unknow'
-                        @endphp
-                        @break
-
-                            
-                    @endswitch
+    @switch($category_id)
+        @case(1)
+            @php
+                $category= 'Clothes'
+            @endphp     
+            @break
+        @case(3)
+            @php
+                $category= 'Shirt'
+            @endphp
+            @break
+        @case(4)
+            @php
+                $category= 'Jacket'
+            @endphp
+            @break
+        @case(2)
+            @php
+                $category= 'Shoes'
+            @endphp
+            @break
+        @default
+        @php
+        $category= 'Unknown'
+        @endphp
+        @break                
+    @endswitch
 <h2 class="intro-y text-lg font-medium mt-10">{{ $category }} List</h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
@@ -149,7 +145,7 @@
                 @endforeach
                 </tbody>
         </table>
-        {{ $product->links() }}
+        {{ $product->links('vendor.livewire.bootstrap') }}
     </div>
     <!-- BEGIN: Modal Toggle -->
  

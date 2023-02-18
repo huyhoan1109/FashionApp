@@ -1,16 +1,12 @@
 <div>
 <!-- BEGIN: Top Bar -->
     <div class="top-bar">
-
         <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Admin</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Edit Product</li>
             </ol>
         </nav>
-        
-        
-        
         <div class="intro-x dropdown w-8 h-8">
             <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in" role="button" aria-expanded="false" data-tw-toggle="dropdown">
                 <img alt="Midone" src="{{ asset('admin/dist/images/profile-5.jpg') }}">
@@ -19,7 +15,7 @@
                 <ul class="dropdown-content bg-primary text-white">
                     <li class="p-2">
                         <div class="font-medium">Admin</div>
-                        <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">Software Engineer</div>
+                        <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">Nike Store</div>
                     </li>
                     <li>
                         <hr class="dropdown-divider border-white/[0.08]">
@@ -37,56 +33,54 @@
         <h2 class="text-lg font-medium mr-auto">Product Information</h2>
     </div>
     @switch($product->type)
-                        @case(1)
-                            @php
-                                $product->type= 'Clothes'
-                            @endphp
-                            
-                            @break
-                        @case(3)
-                            @php
-                                $product->type= 'Shirt'
-                            @endphp
-                            @break
-                        @case(4)
-                            @php
-                                $product->type= 'Jacket'
-                            @endphp
-                            @break
-                        @case(2)
-                            @php
-                                $product->type= 'Shoes'
-                            @endphp
-                            @break
-                        @default
-                        @php
-                        $product->type= 'Unknow'
-                        @endphp
-                        @break
+        @case(1)
+            @php
+                $product->type= 'Clothes'
+            @endphp
+            
+            @break
+        @case(3)
+            @php
+                $product->type= 'Shirt'
+            @endphp
+            @break
+        @case(4)
+            @php
+                $product->type= 'Jacket'
+            @endphp
+            @break
+        @case(2)
+            @php
+                $product->type= 'Shoes'
+            @endphp
+            @break
+        @default
+        @php
+        $product->type= 'Unknow'
+        @endphp
+        @break
+    @endswitch
 
-                            
-                    @endswitch
-
-                    @switch($product->for_male)
-                    @case(1)
-                        @php
-                            $product->for_male= 'Men'
-                        @endphp
-                        
-                        @break
-                    @case(2)
-                        @php
-                            $product->for_male= 'Women'
-                        @endphp
-                        @break
-                    @case(3)
-                        @php
-                            $product->type= 'Both'
-                        @endphp
-                        @break
-                    @default
-                        
-                @endswitch
+    @switch($product->for_male)
+    @case(1)
+        @php
+            $product->for_male= 'Men'
+        @endphp
+        
+        @break
+    @case(2)
+        @php
+            $product->for_male= 'Women'
+        @endphp
+        @break
+    @case(3)
+        @php
+            $product->type= 'Both'
+        @endphp
+        @break
+    @default
+        @break
+    @endswitch
     <!-- BEGIN: Profile Info -->
     <div class="intro-y box px-5 pt-5 mt-5">
         <div class="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
@@ -106,7 +100,7 @@
                 <div class="font-medium text-center lg:text-left lg:mt-3">Details</div>
                 <div class="flex flex-col justify-center items-center lg:items-start mt-4">
                     <div class="truncate sm:whitespace-normal flex items-center">
-                        <i data-lucide="box" class="w-4 h-4 mr-2"></i><p>Instock :</p>
+                        <i data-lucide="box" class="w-4 h-4 mr-2"></i><p>In stock :</p>
                         <div class="ml-2 text-success">{{ $product->quantity }}</div>
                         
                     </div>
@@ -219,13 +213,13 @@
                             <div class="form-label ">
                                 <div class="text-left">
                                     <div class="flex items-center">
-                                        <div class="font-medium">InStock</div>
+                                        <div class="font-medium">In Stock</div>
                                         <div class="ml-2 px-2 py-0.5 bg-slate-200 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md">Required</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="w-full mt-3 xl:mt-0 flex-1">
-                                <input id="quantity" type="text" class="form-control" placeholder="{{ $product->quantity }}" name="quantity">
+                                <input id="quantity" type="number" class="form-control" placeholder="{{ $product->quantity }}" name="quantity" min=1>
                                 <div class="form-help text-right">Enter the quantity</div>
                             </div>
                             <!--Price-->
@@ -241,10 +235,9 @@
                                 <div class="sm:grid grid-cols-4 gap-2">
                                     <div class="input-group w-full">
                                         <div class="input-group-text">$</div>
-                                        <input type="price" class="form-control mt-3 sm:mt-0 " placeholder="{{ $product->price }}" name="price">
-                                        <input type="discount_price" class="form-control mt-3 sm:mt-0" placeholder="{{ $product->discount_price }} " name="discount_price">
+                                        <input type="price" type="number" class="form-control mt-3 sm:mt-0 " placeholder="{{ $product->price }}" name="price" min=1>
+                                        <input type="discount_price" type="number" class="form-control mt-3 sm:mt-0" placeholder="{{ $product->discount_price }}" name="discount_price" min=1>
                                     </div>  
-
                                 </div>
                                 <div class="form-help text-left">Enter the price</div>
                                 

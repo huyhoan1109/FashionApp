@@ -119,13 +119,11 @@ class CheckoutComponent extends Component
                         throw new \Exception($message);
                     }
                 }
-                error_log(json_encode($order));
-                error_log(Order::where('user_id', $this->user_id)->count());
+                
                 // Mail::send('mail.order-track',['order_id' => $order->id], function($message) use ($data) {
                 //     $message->subject('Your Order');
                 //     $message->to($data['email']);
                 // });
-                error_log(3);
                 Cart::where('user_id', $this->user_id)->delete();
                 $message = 'Order created';
                 $this->dispatchBrowserEvent('swal', Helper::SuccessToast($message));

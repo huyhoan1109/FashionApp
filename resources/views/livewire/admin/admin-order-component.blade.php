@@ -19,7 +19,7 @@
             <ul class="dropdown-content bg-primary text-white">
                 <li class="p-2">
                     <div class="font-medium">Admin</div>
-                    <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">Software Engineer</div>
+                    <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">Nike Store</div>
                 </li>
                 <li>
                     <hr class="dropdown-divider border-white/[0.08]">
@@ -56,7 +56,7 @@
                         <th class="whitespace-nowrap">BUYER NAME</th>
                         <th class="text-center whitespace-nowrap">STATUS</th>
                         <th class="whitespace-nowrap">PAYMENT</th>
-                        <th class=" whitespace-nowrap">TOTAL </th>
+                        <th class=" whitespace-nowrap">TOTAL</th>
                         <th class="whitespace-nowrap">TIME</th>
                         <th class="text-center whitespace-nowrap">ACTIONS</th>
                     </tr>
@@ -64,17 +64,14 @@
                 <tbody>
                      @foreach ($orders as $order)
                         <tr class="intro-x">
-                            
                             <td class="w-40 !py-4">
                                 <a href="" class=" whitespace-nowrap">{{ $order->id }}</a>
                             </td>
                             <td class="w-40">
-                                <a href="" class="font-medium whitespace-nowrap">{{ $order->user->firstname }}</a>
-                                
-                                    <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">{{ $order->user->address }}</div>
-
+                                <a href="" class="font-medium whitespace-nowrap">{{ $order->user->firstname }} {{ $order->user->lastname }}</a>
+                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">{{ $order->user->address }}</div>
                             </td>
-                            <td class="text-center">
+                            <td class="w-40">
                                 <div class="flex items-center justify-center whitespace-nowrap text-danger">
                                     @switch($order->state)
                                     @case(1)
@@ -88,9 +85,8 @@
                                         @break
                                 @endswitch
                                 </div>    
-                                    
                             </td>
-                            <td>
+                            <td class="w-40">
                                 <div class="whitespace-nowrap">
                                     @switch($order->payment)
                                         @case(1)
@@ -105,14 +101,12 @@
                                     @endswitch
                                 </div>
                             </td>
-                            <td class="w-40 text-right">
+                            <td class="w-40">
                                 <div class="pr-16">${{ $order->total }}</div>
                             </td>
-                            <td>
-                               
+                            <td class="w-40">
                                 <div class="whitespace-nowrap">{{ $order->created_at }}</div>
-    
-                        </td>
+                            </td>
                             <td class="table-report__action">
                                 <div class="flex justify-center items-center">
                                     <a class="flex items-center text-primary whitespace-nowrap mr-5" href="{{ route('admin.ordersdetails',['order_id'=>$order->id])}}">
@@ -123,15 +117,14 @@
                                     </button>
                                     <button class="flex items-center text-primary whitespace-nowrap mr-5" wire:click.prevent="cancelOrder({{ $order->id }})" >
                                         <i data-lucide="arrow-left-right" class="w-4 h-4 mr-1"></i> Cancel
-                                    </button>
-                                    
+                                    </button>        
                                 </div>
                             </td>
                         </tr>
                     @endforeach 
                 </tbody>
             </table>
-            {{ $orders->links() }}
+            {{ $orders->links('vendor.livewire.bootstrap') }}
         </div>
         <!-- END: Data List -->
     </div>

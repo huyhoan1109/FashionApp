@@ -16,7 +16,7 @@
                 <ul class="dropdown-content bg-primary text-white">
                     <li class="p-2">
                         <div class="font-medium">Admin</div>
-                        <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">Software Engineer</div>
+                        <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">Nike Store</div>
                     </li>
                     <li>
                         <hr class="dropdown-divider border-white/[0.08]">
@@ -123,11 +123,11 @@
                 </div>
                 @endif
                 <div class="flex items-center mt-3">
-                    <i data-lucide="credit-card" class="w-4 h-4 text-slate-500 mr-2"></i>  Shipping Cost : <div class="ml-auto">$1</div>
+                    <i data-lucide="credit-card" class="w-4 h-4 text-slate-500 mr-2"></i>  Shipping Cost : <div class="ml-auto">Free ship</div>
                 </div>
             
                 <div class="flex items-center border-t border-slate-200/60 dark:border-darkmode-400 pt-5 mt-5 font-medium">
-                    <i data-lucide="credit-card" class="w-4 h-4 text-slate-500 mr-2"></i> Grand Total: <div class="ml-auto">${{  $order->total+1  }}</div>
+                    <i data-lucide="credit-card" class="w-4 h-4 text-slate-500 mr-2"></i> Grand Total: <div class="ml-auto">${{  $order->total  }}</div>
                 </div>
             </div>
         
@@ -153,7 +153,7 @@
                                 <tr>
                                     <td class="!py-4">
                                         <div class="flex items-center">
-                                            <a href="" class="font-medium whitespace-nowrap ml-4">{{ Str::limit($ot->name, 10, '...') }}</a>
+                                            <a href="" class="font-medium whitespace-nowrap ml-4">{{ Str::limit($ot->name, 30, '...') }}</a>
                                         </div>
                                     </td>
                                     <td class="text-right">${{ $ot->price }}</td>

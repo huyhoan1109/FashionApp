@@ -15,7 +15,7 @@
                 <ul class="dropdown-content bg-primary text-white">
                     <li class="p-2">
                         <div class="font-medium">Admin</div>
-                        <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">Software Engineer</div>
+                        <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">Nike Store</div>
                     </li>
                     <li>
                         <hr class="dropdown-divider border-white/[0.08]">
@@ -73,7 +73,7 @@
                                 <div class="sm:grid grid-cols-4 gap-2">
                                     <div class="input-group w-full">
                                         <div class="input-group-text">%</div>
-                                        <input id="coupon_code" type="text" class="form-control mt-3 sm:mt-0 " placeholder="Discount" name="discount">
+                                        <input id="coupon_code" type="number" min="10" class="form-control mt-3 sm:mt-0 " placeholder="Discount" name="discount">
                                     </div>  
                                 </div>
                                 <div class="form-help text-left">Enter the discount</div>

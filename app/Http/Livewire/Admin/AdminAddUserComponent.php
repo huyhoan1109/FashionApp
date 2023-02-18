@@ -13,7 +13,6 @@ class AdminAddUserComponent extends Component
     // Nho dung ham has voi mat khau
     public function submitUser($data)
     {   
-        // $data = 
         $validator = Validator::make($data,[
             "firstname" => "required",
             "lastname" => "required",

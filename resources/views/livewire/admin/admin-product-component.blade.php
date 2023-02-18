@@ -19,7 +19,7 @@
                 <ul class="dropdown-content bg-primary text-white">
                     <li class="p-2">
                         <div class="font-medium">Admin</div>
-                        <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">Software Engineer</div>
+                        <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">Nike Store</div>
                     </li>
                     <li>
                         <hr class="dropdown-divider border-white/[0.08]">
@@ -144,7 +144,7 @@
                 </tbody>         
             </table>
         </div>
-        {{ $product->links() }}
+        {{ $product->links('vendor.livewire.bootstrap') }}
     </div>
     <!-- BEGIN: Modal Content -->
     <div id="delete-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">

@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use Livewire\Component;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 class AdminEditUserComponent extends Component
 {
     public $user_id;
@@ -41,7 +42,7 @@ class AdminEditUserComponent extends Component
             }
         if (($data["password"])!='')
             {
-                $user->password = $data["password"];
+                $user->password = Hash::make($data["password"]);
             }
             $user->updated_at=Carbon::today();
             $user->save();

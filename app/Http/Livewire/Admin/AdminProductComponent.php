@@ -22,7 +22,6 @@ class AdminProductComponent extends Component
 
     public function getConfirm($item_id){
         $this->delete_item = $item_id;
-        error_log($item_id);
     }
     public function render()
     {

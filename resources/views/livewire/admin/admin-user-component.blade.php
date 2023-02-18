@@ -20,7 +20,7 @@
                 <ul class="dropdown-content bg-primary text-white">
                     <li class="p-2">
                         <div class="font-medium">Admin</div>
-                        <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">Software Engineer</div>
+                        <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">Nike Store</div>
                     </li>
                     <li>
                         <hr class="dropdown-divider border-white/[0.08]">
@@ -50,7 +50,8 @@
             <table class="table table-report -mt-2">
                 <thead>
                     <tr>
-                        <th class="whitespace-nowrap">USER NAME</th>               
+                        <th class="whitespace-nowrap">USER NAME</th>
+                        <th class="text-center whitespace-nowrap">USER TYPE</th>             
                         <th class="text-center whitespace-nowrap">GENDER</th>
                         <th class="text-center whitespace-nowrap">PHONE</th>
                         <th class="text-center whitespace-nowrap">ADDRESS</th>
@@ -64,7 +65,20 @@
                                 <a href=""class="font-medium whitespace-nowrap">{{ $human->lastname}} {{ $human->firstname }}</a>
                                 <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">{{ $human->email }}</div>
                             </td>
-                            <td class="text-center text-primary">{{ $human->gender }}</td>
+                            <td class="text-center text-primary">
+                                @switch($human->type)
+                                @case(0)
+                                    Admin
+                                @break
+                                @case(1)
+                                    User
+                                @break
+                                @case(2)
+                                    Guest
+                                @break
+                                @endswitch
+                            </td>
+                            <td class="text-center">{{ $human->gender }}</td>
                             <td class="text-center">{{ $human->phone }}</td>
                             <td class="text-center ">{{ $human->address }}</td>
                             <td class="table-report__action w-56">
@@ -87,7 +101,7 @@
                 
                 </tbody>
             </table>
-            {{ $user->links() }}
+            {{ $user->links('vendor.livewire.bootstrap') }}
         </div>
         <!-- BEGIN: Modal Toggle -->
      

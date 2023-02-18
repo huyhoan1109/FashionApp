@@ -23,7 +23,6 @@ class AdminCouponComponent extends Component
 
     public function getConfirm($coupon_id){
         $this->delete_coupon = $coupon_id;
-        error_log($coupon_id);
     }
     public function render()
     {

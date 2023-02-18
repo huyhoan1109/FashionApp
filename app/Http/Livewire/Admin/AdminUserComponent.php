@@ -14,24 +14,19 @@ class AdminUserComponent extends Component
     public function deleteUser()
     {
         $user=User::find($this->delete_user);
-        if($user->type==0)
-        {
+        if($user->type == 0){
             session()->flash('message',"Cannot delete admin's account!");
-        }
-        else
-        {
-            if (isset($user))
-                {
-                    $user->delete();
-                    session()->flash('message','User has been deleted!');
-                }
+        }else{
+            if (isset($user)){
+                $user->delete();
+                session()->flash('message','User has been deleted!');
+            }
         } 
         redirect()->route('admin.users');
     }
 
     public function getConfirm($user_id){
         $this->delete_user = $user_id;
-        error_log($user_id);
     }
     public function render()
     {
