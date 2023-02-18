@@ -11,7 +11,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.1",
-        "livewire/livewire": "^2.10",
+        "livewire/livewire": "^2.11",
         "realrashid/sweet-alert": "^5.1",
         "tymon/jwt-auth": "^1.0"
     },

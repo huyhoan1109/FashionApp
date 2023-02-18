@@ -107,7 +107,7 @@
                                         @endphp
                                         <td class="!py-4">
                                             <div class="flex items-center">       
-                                                <a href="" class="font-medium whitespace-nowrap ml-4">{{ $thisCoupon->coupon_code }}</a>
+                                                <a href="" class="font-medium whitespace-nowrap">{{ $thisCoupon->coupon_code }}</a>
                                             </div>
                                         </td>
                                         <td class="text-center">{{ $thisCoupon->discount }}%</td> 

@@ -115,7 +115,7 @@
                             <td class="text-center">{{ $item->id }}</td>
                             <td class="w-60">
                                 <div class="flex">
-                                    <div class="w-20 h-20 image-fit zoom-in -ml-5">
+                                    <div class="w-20 h-20 image-fit zoom-in -ml-5 ">
                                         <img alt="Product's Image" class="tooltip rounded-full" src="{{ $item->image }}" title=" {{ $item->description}}" >
                                     </div>
                                 </div>

@@ -18,12 +18,22 @@ class AdminOrderComponent extends Component
         {
             $order->isApproved='0';
         }
-        else
+        if($order->isApproved == '0')
         {
             $order->isApproved='1';
         }
+        
         $order->save();
         session()->flash('message','Order has been changed!');
+        redirect()->route('admin.orders');
+    }
+    public function cancelOrder($order_id)
+    {
+        $this->change_order=$order_id;
+        $order= Order::find($this->change_order);    
+        $order->isApproved='2';
+        $order->save();
+        session()->flash('message','Order has been canceled!');
         redirect()->route('admin.orders');
     }
     public function render()

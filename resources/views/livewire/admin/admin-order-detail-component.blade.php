@@ -49,9 +49,19 @@
                 </div>
                 <div class="flex items-center mt-3">
                     <i data-lucide="clock" class="w-4 h-4 text-slate-500 mr-2"></i>Transaction Status: 
-                    
-                    <span class="flex items-center justify-center whitespace-nowrap ml-1  {{ $order->isApproved  ? 'text-success' : 'text-pending' }}">
-                        <i data-lucide="check-square" class="w-4 h-4 mr-2 ml-1"></i> {{ $order->isApproved  ? 'Completed' : 'Pending Payment' }}
+                    <span class="flex items-center justify-center whitespace-nowrap ml-1  text-danger">
+                        @switch($order->isApproved)
+                                    @case(1)
+                                    Completed
+                                        @break
+                                    @case(0)
+                                    Pending Payment
+                                        @break
+                                    @case(2)
+                                        Cancel
+                                        @break
+                                @endswitch
+                       
                     </span>
                 </div>
                 <div class="flex items-center mt-3">

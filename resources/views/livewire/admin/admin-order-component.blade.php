@@ -59,9 +59,7 @@
                         <th class="whitespace-nowrap">BUYER NAME</th>
                         <th class="text-center whitespace-nowrap">STATUS</th>
                         <th class="whitespace-nowrap">PAYMENT</th>
-                        <th class="text-right whitespace-nowrap">
-                            <div class="pr-16">TOTAL </div>
-                        </th>
+                        <th class=" whitespace-nowrap">TOTAL </th>
                         <th class="whitespace-nowrap">TIME</th>
                         <th class="text-center whitespace-nowrap">ACTIONS</th>
                     </tr>
@@ -80,9 +78,20 @@
 
                             </td>
                             <td class="text-center">
-                                <div class="flex items-center justify-center whitespace-nowrap {{ $order->isApproved  ? 'text-success' : 'text-pending' }}">
-                                    <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> {{ $order->isApproved  ? 'Completed' : 'Pending Payment' }}
-                                </div>
+                                <div class="flex items-center justify-center whitespace-nowrap text-danger">
+                                    @switch($order->isApproved)
+                                    @case(1)
+                                    Completed
+                                        @break
+                                    @case(0)
+                                    Pending Payment
+                                        @break
+                                    @case(2)
+                                        Cancel
+                                        @break
+                                @endswitch
+                                </div>    
+                                    
                             </td>
                             <td>
                                 <div class="whitespace-nowrap">
@@ -112,8 +121,11 @@
                                     <a class="flex items-center text-primary whitespace-nowrap mr-5" href="{{ route('admin.ordersdetails',['order_id'=>$order->id])}}">
                                         <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> View Details
                                     </a>
-                                    <button class="flex items-center text-primary" wire:click.prevent="updateOrder({{ $order->id }})" >
+                                    <button class="flex items-center text-primary whitespace-nowrap mr-5" wire:click.prevent="updateOrder({{ $order->id }})" >
                                         <i data-lucide="arrow-left-right" class="w-4 h-4 mr-1"></i> Change Status
+                                    </button>
+                                    <button class="flex items-center text-primary whitespace-nowrap mr-5" wire:click.prevent="cancelOrder({{ $order->id }})" >
+                                        <i data-lucide="arrow-left-right" class="w-4 h-4 mr-1"></i> Cancel
                                     </button>
                                     
                                 </div>
